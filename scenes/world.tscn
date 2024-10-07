@@ -1,7 +1,7 @@
 [gd_scene load_steps=8 format=3 uid="uid://c26siogmy1l2f"]
 
-[ext_resource type="PackedScene" uid="uid://bitnvwh5tm144" path="res://scenes/stock_character.tscn" id="1_ldxo4"]
-[ext_resource type="MeshLibrary" uid="uid://deetsral7i5dx" path="res://assets/brickwall/brickwallTileset.tres" id="2_ovida"]
+[ext_resource type="MeshLibrary" uid="uid://deetsral7i5dx" path="res://assets/brickwallTileset.tres" id="2_ovida"]
+[ext_resource type="PackedScene" uid="uid://w482w0w2x31k" path="res://scenes/stockCharacterHeadless.tscn" id="2_tdcmw"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_uu4sj"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -48,32 +48,6 @@ mesh = SubResource("PlaneMesh_pjvrq")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Ground/StaticBody3D"]
 shape = SubResource("ConcavePolygonShape3D_jr0fr")
 
-[node name="stockCharacter" parent="." instance=ExtResource("1_ldxo4")]
-
-[node name="Skeleton3D" parent="stockCharacter/Armature" index="0"]
-bones/0/position = Vector3(-1.88393e-12, 1.19693, 5.21043e-09)
-bones/0/rotation = Quaternion(-0.0222822, 1.1918e-07, -2.65625e-09, 0.999752)
-bones/1/rotation = Quaternion(0.120888, -1.87045e-14, 2.8822e-08, 0.992666)
-bones/2/rotation = Quaternion(-0.0146501, -0.00777643, 0.993459, -0.112978)
-bones/3/rotation = Quaternion(0.111725, 0.00241308, 0.0179131, 0.993575)
-bones/4/rotation = Quaternion(0.0455492, -0.0152225, 0.997808, -0.0455261)
-bones/5/rotation = Quaternion(-0.0479977, -2.53347e-05, 0.000695177, 0.998847)
-bones/6/rotation = Quaternion(0.610719, 0.0148278, -0.0631663, 0.789185)
-bones/7/rotation = Quaternion(0.0180877, -0.00322306, 0.994216, 0.105816)
-bones/8/rotation = Quaternion(0.111725, -0.00241307, -0.0179131, 0.993575)
-bones/9/rotation = Quaternion(-0.0751169, -0.0139089, 0.995952, 0.0473724)
-bones/10/rotation = Quaternion(-0.0479977, 2.53387e-05, -0.000695183, 0.998847)
-bones/11/rotation = Quaternion(0.60857, -0.0391174, 0.0801281, 0.788474)
-bones/12/rotation = Quaternion(-0.0305826, 0.706445, -0.706445, 0.0305826)
-bones/13/rotation = Quaternion(0.0305826, 0.706445, -0.706445, -0.0305826)
-
-[node name="SpotLight3D" type="SpotLight3D" parent="stockCharacter/Armature" index="1"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.6527, -0.0885646)
-light_color = Color(0.984314, 0.117647, 0, 1)
-light_energy = 2.293
-spot_range = 13.3125
-spot_angle = 32.3172
-
 [node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 5)
 
@@ -87,4 +61,5 @@ data = {
 }
 metadata/_editor_floor_ = Vector3(0, 0, 0)
 
-[editable path="stockCharacter"]
+[node name="stockCharacterHeadless" parent="." instance=ExtResource("2_tdcmw")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0924212, 0, -0.0077002)
