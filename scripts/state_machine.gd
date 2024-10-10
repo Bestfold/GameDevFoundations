@@ -9,7 +9,6 @@ var current_state : State
 @export var initial_state : State
 
 
-
 # NOTE General state machine
 
 func _ready():

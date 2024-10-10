@@ -4,6 +4,7 @@ extends CharacterBody3D
 @onready var armature: Node3D = $Armature
 @onready var animation_tree: AnimationTree = $AnimationTree
 @onready var spring_arm_pivot: Node3D = %SpringArmPivot
+@onready var state_machine: StateMachine = $StateMachine
 
 
 
