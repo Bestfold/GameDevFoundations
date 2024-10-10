@@ -38,6 +38,7 @@ func _physics_process(delta: float) -> void:
 	var input_dir := Input.get_vector("left", "right", "forward", "back")
 	var direction := (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
 	 
+	 
 	# roter basert på pivot rotasjon rundt "z-aksen"-til karakteren (Vector3.UP)
 	direction = direction.rotated(Vector3.UP, spring_arm_pivot.rotation.y)
 	
