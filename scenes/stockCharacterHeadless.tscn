@@ -1,6 +1,8 @@
-[gd_scene load_steps=12 format=4 uid="uid://w482w0w2x31k"]
+[gd_scene load_steps=14 format=4 uid="uid://w482w0w2x31k"]
 
 [ext_resource type="Script" path="res://scripts/stock_character_headless.gd" id="1_yuunu"]
+[ext_resource type="Script" path="res://scripts/state_machine.gd" id="2_qa8n4"]
+[ext_resource type="Script" path="res://scenes/node.gd" id="3_fuks2"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fg6k5"]
 resource_name = "Material"
@@ -522,7 +524,6 @@ _data = {
 min_space = 0.0
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_wc3vh"]
-graph_offset = Vector2(-199, 116)
 nodes/BlendSpace1D/node = SubResource("AnimationNodeBlendSpace1D_wtlb8")
 nodes/BlendSpace1D/position = Vector2(60, 180)
 node_connections = [&"output", 0, &"BlendSpace1D"]
@@ -658,6 +659,7 @@ spring_length = 0.0
 
 [node name="SpotLight3D" type="SpotLight3D" parent="SpringArmPivot/SpringArm3D"]
 transform = Transform3D(-1, -8.74228e-08, 0, 8.74228e-08, -1, 0, 0, 0, 1, 0, 0, 0)
+visible = false
 light_color = Color(0.984314, 0.117647, 0, 1)
 light_energy = 2.882
 spot_range = 18.8445
@@ -667,3 +669,9 @@ spot_angle = 16.9962
 tree_root = SubResource("AnimationNodeBlendTree_wc3vh")
 anim_player = NodePath("../AnimationPlayer")
 parameters/BlendSpace1D/blend_position = 0
+
+[node name="StateMachine" type="Node" parent="."]
+script = ExtResource("2_qa8n4")
+
+[node name="Idle" type="Node" parent="StateMachine"]
+script = ExtResource("3_fuks2")
