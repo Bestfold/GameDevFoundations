@@ -16,5 +16,8 @@ func _ready() -> void:
 	pass
 
 # Relayed _process function from state_machine
-func Update(_delta:float):
+func Update(_delta: float):
+	pass
+	
+func Update_Physics(_delta: float):
 	pass

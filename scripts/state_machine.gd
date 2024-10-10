@@ -26,6 +26,10 @@ func _ready():
 func _process(delta):
 	if current_state:
 		current_state.Update(delta)
+		
+func _physics_process(delta: float) -> void:
+	if current_state:
+		current_state.Update_Physics(delta)
 
 
 # Henta 10.10.24 fra ForlornU på YT. Tittel: Final State Machines in Godot | Godot Starter Kit FSM
