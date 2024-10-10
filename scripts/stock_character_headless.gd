@@ -23,6 +23,7 @@ func _unhandled_input(event: InputEvent) -> void:
 		spring_arm_pivot.rotate_y(-event.relative.x * 0.005)
 		spring_arm.rotate_x(-event.relative.y * 0.005)
 		spring_arm.rotation.x = clamp(spring_arm.rotation.x, -PI/2, PI/2)
+		armature.rotation.y = lerp_angle(armature.rotation.y, atan2(velocity.x, velocity.z), LERP_VAL) # Trenger å bytte fra velocity til spring_arm_pivot sin vector om den skal rotere med kamera
 
 func _physics_process(delta: float) -> void:
 	# Add the gravity.
@@ -45,7 +46,7 @@ func _physics_process(delta: float) -> void:
 	if direction:
 		velocity.x = lerp(velocity.x, direction.x * SPEED, LERP_VAL)
 		velocity.z = lerp(velocity.z, direction.z * SPEED, LERP_VAL)
-		armature.rotation.y = lerp_angle(armature.rotation.y, atan2(-velocity.x, -velocity.z), LERP_VAL)
+		
 	else:
 		velocity.x = lerp(velocity.x, 0.0, LERP_VAL)
 		velocity.z = lerp(velocity.z, 0.0, LERP_VAL)
