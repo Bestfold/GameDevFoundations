@@ -1,6 +1,6 @@
 extends State
 
-class_name IdleState
+class_name FallState
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
