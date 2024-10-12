@@ -42,6 +42,9 @@ func process_input(event: InputEvent) -> State:
 	if Input.get_vector("left", "right", "forward", "back") == Vector2.ZERO:
 		return idle_state
 
+	if Input.get_vector("left", "right", "forward", "back") != Vector2.ZERO && Input.is_action_just_pressed("run"):
+		return run_state
+
 	if Input.is_action_just_pressed("jump") and parent.is_on_floor():
 		return jump_state
 	

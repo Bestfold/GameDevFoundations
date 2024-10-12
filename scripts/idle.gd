@@ -30,8 +30,8 @@ func process_physics(delta: float) -> State:
 	parent.velocity.x = lerp(parent.velocity.x, 0.0, lerp_val)
 	parent.velocity.z = lerp(parent.velocity.z, 0.0, lerp_val)
 	
-	#if !parent.is_on_floor():
-	#	return fall_state
+	if !parent.is_on_floor():
+		return fall_state
 	parent.animation_tree.set("parameters/BlendSpace1D/blend_position", parent.velocity.length() / move_speed)
 
 	parent.move_and_slide()
@@ -45,12 +45,14 @@ func process_input(event: InputEvent) -> State:
 
 	if Input.is_action_just_pressed("jump") and parent.is_on_floor():
 		return jump_state
+	if Input.get_vector("left", "right", "forward", "back") != Vector2.ZERO && Input.is_action_just_pressed("run"):
+		return run_state
 	if Input.get_vector("left", "right", "forward", "back") != Vector2.ZERO:
 		return walk_state
-	if Input.is_action_just_pressed("crouch"):
-		return crouch_idle_state
-	if Input.is_action_just_pressed("crawl"):
-		return crawl_idle_state
+	#if Input.is_action_just_pressed("crouch"):
+	#	return crouch_idle_state
+	#if Input.is_action_just_pressed("crawl"):
+	#	return crawl_idle_state
 	return null
 
 func process_frame(_delta: float) -> State:

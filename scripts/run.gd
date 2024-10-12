@@ -2,6 +2,20 @@ extends State
 
 class_name RunState
 
+@export var run_modifier: float = 3
+
+@export var idle_state: State
+@export var fall_state: State
+@export var jump_state: State
+@export var walk_state: State
+@export var die_state: State
+@export var crouch_idle_state: State
+@export var crouch_walk_state: State
+@export var crawl_idle_state: State
+@export var crawl_walk_state: State
+@export var terminal_state: State
+@export var operating_state: State
+
 #func enter():
 	#super()
 #	pass
@@ -9,11 +23,43 @@ class_name RunState
 #func exit():
 #	pass
 
-#func process_physics(delta: float) -> State:
-#	return null
+func process_physics(delta: float) -> State:
+	parent.velocity.y -= gravity * delta
 
-#func process_input(event: InputEvent) -> State:
-#	return null
+	var input_dir := Input.get_vector("left", "right", "forward", "back")
+	var direction := (parent.transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
+
+	# roter basert på pivot rotasjon rundt "z-aksen"-til karakteren (Vector3.UP)
+	direction = direction.rotated(Vector3.UP, parent.spring_arm_pivot.rotation.y)
+
+	if direction:
+		parent.velocity.x = lerp(parent.velocity.x, direction.x * move_speed * run_modifier, lerp_val)
+		parent.velocity.z = lerp(parent.velocity.z, direction.z * move_speed * run_modifier, lerp_val)
+
+	parent.animation_tree.set("parameters/BlendSpace1D/blend_position", parent.velocity.length() / move_speed)
+
+	if !parent.is_on_floor():
+		return fall_state
+	
+	parent.move_and_slide()
+	return null
+
+func process_input(event: InputEvent) -> State:
+
+	# Mouse movement function from State class
+	mouse_movement_free(event)
+
+	if !Input.is_action_pressed("run") && Input.get_vector("left", "right", "forward", "back") != Vector2.ZERO:
+		return walk_state
+	if Input.get_vector("left", "right", "forward", "back") == Vector2.ZERO:
+		return idle_state
+	if Input.is_action_just_pressed("jump") and parent.is_on_floor():
+		return jump_state
+	if Input.is_action_just_pressed("crouch"):
+		return crouch_walk_state
+	if Input.is_action_just_pressed("crawl"):
+		return crawl_walk_state
+	return null
 
 #func process_frame(delta: float) -> State:
 #	return null
