@@ -2,11 +2,59 @@ extends State
 
 class_name JumpState
 
-# Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-	pass # Replace with function body.
+@export var jump_velocity: float = 10
 
+@export var idle_state: State
+@export var fall_state: State
+@export var terminal_state: State
+@export var operating_state: State
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
+func enter():
+	#super()
+	parent.velocity.y += jump_velocity
+	parent.move_and_slide()
+	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	pass
+
+#func exit():
+#	pass
+
+func process_physics(delta: float) -> State:
+	parent.velocity.y -= gravity * delta
+	
+	# dampening heigth of jump
+	if parent.velocity.y >= 0.001:
+		parent.velocity.y = lerp(parent.velocity.y, 0.0, lerp_val * gravity * delta)
+
+	var input_dir := Input.get_vector("left", "right", "forward", "back")
+	var direction := (parent.transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
+
+	# roter basert på pivot rotasjon rundt "z-aksen"-til karakteren (Vector3.UP)
+	direction = direction.rotated(Vector3.UP, parent.spring_arm_pivot.rotation.y)
+
+	if direction:
+		parent.velocity.x = lerp(parent.velocity.x, direction.x * move_speed, lerp_val)
+		parent.velocity.z = lerp(parent.velocity.z, direction.z * move_speed, lerp_val)
+	else:
+		parent.velocity.x = lerp(parent.velocity.x, 0.0, lerp_val)
+		parent.velocity.z = lerp(parent.velocity.z, 0.0, lerp_val)
+
+	parent.move_and_slide()
+
+	if parent.velocity.y > 0:
+		return fall_state
+
+	if parent.is_on_floor:
+		return idle_state
+	
+	return null
+
+func process_input(event: InputEvent) -> State:
+
+	# Mouse movement function from State class
+	mouse_movement_free(event)
+	
+	return null
+
+#func process_frame(delta: float) -> State:
+#	return null

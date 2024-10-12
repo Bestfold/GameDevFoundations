@@ -3,33 +3,58 @@ extends Node
 class_name StateMachine
 
 # State machine for managing states
+# NOTE General state machine
+
+# Works by passing functions to states (process_physics etc.) and changing
+#  states based on returned states from said passed functions.
+
+@export var initial_state : State
 
 var states : Dictionary = {}
 var current_state : State
-@export var initial_state : State
 
 
-# NOTE General state machine
-
-func _ready():
+# Gets parent refrence (as param) to all state-children
+func init(parent: Player) -> void:
 	for child in get_children():
-		if child is State:
-			states[child.name.to_lower()] = child
-			child.state_transition.connect(change_state)
+		child.parent = parent
+	
+	# Initialize to the default state
+	change_state(initial_state)
 
-	if initial_state:
-		initial_state.Enter()
-		current_state = initial_state
-
-
-# Relays _process-calls to child-States' update function
-func _process(delta):
+# Changing from current to new state
+func change_state(new_state : State):
 	if current_state:
-		current_state.Update(delta)
-		
-func _physics_process(delta: float) -> void:
-	if current_state:
-		current_state.Update_Physics(delta)
+		current_state.exit()
+	
+	current_state = new_state
+	print("current state: " + current_state.name)
+	current_state.enter()
+
+# Passes process_physics, AND "listens" for any returned state changes
+func process_physics(delta: float) -> void:
+	var new_state = current_state.process_physics(delta)
+	if new_state:
+		# Changes to whatever state (if not void) is returned
+		change_state(new_state)
+
+# Passes process_input, AND "listens" for any returned state changes
+func process_input(event: InputEvent) -> void:
+	var new_state = current_state.process_input(event)
+	if new_state:
+		# Changes to whatever state (if not void) is returned
+		change_state(new_state)
+
+# Passes process_frame, AND "listens" for any returned state changes
+func process_frame(delta: float) -> void:
+	var new_state = current_state.process_frame(delta)
+	if new_state:
+		# Changes to whatever state (if not void) is returned
+		change_state(new_state)
+
+
+
+
 
 
 # Henta 10.10.24 fra ForlornU på YT. Tittel: Final State Machines in Godot | Godot Starter Kit FSM
@@ -54,21 +79,3 @@ func force_change_state(new_state_name : String):
 	newState.Enter()
 
 	current_state = newState
-
-
-func change_state(source_state : State, new_state_name : String):
-	if source_state != current_state:
-		print("Invalid change_state. Changing from " + source_state.name + " bur currently in " + current_state.name)
-		return
-
-	var new_state = states.get(new_state_name.to_lower())
-	if !new_state:
-		print("New state is empty!")
-		return;
-
-	if current_state:
-		current_state.Exit()
-	
-	new_state.Enter()
-
-	current_state = new_state
