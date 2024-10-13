@@ -8,6 +8,8 @@ class_name Player
 @onready var spring_arm_pivot: Node3D = %SpringArmPivot
 @onready var state_machine: StateMachine = $StateMachine
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
+@onready var head_mesh: MeshInstance3D = %Head
+
 
 # Player is controlled by state-children, as exception to common standard.
 
@@ -15,6 +17,11 @@ func _ready() -> void:
 	# Initialize state machine, passing a refrence of player to the states
 	state_machine.init(self)
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+
+	# Sets head invisible for player
+	head_mesh.visible = false
+	
+	
 
 func _unhandled_input(event: InputEvent) -> void:
 		# Passes _unhandled_input() to state machine

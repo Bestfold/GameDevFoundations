@@ -2,7 +2,7 @@ extends State
 
 class_name RunState
 
-@export var run_modifier: float = 3
+@export var run_modifier: float = 2
 
 @export var idle_state: State
 @export var fall_state: State
@@ -49,9 +49,11 @@ func process_input(event: InputEvent) -> State:
 	# Mouse movement function from State class
 	mouse_movement_free(event)
 
-	if !Input.is_action_pressed("run") && Input.get_vector("left", "right", "forward", "back") != Vector2.ZERO:
+	var input_dir := Input.get_vector("left", "right", "forward", "back")
+
+	if !Input.is_action_pressed("run") && input_dir != Vector2.ZERO:
 		return walk_state
-	if Input.get_vector("left", "right", "forward", "back") == Vector2.ZERO:
+	if input_dir == Vector2.ZERO:
 		return idle_state
 	if Input.is_action_just_pressed("jump") and parent.is_on_floor():
 		return jump_state

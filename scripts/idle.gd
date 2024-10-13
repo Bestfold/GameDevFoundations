@@ -34,6 +34,16 @@ func process_physics(delta: float) -> State:
 		return fall_state
 	parent.animation_tree.set("parameters/BlendSpace1D/blend_position", parent.velocity.length() / move_speed)
 
+	#parent.armature.rotate_y(parent.spring_arm_pivot.rotation.y)
+
+	#parent.armature.rotate_y(lerp_angle(parent.armature.rotation.y, parent.spring_arm_pivot.rotation.y, lerp_val))
+
+	#parent.armature.rotation.y = lerp_angle(parent.armature.rotation.y, atan2(parent.velocity.x, parent.velocity.z), lerp_val)
+
+	var input_dir := Input.get_vector("left", "right", "forward", "back")
+	if input_dir:
+		return walk_state
+
 	parent.move_and_slide()
 	return null
 
@@ -41,13 +51,14 @@ func process_input(event: InputEvent) -> State:
 
 	# Mouse movement function from State class
 	mouse_movement_free(event)
-	
 
-	if Input.is_action_just_pressed("jump") and parent.is_on_floor():
+	var input_dir := Input.get_vector("left", "right", "forward", "back")
+	
+	if Input.is_action_pressed("jump") and parent.is_on_floor():
 		return jump_state
-	if Input.get_vector("left", "right", "forward", "back") != Vector2.ZERO && Input.is_action_just_pressed("run"):
+	if input_dir != Vector2.ZERO && Input.is_action_pressed("run"):
 		return run_state
-	if Input.get_vector("left", "right", "forward", "back") != Vector2.ZERO:
+	if input_dir != Vector2.ZERO:
 		return walk_state
 	#if Input.is_action_just_pressed("crouch"):
 	#	return crouch_idle_state
