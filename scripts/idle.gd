@@ -4,6 +4,7 @@ class_name IdleState
 
 # Idle, "default" state which can direct to most other states
 
+@export_category("States")
 @export var run_state: State
 @export var fall_state: State
 @export var jump_state: State
@@ -20,7 +21,8 @@ func enter():
 	# Calling State default call (animation_tree.animation(animation_name)
 	super()
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
-
+	
+	
 func exit():
 	pass
 
@@ -32,17 +34,8 @@ func process_physics(delta: float) -> State:
 	
 	if !parent.is_on_floor():
 		return fall_state
+
 	parent.animation_tree.set("parameters/BlendSpace1D/blend_position", parent.velocity.length() / move_speed)
-
-	#parent.armature.rotate_y(parent.spring_arm_pivot.rotation.y)
-
-	#parent.armature.rotate_y(lerp_angle(parent.armature.rotation.y, parent.spring_arm_pivot.rotation.y, lerp_val))
-
-	#parent.armature.rotation.y = lerp_angle(parent.armature.rotation.y, atan2(parent.velocity.x, parent.velocity.z), lerp_val)
-
-	var input_dir := Input.get_vector("left", "right", "forward", "back")
-	if input_dir:
-		return walk_state
 
 	parent.move_and_slide()
 	return null

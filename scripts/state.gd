@@ -40,6 +40,6 @@ func mouse_movement_free(event: InputEvent) -> void:
 		parent.spring_arm.rotation.x = clamp(parent.spring_arm.rotation.x, -PI/2, PI/2)
 		# Trenger å bytte fra velocity til spring_arm_pivot sin vector om den skal rotere med kamera
 	
-		parent.armature.rotation.y = lerp_angle(parent.armature.rotation.y, 
-			atan2(parent.velocity.x, parent.velocity.z), lerp_val)
-	
+		#parent.armature.rotation.y = lerp_angle(parent.armature.rotation.y, 
+		#	atan2(parent.velocity.x, parent.velocity.z), lerp_val)
+		parent.armature.rotation.y = parent.spring_arm_pivot.rotation.y

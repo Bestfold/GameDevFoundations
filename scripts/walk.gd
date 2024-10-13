@@ -2,6 +2,7 @@ extends State
 
 class_name WalkState
 
+@export_category("States")
 @export var idle_state: State
 @export var run_state: State
 @export var fall_state: State
@@ -47,9 +48,9 @@ func process_input(event: InputEvent) -> State:
 
 	if input_dir == Vector2.ZERO:
 		return idle_state
-	if input_dir != Vector2.ZERO && Input.is_action_just_pressed("run"):
+	if input_dir != Vector2.ZERO && Input.is_action_pressed("run"):
 		return run_state
-	if Input.is_action_just_pressed("jump") and parent.is_on_floor():
+	if Input.is_action_pressed("jump") and parent.is_on_floor():
 		return jump_state
 	
 	return null

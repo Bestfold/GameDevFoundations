@@ -2,8 +2,10 @@ extends State
 
 class_name RunState
 
+@export_category("Modifiers")
 @export var run_modifier: float = 2
 
+@export_category("States")
 @export var idle_state: State
 @export var fall_state: State
 @export var jump_state: State
@@ -44,6 +46,7 @@ func process_physics(delta: float) -> State:
 	parent.move_and_slide()
 	return null
 
+
 func process_input(event: InputEvent) -> State:
 
 	# Mouse movement function from State class
@@ -55,12 +58,12 @@ func process_input(event: InputEvent) -> State:
 		return walk_state
 	if input_dir == Vector2.ZERO:
 		return idle_state
-	if Input.is_action_just_pressed("jump") and parent.is_on_floor():
+	if Input.is_action_pressed("jump") and parent.is_on_floor():
 		return jump_state
-	if Input.is_action_just_pressed("crouch"):
-		return crouch_walk_state
-	if Input.is_action_just_pressed("crawl"):
-		return crawl_walk_state
+	#if Input.is_action_pressed("crouch"):
+	#	return crouch_walk_state
+	#if Input.is_action_pressed("crawl"):
+	#	return crawl_walk_state
 	return null
 
 #func process_frame(delta: float) -> State:

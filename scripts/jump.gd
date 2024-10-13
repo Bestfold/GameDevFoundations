@@ -2,10 +2,14 @@ extends State
 
 class_name JumpState
 
+@export_category("Modifiers")
 @export var jump_velocity: float = 10
 
+@export_category("States")
 @export var idle_state: State
 @export var fall_state: State
+@export var walk_state: State
+@export var run_state: State
 @export var terminal_state: State
 @export var operating_state: State
 
@@ -44,8 +48,13 @@ func process_physics(delta: float) -> State:
 	if parent.velocity.y > 0:
 		return fall_state
 
-	if parent.is_on_floor:
-		return idle_state
+	if parent.is_on_floor():
+		if input_dir && Input.is_action_pressed("run"):
+			return run_state
+		elif input_dir:
+			return walk_state
+		else:
+			return idle_state
 	
 	return null
 

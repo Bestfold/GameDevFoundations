@@ -2,8 +2,11 @@ extends State
 
 class_name FallState
 
+@export_category("States")
 @export var idle_state: State
 @export var jump_state: State
+@export var walk_state: State
+@export var run_state: State
 @export var terminal_state: State
 @export var operating_state: State
 
@@ -11,7 +14,6 @@ class_name FallState
 func enter():
 	#super()
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
-	pass
 
 #func exit():
 #	pass
@@ -39,7 +41,12 @@ func process_physics(delta: float) -> State:
 	parent.move_and_slide()
 
 	if parent.is_on_floor():
-		return idle_state
+		if input_dir && Input.is_action_pressed("run"):
+			return run_state
+		elif input_dir:
+			return walk_state
+		else:
+			return idle_state
 	
 	return null
 
@@ -48,7 +55,7 @@ func process_input(event: InputEvent) -> State:
 	# Mouse movement function from State class
 	mouse_movement_free(event)
 
-	if Input.is_action_just_pressed("jump") and parent.is_on_floor():
+	if Input.is_action_pressed("jump") and parent.is_on_floor():
 		return jump_state
 
 	return null
