@@ -1,7 +1,9 @@
-[gd_scene load_steps=12 format=3 uid="uid://c26siogmy1l2f"]
+[gd_scene load_steps=14 format=3 uid="uid://c26siogmy1l2f"]
 
 [ext_resource type="MeshLibrary" uid="uid://deetsral7i5dx" path="res://assets/brickwall/brickwallTileset.tres" id="2_ovida"]
 [ext_resource type="PackedScene" uid="uid://w482w0w2x31k" path="res://scenes/character_scenes/player.tscn" id="2_tdcmw"]
+[ext_resource type="Script" path="res://scripts/component_scripts/movement_enemy_test.gd" id="3_3msq4"]
+[ext_resource type="Script" path="res://scripts/component_scripts/look_enemy_test.gd" id="4_dbfir"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_uu4sj"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -131,23 +133,26 @@ shape = SubResource("BoxShape3D_ps6dd")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.19752, -2.98023e-07, 0.0954694)
 
 [node name="Skeleton3D" parent="Player/Armature" index="0"]
-bones/0/position = Vector3(1.41462e-10, 1.19519, 3.8877e-09)
+bones/0/position = Vector3(1.06976e-10, 1.19194, 3.61349e-09)
 bones/0/rotation = Quaternion(-0.0222822, 1.1918e-07, -2.65625e-09, 0.999752)
 bones/1/rotation = Quaternion(0.120888, -1.87045e-14, 2.8822e-08, 0.992666)
-bones/2/rotation = Quaternion(-0.0146889, -0.00778663, 0.993338, -0.114034)
+bones/2/rotation = Quaternion(-0.0147612, -0.00780564, 0.993109, -0.116001)
 bones/3/rotation = Quaternion(0.111725, 0.00241308, 0.0179131, 0.993575)
-bones/4/rotation = Quaternion(0.0450454, -0.00250878, 0.997922, -0.045995)
-bones/5/rotation = Quaternion(-0.0736256, -2.52977e-05, 0.00106637, 0.997285)
-bones/6/rotation = Quaternion(0.620881, 0.0155582, -0.0632215, 0.781197)
-bones/7/rotation = Quaternion(0.0181137, -0.00323152, 0.994148, 0.106446)
+bones/4/rotation = Quaternion(0.0444642, 0.0129104, 0.99784, -0.046599)
+bones/5/rotation = Quaternion(-0.104667, -2.52231e-05, 0.00151596, 0.994506)
+bones/6/rotation = Quaternion(0.633084, 0.0164624, -0.0633308, 0.771313)
+bones/7/rotation = Quaternion(0.0181563, -0.00324537, 0.994037, 0.107475)
 bones/8/rotation = Quaternion(0.111725, -0.00241307, -0.0179131, 0.993575)
-bones/9/rotation = Quaternion(-0.0745871, -0.00121141, 0.996047, 0.0482192)
-bones/10/rotation = Quaternion(-0.0736256, 2.53025e-05, -0.00106637, 0.997285)
-bones/11/rotation = Quaternion(0.618724, -0.0400652, 0.0798685, 0.78051)
+bones/9/rotation = Quaternion(-0.0739679, 0.0141889, 0.995941, 0.0492819)
+bones/10/rotation = Quaternion(-0.104667, 2.52311e-05, -0.00151597, 0.994506)
+bones/11/rotation = Quaternion(0.630916, -0.0412277, 0.0795925, 0.770656)
 bones/12/rotation = Quaternion(-0.0305826, 0.706445, -0.706445, 0.0305826)
 bones/13/rotation = Quaternion(0.0305826, 0.706445, -0.706445, -0.0305826)
 
 [node name="MoveComponent" parent="Player" index="6"]
-script = null
+script = ExtResource("3_3msq4")
+
+[node name="LookComponent" parent="Player" index="7"]
+script = ExtResource("4_dbfir")
 
 [editable path="Player"]

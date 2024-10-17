@@ -15,6 +15,7 @@ var gravity: int = ProjectSettings.get_setting("physics/3d/default_gravity")
 var parent: CharacterBody3D
 var animation_player: AnimationPlayer
 var move_component: MovementInterface
+var look_component: LookInterface
 
 func enter():
 	animation_player.play(animation_name)
@@ -44,3 +45,6 @@ func mouse_movement_free(event: InputEvent) -> void:
 		#parent.armature.rotation.y = lerp_angle(parent.armature.rotation.y, 
 		#	atan2(parent.velocity.x, parent.velocity.z), lerp_val)
 		parent.armature.rotation.y = parent.spring_arm_pivot.rotation.y
+
+func rotate_character(event: float) -> void:
+	parent.armature.rotation.y = -event * 0.005
