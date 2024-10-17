@@ -12,11 +12,12 @@ var gravity: int = ProjectSettings.get_setting("physics/3d/default_gravity")
 
 # Holds a refrence to grandparent CharacterBody so that the body can be
 #  controlled by the state
-var parent: Player
+var parent: CharacterBody3D
+var animation_player: AnimationPlayer
+var move_component: MovementInterface
 
 func enter():
-	parent.animation_player.play(animation_name)
-	pass
+	animation_player.play(animation_name)
 
 func exit():
 	pass

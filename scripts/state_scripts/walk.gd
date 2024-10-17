@@ -24,7 +24,7 @@ func exit():
 func process_physics(delta: float) -> State:
 	parent.velocity.y -= gravity * delta
 
-	var input_dir := Input.get_vector("left", "right", "forward", "back")
+	var input_dir := move_component.get_movement_input()
 	var direction := (parent.transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
 
 	# roter basert på pivot rotasjon rundt "z-aksen"-til karakteren (Vector3.UP)
@@ -44,13 +44,13 @@ func process_input(event: InputEvent) -> State:
 	# Mouse movement function from State class
 	mouse_movement_free(event)
 
-	var input_dir := Input.get_vector("left", "right", "forward", "back")
+	var input_dir := move_component.get_movement_input()
 
 	if input_dir == Vector2.ZERO:
 		return idle_state
-	if input_dir != Vector2.ZERO && Input.is_action_pressed("run"):
+	if input_dir != Vector2.ZERO && move_component.wants_run():
 		return run_state
-	if Input.is_action_pressed("jump") and parent.is_on_floor():
+	if move_component.wants_jump() and parent.is_on_floor():
 		return jump_state
 	
 	return null

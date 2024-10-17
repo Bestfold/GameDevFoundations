@@ -15,9 +15,11 @@ var current_state : State
 
 
 # Gets parent refrence (as param) to all state-children
-func init(parent: Player) -> void:
+func init(parent: CharacterBody3D, animation_player: AnimationPlayer, move_component: MovementInterface) -> void:
 	for child in get_children():
 		child.parent = parent
+		child.animation_player = animation_player
+		child.move_component = move_component
 	
 	# Initialize to the default state
 	change_state(initial_state)

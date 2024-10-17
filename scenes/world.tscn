@@ -1,7 +1,7 @@
 [gd_scene load_steps=12 format=3 uid="uid://c26siogmy1l2f"]
 
-[ext_resource type="MeshLibrary" uid="uid://deetsral7i5dx" path="res://assets/brickwallTileset.tres" id="2_ovida"]
-[ext_resource type="PackedScene" uid="uid://w482w0w2x31k" path="res://scenes/player.tscn" id="2_tdcmw"]
+[ext_resource type="MeshLibrary" uid="uid://deetsral7i5dx" path="res://assets/brickwall/brickwallTileset.tres" id="2_ovida"]
+[ext_resource type="PackedScene" uid="uid://w482w0w2x31k" path="res://scenes/character_scenes/player.tscn" id="2_tdcmw"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_uu4sj"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -46,6 +46,7 @@ transform = Transform3D(-0.866025, -0.433013, 0.25, 0, 0.5, 0.866025, -0.5, 0.75
 shadow_enabled = true
 
 [node name="Ground" type="MeshInstance3D" parent="."]
+transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 0, 0, 0)
 mesh = SubResource("PlaneMesh_pjvrq")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Ground"]
@@ -125,3 +126,28 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0.5, 0)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="TestBoxes/CSGBox3D/StaticBody3D"]
 shape = SubResource("BoxShape3D_ps6dd")
+
+[node name="Player" parent="." instance=ExtResource("2_tdcmw")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.19752, -2.98023e-07, 0.0954694)
+
+[node name="Skeleton3D" parent="Player/Armature" index="0"]
+bones/0/position = Vector3(1.41462e-10, 1.19519, 3.8877e-09)
+bones/0/rotation = Quaternion(-0.0222822, 1.1918e-07, -2.65625e-09, 0.999752)
+bones/1/rotation = Quaternion(0.120888, -1.87045e-14, 2.8822e-08, 0.992666)
+bones/2/rotation = Quaternion(-0.0146889, -0.00778663, 0.993338, -0.114034)
+bones/3/rotation = Quaternion(0.111725, 0.00241308, 0.0179131, 0.993575)
+bones/4/rotation = Quaternion(0.0450454, -0.00250878, 0.997922, -0.045995)
+bones/5/rotation = Quaternion(-0.0736256, -2.52977e-05, 0.00106637, 0.997285)
+bones/6/rotation = Quaternion(0.620881, 0.0155582, -0.0632215, 0.781197)
+bones/7/rotation = Quaternion(0.0181137, -0.00323152, 0.994148, 0.106446)
+bones/8/rotation = Quaternion(0.111725, -0.00241307, -0.0179131, 0.993575)
+bones/9/rotation = Quaternion(-0.0745871, -0.00121141, 0.996047, 0.0482192)
+bones/10/rotation = Quaternion(-0.0736256, 2.53025e-05, -0.00106637, 0.997285)
+bones/11/rotation = Quaternion(0.618724, -0.0400652, 0.0798685, 0.78051)
+bones/12/rotation = Quaternion(-0.0305826, 0.706445, -0.706445, 0.0305826)
+bones/13/rotation = Quaternion(0.0305826, 0.706445, -0.706445, -0.0305826)
+
+[node name="MoveComponent" parent="Player" index="6"]
+script = null
+
+[editable path="Player"]

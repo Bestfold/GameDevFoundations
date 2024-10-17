@@ -45,11 +45,11 @@ func process_input(event: InputEvent) -> State:
 	# Mouse movement function from State class
 	mouse_movement_free(event)
 
-	var input_dir := Input.get_vector("left", "right", "forward", "back")
+	var input_dir := move_component.get_movement_input()
 	
-	if Input.is_action_pressed("jump") and parent.is_on_floor():
+	if move_component.wants_jump() and parent.is_on_floor():
 		return jump_state
-	if input_dir != Vector2.ZERO && Input.is_action_pressed("run"):
+	if input_dir != Vector2.ZERO && move_component.wants_run():
 		return run_state
 	if input_dir != Vector2.ZERO:
 		return walk_state

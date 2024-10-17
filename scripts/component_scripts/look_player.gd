@@ -1,0 +1,2 @@
+extends LookInterface
+class_name LookPlayer

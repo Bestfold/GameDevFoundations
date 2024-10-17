@@ -4,12 +4,12 @@ importer="scene"
 importer_version=1
 type="PackedScene"
 uid="uid://t7sv8s77dkum"
-path="res://.godot/imported/stockCharacterWSpearateHead.glb-4ff7ddb17d249bf1aae49be67f8bc5c3.scn"
+path="res://.godot/imported/stockCharacterWSpearateHead.glb-1b6765464992133bdca3417138f6d793.scn"
 
 [deps]
 
-source_file="res://scenes/stockCharacterWSpearateHead.glb"
-dest_files=["res://.godot/imported/stockCharacterWSpearateHead.glb-4ff7ddb17d249bf1aae49be67f8bc5c3.scn"]
+source_file="res://scenes/character_scenes/stockCharacterWSpearateHead.glb"
+dest_files=["res://.godot/imported/stockCharacterWSpearateHead.glb-1b6765464992133bdca3417138f6d793.scn"]
 
 [params]
 
