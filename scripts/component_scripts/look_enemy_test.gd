@@ -5,6 +5,10 @@ class_name LookEnemyTest
 func capture_mouse() -> void:
 	pass
 
-# Returns float of what armature should rotate with
-func get_look_rotation_y() -> float:
-	return 0.0
+# Handles input
+func handle_input(_event: InputEvent) -> void:
+	pass
+
+# Returns rotation-float for y-axis
+func update_rotation(delta: float) -> void:
+	parent.armature.rotation.y += delta * 10

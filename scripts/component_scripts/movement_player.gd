@@ -1,7 +1,6 @@
 extends MovementInterface
 class_name MovementPlayer
 
-
 # Returns a movement vector where [x, y, z] = [move x axis, 1 = want to jump, move z axis]
 func get_movement_input() -> Vector2:
 	var input_dir := Input.get_vector("left", "right", "forward", "back")

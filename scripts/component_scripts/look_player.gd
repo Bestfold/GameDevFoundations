@@ -5,9 +5,33 @@ class_name LookPlayer
 func capture_mouse() -> void:
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 
+# Handles input
+func handle_input(event: InputEvent) -> void:
+	if event is InputEventMouseMotion:
+		parent.spring_arm_pivot.rotate_y(-event.relative.x * 0.005)
+		parent.spring_arm.rotate_x(-event.relative.y * 0.005)
+		parent.spring_arm.rotation.x = clamp(parent.spring_arm.rotation.x, -PI/2, PI/2)
+		# Trenger å bytte fra velocity til spring_arm_pivot sin vector om den skal rotere med kamera
+	
+		#parent.armature.rotation.y = lerp_angle(parent.armature.rotation.y, 
+		#	atan2(parent.velocity.x, parent.velocity.z), lerp_val)
+		parent.armature.rotation.y = parent.spring_arm_pivot.rotation.y
+
+# Returns rotation-float for y-axis
+func update_rotation(_delta: float) -> void:
+	pass
+
 # Returns float of what armature should rotate with
-func get_look_rotation_y() -> float:
-	return 0.0
+#func look_and_rotate_y(event: InputEvent, parent: CharacterBody3D) -> void:
+#	if event is InputEventMouseMotion:
+#		parent.spring_arm_pivot.rotate_y(-event.relative.x * 0.005)
+#		parent.spring_arm.rotate_x(-event.relative.y * 0.005)
+#		parent.spring_arm.rotation.x = clamp(parent.spring_arm.rotation.x, -PI/2, PI/2)
+		# Trenger å bytte fra velocity til spring_arm_pivot sin vector om den skal rotere med kamera
+	
+		#parent.armature.rotation.y = lerp_angle(parent.armature.rotation.y, 
+		#	atan2(parent.velocity.x, parent.velocity.z), lerp_val)
+#		parent.armature.rotation.y = parent.spring_arm_pivot.rotation.y
 
 
 #func get_look_input(event: InputEvent) -> 

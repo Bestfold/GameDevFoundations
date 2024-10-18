@@ -37,26 +37,27 @@ func process_physics(delta: float) -> State:
 
 	parent.animation_tree.set("parameters/BlendSpace1D/blend_position", parent.velocity.length() / move_speed)
 
+	look_component.update_rotation(delta)
+
 	parent.move_and_slide()
 	return null
 
 func process_input(event: InputEvent) -> State:
-	if move_component is MovementPlayer:
-				# Mouse movement function from State class
-		mouse_movement_free(event)
+	# Mouse movement function from State class
+	look_component.handle_input(event)
 
-		var input_dir := move_component.get_movement_input()
+	var input_dir := move_component.get_movement_input()
 	
-		if move_component.wants_jump() and parent.is_on_floor():
-			return jump_state
-		if input_dir != Vector2.ZERO && move_component.wants_run():
-			return run_state
-		if input_dir != Vector2.ZERO:
-			return walk_state
-		#if Input.is_action_just_pressed("crouch"):
-		#	return crouch_idle_state
-		#if Input.is_action_just_pressed("crawl"):
-		#	return crawl_idle_state
+	if move_component.wants_jump() and parent.is_on_floor():
+		return jump_state
+	if input_dir != Vector2.ZERO && move_component.wants_run():
+		return run_state
+	if input_dir != Vector2.ZERO:
+		return walk_state
+	#if Input.is_action_just_pressed("crouch"):
+	#	return crouch_idle_state
+	#if Input.is_action_just_pressed("crawl"):
+	#	return crawl_idle_state
 	return null
 
 func process_frame(_delta: float) -> State:

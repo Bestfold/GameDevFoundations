@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://c26siogmy1l2f"]
+[gd_scene load_steps=15 format=3 uid="uid://c26siogmy1l2f"]
 
 [ext_resource type="MeshLibrary" uid="uid://deetsral7i5dx" path="res://assets/brickwall/brickwallTileset.tres" id="2_ovida"]
 [ext_resource type="PackedScene" uid="uid://w482w0w2x31k" path="res://scenes/character_scenes/player.tscn" id="2_tdcmw"]
@@ -27,6 +27,9 @@ fog_density = 0.1
 [sub_resource type="PlaneMesh" id="PlaneMesh_pjvrq"]
 size = Vector2(20, 20)
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vymgn"]
+albedo_color = Color(0.241156, 0.241156, 0.241156, 1)
+
 [sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_jr0fr"]
 data = PackedVector3Array(10, 0, 10, -10, 0, 10, 10, 0, -10, -10, 0, 10, -10, 0, -10, 10, 0, -10)
 
@@ -50,6 +53,7 @@ shadow_enabled = true
 [node name="Ground" type="MeshInstance3D" parent="."]
 transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 0, 0, 0)
 mesh = SubResource("PlaneMesh_pjvrq")
+surface_material_override/0 = SubResource("StandardMaterial3D_vymgn")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Ground"]
 
@@ -129,30 +133,24 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0.5, 0)
 [node name="CollisionShape3D" type="CollisionShape3D" parent="TestBoxes/CSGBox3D/StaticBody3D"]
 shape = SubResource("BoxShape3D_ps6dd")
 
-[node name="Player" parent="." instance=ExtResource("2_tdcmw")]
+[node name="NPC" parent="." instance=ExtResource("2_tdcmw")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.19752, -2.98023e-07, 0.0954694)
 
-[node name="Skeleton3D" parent="Player/Armature" index="0"]
-bones/0/position = Vector3(1.06976e-10, 1.19194, 3.61349e-09)
-bones/0/rotation = Quaternion(-0.0222822, 1.1918e-07, -2.65625e-09, 0.999752)
-bones/1/rotation = Quaternion(0.120888, -1.87045e-14, 2.8822e-08, 0.992666)
-bones/2/rotation = Quaternion(-0.0147612, -0.00780564, 0.993109, -0.116001)
-bones/3/rotation = Quaternion(0.111725, 0.00241308, 0.0179131, 0.993575)
-bones/4/rotation = Quaternion(0.0444642, 0.0129104, 0.99784, -0.046599)
-bones/5/rotation = Quaternion(-0.104667, -2.52231e-05, 0.00151596, 0.994506)
-bones/6/rotation = Quaternion(0.633084, 0.0164624, -0.0633308, 0.771313)
-bones/7/rotation = Quaternion(0.0181563, -0.00324537, 0.994037, 0.107475)
-bones/8/rotation = Quaternion(0.111725, -0.00241307, -0.0179131, 0.993575)
-bones/9/rotation = Quaternion(-0.0739679, 0.0141889, 0.995941, 0.0492819)
-bones/10/rotation = Quaternion(-0.104667, 2.52311e-05, -0.00151597, 0.994506)
-bones/11/rotation = Quaternion(0.630916, -0.0412277, 0.0795925, 0.770656)
-bones/12/rotation = Quaternion(-0.0305826, 0.706445, -0.706445, 0.0305826)
-bones/13/rotation = Quaternion(0.0305826, 0.706445, -0.706445, -0.0305826)
+[node name="Skeleton3D" parent="NPC/Armature" index="0"]
+bones/0/position = Vector3(5.28003e-11, 1.18685, 2.37159e-09)
+bones/2/rotation = Quaternion(-0.0148744, -0.00783535, 0.992742, -0.119083)
+bones/4/rotation = Quaternion(0.043842, 0.0304699, 0.997451, -0.0473397)
+bones/5/rotation = Quaternion(-0.139937, -2.51114e-05, 0.00202681, 0.990158)
+bones/6/rotation = Quaternion(0.646817, 0.0175216, -0.0635144, 0.759794)
+bones/7/rotation = Quaternion(0.018226, -0.00326805, 0.993851, 0.109162)
+bones/9/rotation = Quaternion(-0.0732938, 0.0317277, 0.995523, 0.0505454)
+bones/10/rotation = Quaternion(-0.139937, 2.51082e-05, -0.00202682, 0.990158)
+bones/11/rotation = Quaternion(0.644636, -0.0425739, 0.0793322, 0.759169)
 
-[node name="MoveComponent" parent="Player" index="6"]
+[node name="MoveComponent" parent="NPC" index="6"]
 script = ExtResource("3_3msq4")
 
-[node name="LookComponent" parent="Player" index="7"]
+[node name="LookComponent" parent="NPC" index="7"]
 script = ExtResource("4_dbfir")
 
-[editable path="Player"]
+[editable path="NPC"]

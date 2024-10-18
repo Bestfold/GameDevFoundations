@@ -25,25 +25,16 @@ func process_physics(delta: float) -> State:
 	if parent.velocity.y >= 0.001:
 		parent.velocity.y = lerp(parent.velocity.y, 0.0, lerp_val * gravity * delta)
 
-	var input_dir := move_component.get_movement_input()
-	var direction := (parent.transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
+	move_component.update_movement(delta, move_speed, lerp_val)
 
-	# roter basert på pivot rotasjon rundt "z-aksen"-til karakteren (Vector3.UP)
-	direction = direction.rotated(Vector3.UP, parent.spring_arm_pivot.rotation.y)
-
-	if direction:
-		parent.velocity.x = lerp(parent.velocity.x, direction.x * move_speed, lerp_val)
-		parent.velocity.z = lerp(parent.velocity.z, direction.z * move_speed, lerp_val)
-	else:
-		parent.velocity.x = lerp(parent.velocity.x, 0.0, lerp_val)
-		parent.velocity.z = lerp(parent.velocity.z, 0.0, lerp_val)
+	look_component.update_rotation(delta)
 
 	parent.move_and_slide()
 
 	if parent.is_on_floor():
-		if input_dir && move_component.wants_run():
+		if move_component.get_movement_input() && move_component.wants_run():
 			return run_state
-		elif input_dir:
+		elif move_component.get_movement_input():
 			return walk_state
 		else:
 			return idle_state
@@ -53,7 +44,7 @@ func process_physics(delta: float) -> State:
 func process_input(event: InputEvent) -> State:
 
 	# Mouse movement function from State class
-	mouse_movement_free(event)
+	look_component.handle_input(event)
 
 	if move_component.wants_jump() and parent.is_on_floor():
 		return jump_state

@@ -24,17 +24,11 @@ func exit():
 func process_physics(delta: float) -> State:
 	parent.velocity.y -= gravity * delta
 
-	var input_dir := move_component.get_movement_input()
-	var direction := (parent.transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
-
-	# roter basert på pivot rotasjon rundt "z-aksen"-til karakteren (Vector3.UP)
-	direction = direction.rotated(Vector3.UP, parent.spring_arm_pivot.rotation.y)
-
-	if direction:
-		parent.velocity.x = lerp(parent.velocity.x, direction.x * move_speed, lerp_val)
-		parent.velocity.z = lerp(parent.velocity.z, direction.z * move_speed, lerp_val)
+	move_component.update_movement(delta, move_speed, lerp_val)
 
 	parent.animation_tree.set("parameters/BlendSpace1D/blend_position", parent.velocity.length() / move_speed)
+
+	look_component.update_rotation(delta)
 
 	parent.move_and_slide()
 	return null
@@ -42,7 +36,7 @@ func process_physics(delta: float) -> State:
 func process_input(event: InputEvent) -> State:
 
 	# Mouse movement function from State class
-	mouse_movement_free(event)
+	look_component.handle_input(event)
 
 	var input_dir := move_component.get_movement_input()
 
