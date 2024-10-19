@@ -8,9 +8,9 @@ func capture_mouse() -> void:
 	pass
 
 # Handles input
-func handle_input(_event: InputEvent) -> void:
+func handle_input(_event: InputEvent, _move_speed: float, _lerp_val: float) -> void:
 	pass
 
 # Returns rotation-float for y-axis
-func update_rotation(_delta: float) -> void:
+func handle_physics(_delta: float, _move_speed: float, _lerp_val: float) -> void:
 	pass

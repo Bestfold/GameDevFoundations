@@ -17,14 +17,21 @@ func enter():
 	#super()
 	parent.velocity.y += jump_velocity
 	parent.move_and_slide()
-	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
-	pass
+	move_speed = 5
+	# Change of move_speed if run:
+	if move_component.wants_run():
+		move_speed = 8
+
+	look_component.capture_mouse()
 
 #func exit():
 #	pass
 
 func process_physics(delta: float) -> State:
 	parent.velocity.y -= gravity * delta
+
+
+
 	
 	# dampening heigth of jump
 	if parent.velocity.y >= 0.001:
@@ -32,7 +39,7 @@ func process_physics(delta: float) -> State:
 
 	move_component.update_movement(delta, move_speed, lerp_val)
 
-	look_component.update_rotation(delta)
+	look_component.handle_physics(delta, move_speed, lerp_val)
 
 	parent.move_and_slide()
 
@@ -52,7 +59,7 @@ func process_physics(delta: float) -> State:
 func process_input(event: InputEvent) -> State:
 
 	# Mouse movement function from State class
-	look_component.handle_input(event)
+	look_component.handle_input(event, move_speed, lerp_val)
 	
 	return null
 

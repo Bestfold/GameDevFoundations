@@ -17,7 +17,7 @@ func wants_jump() -> bool:
 func wants_run() -> bool:
     return false
 
-func update_movement(_delta: float, move_speed: float, lerp_val) -> void:
+func update_movement(_delta: float, move_speed: float, lerp_val: float) -> void:
     var input_dir := get_movement_input()
     var direction := (parent.transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
 

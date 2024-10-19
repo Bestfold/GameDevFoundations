@@ -28,7 +28,7 @@ func process_physics(delta: float) -> State:
 
 	parent.animation_tree.set("parameters/BlendSpace1D/blend_position", parent.velocity.length() / move_speed)
 
-	look_component.update_rotation(delta)
+	look_component.handle_physics(delta, move_speed, lerp_val)
 
 	parent.move_and_slide()
 	return null
@@ -36,7 +36,7 @@ func process_physics(delta: float) -> State:
 func process_input(event: InputEvent) -> State:
 
 	# Mouse movement function from State class
-	look_component.handle_input(event)
+	look_component.handle_input(event, move_speed, lerp_val)
 
 	var input_dir := move_component.get_movement_input()
 
