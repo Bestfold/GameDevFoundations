@@ -4,6 +4,7 @@ class_name JumpState
 
 @export_category("Modifiers")
 @export var jump_velocity: float = 10
+@export var run_modifier: float = 2
 
 @export_category("States")
 @export var idle_state: State
@@ -17,10 +18,11 @@ func enter():
 	#super()
 	parent.velocity.y += jump_velocity
 	parent.move_and_slide()
-	move_speed = 5
+	
+	#move_speed = 5
 	# Change of move_speed if run:
-	if move_component.wants_run():
-		move_speed = 8
+	#if move_component.wants_run():
+	#	move_speed = 8
 
 	look_component.capture_mouse()
 
@@ -30,16 +32,18 @@ func enter():
 func process_physics(delta: float) -> State:
 	parent.velocity.y -= gravity * delta
 
-
-
-	
 	# dampening heigth of jump
 	if parent.velocity.y >= 0.001:
 		parent.velocity.y = lerp(parent.velocity.y, 0.0, lerp_val * gravity * delta)
 
-	move_component.update_movement(delta, move_speed, lerp_val)
+	# Changing what move_speed is passed to component functions if run
+	var _passed_move_speed = move_speed
+	if move_component.wants_run():
+		_passed_move_speed = run_state.move_speed - 2
 
-	look_component.handle_physics(delta, move_speed, lerp_val)
+	move_component.update_movement(delta, _passed_move_speed, lerp_val)
+
+	look_component.handle_physics(delta, _passed_move_speed, lerp_val)
 
 	parent.move_and_slide()
 

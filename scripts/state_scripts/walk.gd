@@ -26,7 +26,11 @@ func process_physics(delta: float) -> State:
 
 	move_component.update_movement(delta, move_speed, lerp_val)
 
-	parent.animation_tree.set("parameters/BlendSpace1D/blend_position", parent.velocity.length() / move_speed)
+	# Exluding the y-axis of velocity vector
+	var _velocity_vector_x_and_z = Vector2(parent.velocity.x, parent.velocity.z)
+	
+	# Animation blending between idle and run
+	parent.animation_tree.set("parameters/BlendSpace1D/blend_position", _velocity_vector_x_and_z.length() / move_speed)
 
 	look_component.handle_physics(delta, move_speed, lerp_val)
 

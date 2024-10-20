@@ -31,10 +31,3 @@ func process_input(_event: InputEvent) -> State:
 
 func process_frame(_delta: float) -> State:
 	return null
-
-
-
-
-
-func rotate_character(event: float) -> void:
-	parent.armature.rotation.y = -event * 0.005

@@ -54,31 +54,3 @@ func process_frame(delta: float) -> void:
 	if new_state:
 		# Changes to whatever state (if not void) is returned
 		change_state(new_state)
-
-
-
-
-
-
-# Henta 10.10.24 fra ForlornU på YT. Tittel: Final State Machines in Godot | Godot Starter Kit FSM
-# USE CAUTIOUSLY! Immedialty changes to new state. 
-func force_change_state(new_state_name : String):
-	var newState = states.get(new_state_name.to_lower())
-	
-	if !newState:
-		print(new_state_name + " not found in states dictionary")
-		return
-
-	if current_state == newState:
-		print("Trying to force current state, aborting")
-		return
-
-	# Ved å kalle Exit() gjennom "call_deferred()", så er kallet tryggere enn å kalle det direkte. Siden gjenstand kan removes 
-	#  før den rekker å kalles pga. force
-	if current_state:
-		var exit_callable = Callable(current_state, "Exit")
-		exit_callable.call_deferred()
-
-	newState.Enter()
-
-	current_state = newState
