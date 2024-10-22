@@ -15,16 +15,12 @@ var current_state : State
 
 
 # Gets parent refrence (as param) to all state-children
-func init(parent: CharacterBody3D, animation_player: AnimationPlayer, 
-		move_component: MovementInterface, look_component: LookInterface,
-		can_interact_component: CanInteractInterface) -> void:
-
+func init(parent: CharacterBody3D, animation_player: AnimationPlayer, move_component: MovementInterface, look_component: LookInterface) -> void:
 	for child in get_children():
 		child.parent = parent
 		child.animation_player = animation_player
 		child.move_component = move_component
 		child.look_component = look_component
-		child.can_interact_component = can_interact_component
 	
 	# Initialize to the default state
 	change_state(initial_state)
