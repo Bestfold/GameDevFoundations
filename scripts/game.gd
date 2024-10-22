@@ -15,11 +15,11 @@ func _ready():
 	if !player.var_monitoring_2.is_connected(ui._monitored_value_2):
 		player.var_monitoring_2.connect(ui._monitored_value_2)
 
-	if !player.var_monitoring_3.is_connected(ui._monitored_value_3):
-		player.var_monitoring_3.connect(ui._monitored_value_3)
+	#if !player.var_monitoring_3.is_connected(ui._monitored_value_3):
+	#	player.var_monitoring_3.connect(ui._monitored_value_3)
 
-	if !player.var_monitoring_4.is_connected(ui._monitored_value_4):
-		player.var_monitoring_4.connect(ui._monitored_value_4)
+	#if !player.var_monitoring_4.is_connected(ui._monitored_value_4):
+	#	player.var_monitoring_4.connect(ui._monitored_value_4)
 
-	if !player.var_monitoring_5.is_connected(ui._monitored_value_5):
-		player.var_monitoring_5.connect(ui._monitored_value_5)
+	#if !player.var_monitoring_5.is_connected(ui._monitored_value_5):
+	#	player.var_monitoring_5.connect(ui._monitored_value_5)

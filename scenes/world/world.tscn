@@ -2,8 +2,8 @@
 
 [ext_resource type="MeshLibrary" uid="uid://deetsral7i5dx" path="res://assets/brickwall/brickwallTileset.tres" id="1_o4gn4"]
 [ext_resource type="PackedScene" uid="uid://w482w0w2x31k" path="res://scenes/entities/character_scenes/player.tscn" id="2_2i8er"]
-[ext_resource type="Script" path="res://scripts/component_scripts/movement_enemy_test.gd" id="3_qo5e8"]
-[ext_resource type="Script" path="res://scripts/component_scripts/look_enemy_test.gd" id="4_ky8kg"]
+[ext_resource type="Script" path="res://scripts/component_scripts/move_components/movement_enemy_test.gd" id="3_qo5e8"]
+[ext_resource type="Script" path="res://scripts/component_scripts/look_components/look_enemy_test.gd" id="4_ky8kg"]
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_pjvrq"]
 size = Vector2(20, 20)

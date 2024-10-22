@@ -12,6 +12,7 @@ class_name Player
 @onready var head_mesh: MeshInstance3D = %Head
 @onready var move_component: MovementInterface = $MoveComponent
 @onready var look_component: LookInterface = $LookComponent
+@onready var can_interact_component: CanInteractInterface = $CanInteract
 @onready var head_bobbing: Node3D = %Head_bobbing
 
 # Debug signals -> values to screen
@@ -25,7 +26,8 @@ signal var_monitoring_2(value_to_monitor)
 
 func _ready() -> void:
 	# Initialize state machine, passing a refrence of player to the states
-	state_machine.init(self, animation_player, move_component, look_component)
+	state_machine.init(self, animation_player, move_component, look_component,
+			can_interact_component)
 	look_component.capture_mouse()
 
 	# Sets head invisible for player
