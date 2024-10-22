@@ -16,6 +16,7 @@ var parent: CharacterBody3D
 var animation_player: AnimationPlayer
 var move_component: MovementInterface
 var look_component: LookInterface
+var can_interact_component: CanInteractInterface
 
 func enter():
 	animation_player.play(animation_name)
