@@ -3,13 +3,13 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://bwq0o22iw7bqk"
-path="res://.godot/imported/stockCharacter.glb-59b03732cce3329245ebef49801c0f12.scn"
+uid="uid://dyyfry4ao4gnn"
+path="res://.godot/imported/brickwalls.glb-03acbb4d365231c5a3951b4b8f063d41.scn"
 
 [deps]
 
-source_file="res://assets/stockCharacter.glb"
-dest_files=["res://.godot/imported/stockCharacter.glb-59b03732cce3329245ebef49801c0f12.scn"]
+source_file="res://assets/brickwall/brickwalls.glb"
+dest_files=["res://.godot/imported/brickwalls.glb-03acbb4d365231c5a3951b4b8f063d41.scn"]
 
 [params]
 
