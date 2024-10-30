@@ -13,3 +13,10 @@ script = ExtResource("1_hkswb")
 [node name="Player" parent="." instance=ExtResource("2_l1e6r")]
 
 [node name="UI" parent="." instance=ExtResource("1_my32x")]
+
+[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
+_spawnable_scenes = PackedStringArray("")
+spawn_path = NodePath("../MutliplayerPlayers")
+spawn_limit = 4
+
+[node name="MutliplayerPlayers" type="Node3D" parent="."]

@@ -1,0 +1,4 @@
+extends MovementInterface
+
+class_name MovementMultiplayerPlayer
+
