@@ -28,7 +28,7 @@ func _ready() -> void:
 	# Initialize state machine, passing a refrence of player to the states
 	state_machine.init(self, animation_player, move_component, look_component,
 			can_interact_component)
-	look_component.capture_mouse()
+	#look_component.capture_mouse()
 
 	# Sets head invisible for player
 	head_mesh.visible = false

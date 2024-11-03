@@ -20,7 +20,7 @@ class_name IdleState
 func enter():
 	# Calling State default call (animation_tree.animation(animation_name)
 	super()
-	look_component.capture_mouse()
+	#look_component.capture_mouse()
 	
 	
 func exit():

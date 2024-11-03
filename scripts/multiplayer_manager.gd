@@ -62,7 +62,7 @@ func join_as_player():
 	# Setting API's peer to client
 	multiplayer.multiplayer_peer = client_peer
 
-	_remove_single_player()
+	#_remove_single_player()
 
 
 func _add_player_to_game(id: int):
@@ -75,7 +75,7 @@ func _add_player_to_game(id: int):
 	player_to_add.name = str(id)
 
 	# Put instantiated player with given id in the node for spawned players
-	_player_spawn_node.add_child(player_to_add)
+	_player_spawn_node.add_child(player_to_add, true)
 
 
 func _delete_player(id: int):
@@ -94,3 +94,15 @@ func _remove_single_player():
 	# We need the player refrence at the point of calling the method:
 	var player_to_remove = get_tree().get_current_scene().get_node("Player")
 	player_to_remove.queue_free()
+
+
+# Multiplayer host and join for testing purposes
+func _input(_event):
+	
+	if Input.is_action_just_pressed("TestHost"):
+		print("Become host pressed")
+		become_host()
+	
+	elif Input.is_action_just_pressed("TestJoin"):
+		print("Join as player pressed")
+		join_as_player()

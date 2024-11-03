@@ -14,6 +14,7 @@ class_name PlayerMultiplayer
 @onready var look_component: LookInterface = $LookComponent
 @onready var can_interact_component: CanInteractInterface = $CanInteract
 @onready var head_bobbing: Node3D = %Head_bobbing
+@onready var camera: Camera3D = %Camera3D
 
 # Debug signals -> values to screen
 signal var_monitoring_1(value_to_monitor)
@@ -26,39 +27,49 @@ signal var_monitoring_2(value_to_monitor)
 var player_id:
 	set(id):
 		player_id = id
+		# Replication-authority for the input replicater is set to this client, meaning: This clients input will be replicated to server, not the other way
+		%InputSynchronizer.set_multiplayer_authority(id)
 
 # Player is controlled by state-children, as exception to common standard.
 
 func _ready() -> void:
-	# Initialize state machine, passing a refrence of player to the states
-	state_machine.init(self, animation_player, move_component, look_component,
-			can_interact_component)
+	# Initialize state machine only on server. Replicate game state to clients
+	if multiplayer.is_server():
+		# Initialize state machine, passing a refrence of player to the states
+		state_machine.init(self, animation_player, move_component, look_component,
+				can_interact_component)
 	
 	# If this game instance's multiplayer id matches player's
 	if multiplayer.get_unique_id() == player_id:
-		look_component.capture_mouse()
+		camera.current = true
+		#look_component.capture_mouse()
 
 		# Sets head invisible for player
 		head_mesh.visible = false
+	else:
+		camera.current = false
 	
 
 func _unhandled_input(event: InputEvent) -> void:
+	if multiplayer.is_server():
 		# Passes _unhandled_input() to state machine
-	state_machine.process_input(event)
+		state_machine.process_input(event)
 	
 	if Input.is_action_just_pressed("quit"):
 		get_tree().quit()
 
 func _physics_process(delta: float) -> void:
-	# Passing function
-	state_machine.process_physics(delta)
+	if multiplayer.is_server():
+		# Passing function
+		state_machine.process_physics(delta)
 
-	# Monitoring
-	#var_monitoring.emit(animation_tree.get("parameters/BlendSpace1D/blend_position"))
-	if look_component is LookPlayer:
-		var_monitoring_1.emit(look_component.head_bobbing_vector)
-		var_monitoring_2.emit(head_bobbing.position)
+		# Monitoring
+		#var_monitoring.emit(animation_tree.get("parameters/BlendSpace1D/blend_position"))
+		if look_component is LookPlayer:
+			var_monitoring_1.emit(look_component.head_bobbing_vector)
+			var_monitoring_2.emit(head_bobbing.position)
 
 # Passing function
 func _process(delta: float) -> void:
-	state_machine.process_frame(delta)
+	if multiplayer.is_server():
+		state_machine.process_frame(delta)
