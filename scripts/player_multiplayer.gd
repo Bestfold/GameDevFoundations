@@ -37,6 +37,9 @@ signal var_monitoring_2(value_to_monitor)
 #  ligger i at server-client forholdet er litt janky i min implementasjon. Skriv og tegn en oversikt, og
 #  gå over fra topp til bunn.
 
+# Lurer på om ikke jeg skal endre slik at client har authority over movement, rotation og state. Da må
+#  jeg endre slik at state machine kjører på clients.
+
 
 
 
