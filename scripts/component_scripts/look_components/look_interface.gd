@@ -3,6 +3,10 @@ class_name LookInterface
 
 @export var parent: CharacterBody3D
 
+# Initializes parent refrence
+#func init(passed_parent: CharacterBody3D):
+#	parent = passed_parent
+
 # For players this will change mouse mode to captured
 func capture_mouse() -> void:
 	pass

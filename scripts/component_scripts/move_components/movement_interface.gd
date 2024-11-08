@@ -5,6 +5,10 @@ class_name MovementInterface
 
 @export var parent: CharacterBody3D
 
+# Initializes parent refrence
+#func init(passed_parent: CharacterBody3D):
+#    parent = passed_parent
+
 # Returns a movement vector where [x, y] = [move x axis, move z axis]
 func get_movement_input() -> Vector2:
     return Vector2.ZERO

@@ -6,6 +6,9 @@ extends MultiplayerSynchronizer
 var input_dir := Vector2(0,0)
 var do_jump := false
 var do_run := false
+var mouse_event : InputEventMouseMotion
+
+var event: InputEvent
 
 # Handles input on relevant client, and replicates to others.
 # Should have replication authority
@@ -24,6 +27,21 @@ func _physics_process(_delta):
 func _process(_delta):
 		if Input.is_action_just_pressed("jump"):
 			do_jump = true
+		#else:
+		#	do_jump = false
+		# Tror den blir false før den rekker å replicate true for jump
+		##  tror det kan fikses med RPC call for jump
 
-		elif Input.is_action_just_pressed("run"):
+		if Input.is_action_just_pressed("run"):
 			do_run = true
+		#else:
+		#	do_run = false
+		# Tror den blir false før den rekker å replicate true for run
+		##  tror det kan fikses med RPC call for run
+
+func _input(incomingEvent):
+	if incomingEvent is InputEventMouseMotion:
+		mouse_event = incomingEvent
+
+func _unhandled_input(inputEvent: InputEvent) -> void:
+	event = inputEvent

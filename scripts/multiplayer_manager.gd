@@ -62,7 +62,7 @@ func join_as_player():
 	# Setting API's peer to client
 	multiplayer.multiplayer_peer = client_peer
 
-	#_remove_single_player()
+	_remove_single_player()
 
 
 func _add_player_to_game(id: int):
