@@ -1,0 +1,47 @@
+[gd_scene format=3 uid="uid://bd75nn2huo38l"]
+
+[node name="LobbyScreen" type="VBoxContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="NameLabel" type="Label" parent="."]
+layout_mode = 2
+
+[node name="Name" type="LineEdit" parent="."]
+layout_mode = 2
+
+[node name="TabContainer" type="TabContainer" parent="."]
+layout_mode = 2
+current_tab = 0
+
+[node name="ENet" type="Control" parent="TabContainer"]
+layout_mode = 2
+metadata/_tab_index = 0
+
+[node name="Players" type="PanelContainer" parent="TabContainer/ENet"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="MarginContainer" type="MarginContainer" parent="TabContainer/ENet/Players"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="TabContainer/ENet/Players/MarginContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="TabContainer/ENet/Players/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Host" type="Button" parent="TabContainer/ENet/Players/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Join" type="Button" parent="TabContainer/ENet/Players/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Steam" type="Control" parent="TabContainer"]
+visible = false
+layout_mode = 2
+metadata/_tab_index = 1

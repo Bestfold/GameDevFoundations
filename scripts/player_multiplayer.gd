@@ -35,6 +35,11 @@ signal var_monitoring_2(value_to_monitor)
 #  og det er noe rot med kamera. Virker som man kun kan ha ett current camera når man åpner 2 viewports?
 # Det er også mye rot igjen etter byttet fra server authoritative til client.
 
+# 09.11.24
+# Fiksa kamera, og replicate-er velocity, ikke state. Må da sørge for å implementere rpc for alle inputs
+#  som kan endre state, som jump og run (ikke movement). Litt usikker på hvordan rpc-er funker, og må
+#  kalles per nå.
+
 # END LOG
 
 
@@ -61,8 +66,8 @@ func _ready() -> void:
 
 		# Sets head invisible for player
 		head_mesh.visible = false
-	#else:
-	#	camera.current = false
+	else:
+		camera.current = false
 	
 
 func _unhandled_input(event: InputEvent) -> void:
