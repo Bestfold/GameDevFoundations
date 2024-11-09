@@ -3,17 +3,17 @@ class_name Game
 
 @onready var player: Player = $Player
 
-@onready var ui: UI = $UI
+@onready var debug_ui: DebugUI = $UI
 
 
 func _ready():
 	# Debug signals for monitoring values on screen
 	#ui._update_var1_label()
-	if !player.var_monitoring_1.is_connected(ui._monitored_value_1):
-		player.var_monitoring_1.connect(ui._monitored_value_1)
+	if !player.var_monitoring_1.is_connected(debug_ui._monitored_value_1):
+		player.var_monitoring_1.connect(debug_ui._monitored_value_1)
 
-	if !player.var_monitoring_2.is_connected(ui._monitored_value_2):
-		player.var_monitoring_2.connect(ui._monitored_value_2)
+	if !player.var_monitoring_2.is_connected(debug_ui._monitored_value_2):
+		player.var_monitoring_2.connect(debug_ui._monitored_value_2)
 
 	#if !player.var_monitoring_3.is_connected(ui._monitored_value_3):
 	#	player.var_monitoring_3.connect(ui._monitored_value_3)

@@ -1,5 +1,5 @@
 extends CanvasLayer
-class_name UI
+class_name DebugUI
 
 # Variable to keep trach of in runtime
 @onready var var_1_label: Label = %Var1

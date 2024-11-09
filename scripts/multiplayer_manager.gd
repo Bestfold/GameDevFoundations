@@ -1,11 +1,18 @@
 extends Node
 
-# Global "autoload" handling multiplayer API -> hosting, joining, adding and removing players
+## Global "autoload" handling multiplayer API -> hosting, joining, adding and removing players
 
 # Testing port and ip.
 # Needs to be changed to connect with others
 const SERVER_PORT = 8080
 const SERVER_IP = "127.0.0.1"
+
+#signal player_list_changed()
+#signal connection_failed()
+#signal connection_succeeded()
+#signal game_ended()
+#signal game_error(message: String)
+#signal game_log(message: String)
 
 # PlayerSpawner's target spawn-under-node
 var _player_spawn_node: Node3D
