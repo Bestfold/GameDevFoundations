@@ -30,6 +30,7 @@ var multiplayer_scene = preload("res://scenes/entities/character_scenes/multipla
 # Game instance
 @onready var game: GameManager = get_tree().get_current_scene().get_node(".")
 
+
 func become_host():
 	if multiplayer_mode_enabled:
 		print("host failed. multiplayer already enabled")
@@ -125,10 +126,10 @@ func _input(_event):
 	# En rar måte sjekke om game er instantiated, for å å connect-e signaler til lobby-knappene
 	if game != null:
 		if (Input.is_action_just_pressed("escape") 
-				&& !game.lobby_screen.e_net_host.is_connected(become_host)
-				&& !game.lobby_screen.e_net_join.is_connected(join_as_client)):
-			game.lobby_screen.e_net_host.connect(become_host)
-			game.lobby_screen.e_net_join.connect(join_as_client)
+				&& !game.lobby_screen.enet_host.is_connected(become_host)
+				&& !game.lobby_screen.enet_join.is_connected(join_as_client)):
+			game.lobby_screen.enet_host.connect(become_host)
+			game.lobby_screen.enet_join.connect(join_as_client)
 			
 
 

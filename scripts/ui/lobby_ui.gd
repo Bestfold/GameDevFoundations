@@ -4,8 +4,8 @@ extends VBoxContainer
 
 #signal game_log(message: String)
 
-signal e_net_host()
-signal e_net_join()
+signal enet_host()
+signal enet_join()
 signal steam_host()
 signal steam_list_lobbies()
 #signal steam_join()
@@ -16,12 +16,12 @@ func _ready():
 	
 
 
-func _on_e_net_host_pressed() -> void:
-	e_net_host.emit()
+func _on_enet_host_pressed() -> void:
+	enet_host.emit()
 
 
-func _on_e_net_join_pressed() -> void:
-	e_net_join.emit()
+func _on_enet_join_pressed() -> void:
+	enet_join.emit()
 
 # Easy quit implementation for debug purposes
 func _on_quit_pressed() -> void:
@@ -29,8 +29,10 @@ func _on_quit_pressed() -> void:
 
 
 func _on_steam_host_pressed() -> void:
+	SteamManager.initialize_steam()
 	steam_host.emit()
 
 
 func _on_steam_list_lobbies_pressed() -> void:
+	SteamManager.initialize_steam()
 	steam_list_lobbies.emit()

@@ -25,6 +25,8 @@ class_name PlayerMultiplayer
 #  en menu_visible attributt hos både single- og multiplayer-player, som avgjør om look_component.capture_mouse
 #  capture eller visible mus. Masse debug
 
+# 10.11.24 BUG: When hosting or joining, player has movement controll, even though menu is up
+
 # END LOG
 
 
