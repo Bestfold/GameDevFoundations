@@ -45,9 +45,4 @@ func initialize_steam():
 	#    get_tree().quit()
 
 
-	# Not sure if this actually finds it
-	var game_manager = get_tree().get_current_scene().get_node(".")
-	game_manager.network_manager.active_network_type = game_manager.network_manager.MULTIPLAYER_NETWORK_TYPE.STEAM
-	print("worked")
-
 	steam_initialized = true

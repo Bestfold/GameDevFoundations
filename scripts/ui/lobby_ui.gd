@@ -1,5 +1,6 @@
 extends VBoxContainer
 
+@onready var network_manager: Node = %NetworkManager
 
 
 #signal game_log(message: String)
@@ -29,10 +30,8 @@ func _on_quit_pressed() -> void:
 
 
 func _on_steam_host_pressed() -> void:
-	SteamManager.initialize_steam()
 	steam_host.emit()
 
 
 func _on_steam_list_lobbies_pressed() -> void:
-	SteamManager.initialize_steam()
 	steam_list_lobbies.emit()

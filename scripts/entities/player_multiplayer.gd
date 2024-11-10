@@ -64,14 +64,6 @@ var player_id:
 		%InputSynchronizer.set_multiplayer_authority(id)
 		%PlayerClientAuthSynchronizer.set_multiplayer_authority(id)
 
-# Debug signals -> values to screen
-signal var_monitoring_1(value_to_monitor)
-signal var_monitoring_2(value_to_monitor)
-#signal var_monitoring_3(value_to_monitor)
-#signal var_monitoring_4(value_to_monitor)
-#signal var_monitoring_5(value_to_monitor)
-
-
 # Player is controlled by state-children, as exception to common standard.
 
 func _ready() -> void:
@@ -102,12 +94,6 @@ func _unhandled_input(event: InputEvent) -> void:
 func _physics_process(delta: float) -> void:
 	# Passing function
 	state_machine.process_physics(delta)
-
-	# Monitoring
-	#var_monitoring.emit(animation_tree.get("parameters/BlendSpace1D/blend_position"))
-	if look_component is LookPlayer:
-		var_monitoring_1.emit(look_component.head_bobbing_vector)
-		var_monitoring_2.emit(head_bobbing.position)
 
 # Passing function
 func _process(delta: float) -> void:

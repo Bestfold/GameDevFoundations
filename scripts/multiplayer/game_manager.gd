@@ -4,40 +4,69 @@ class_name GameManager
 @onready var singleplayer_player: Player = $Player
 @onready var multiplayer_players: Node3D = $MultiplayerPlayers
 
-
 @onready var debug_ui: DebugUI = %DebugUI
 @onready var lobby_screen: VBoxContainer = %LobbyScreen
 
 
 func _ready():
+	if OS.has_feature("dedicated_server"):
+		print("Starting dedicated server")
+		%NetworkManager.become_host()
+
 	lobby_screen.hide()
 	debug_ui.hide()
 	
-	# Connecting to adding or removing players from autoload
-	if !MultiplayerManager.player_list_changed.is_connected(amount_of_players_changed):
-		MultiplayerManager.player_list_changed.connect(amount_of_players_changed)
-
-
-	# Debug signals for monitoring values on screen
-	#ui._update_var1_label()
-	if !singleplayer_player.var_monitoring_1.is_connected(debug_ui._monitored_value_1):
-		singleplayer_player.var_monitoring_1.connect(debug_ui._monitored_value_1)
-
-	if !singleplayer_player.var_monitoring_2.is_connected(debug_ui._monitored_value_2):
-		singleplayer_player.var_monitoring_2.connect(debug_ui._monitored_value_2)
-
-	#if !singleplayer_player.var_monitoring_3.is_connected(ui._monitored_value_3):
-	#	singleplayer_player.var_monitoring_3.connect(ui._monitored_value_3)
-
-	#if !singleplayer_player.var_monitoring_4.is_connected(ui._monitored_value_4):
-	#	singleplayer_player.var_monitoring_4.connect(ui._monitored_value_4)
-
-	#if !singleplayer_player.var_monitoring_5.is_connected(ui._monitored_value_5):
-	#	singleplayer_player.var_monitoring_5.connect(ui._monitored_value_5)
-
-func amount_of_players_changed():
-	print("Signal kom gjennom")
+	lobby_screen.enet_host.connect(become_host)
+	lobby_screen.enet_join.connect(join_as_client)
 	
+	lobby_screen.steam_host.connect(become_host)
+	lobby_screen.steam_host.connect(use_steam)
+	
+	lobby_screen.steam_list_lobbies.connect(list_steam_lobbies)
+	lobby_screen.steam_list_lobbies.connect(use_steam)
+
+	#lobby_screen.steam_join.connect(join_as_client)
+	#lobby_screen.steam_join.connect(use_steam)
+
+
+func become_host():
+	print("Host game")
+	_remove_single_player()
+	%NetworkManager.become_host()
+
+
+func join_as_client():
+	print("Join game")
+	_remove_single_player()
+	%NetworkManager.join_as_client()
+
+
+func list_steam_lobbies():
+	print("List lobbies")
+	%NetworkManager.list_lobbies()
+
+
+func use_steam():
+	print("Using Steam")
+	SteamManager.initialize_steam()
+	Steam.lobby_match_list.connect(_on_lobby_match_list)
+	%NetworkManager.active_network_type = %NetworkManager.MULTIPLAYER_NETWORK_TYPE.STEAM
+
+
+func _on_lobby_match_list(lobbies: Array):
+	print("On lobby match list")
+	# 	Avslutta her 10.11.24: Battery Acid Dev's Godot + Steam P2P Multiplayer Tutorial video - 40:00
+	
+# Removes single player controller
+func _remove_single_player():
+	if has_node("Player"):
+		var player_to_remove = get_tree().get_current_scene().get_node("Player")
+		player_to_remove.queue_free()
+	
+
+
+
+
 # Escape-menu for game-instance
 func _input(_event):
 	if Input.is_action_just_pressed("escape"):
