@@ -28,7 +28,7 @@ var respawn_point = Vector3(0,0,0)
 var multiplayer_scene = preload("res://scenes/entities/character_scenes/multiplayer_player.tscn")
 
 # Game instance
-@onready var game: Game = get_tree().get_current_scene().get_node(".")
+@onready var game: GameManager = get_tree().get_current_scene().get_node(".")
 
 func become_host():
 	if multiplayer_mode_enabled:
@@ -64,7 +64,7 @@ func become_host():
 	_add_player_to_game(1)
 
 
-func join_as_player():
+func join_as_client():
 	if multiplayer_mode_enabled:
 		print("join failed. multiplayer already enabled")
 		return
@@ -126,9 +126,9 @@ func _input(_event):
 	if game != null:
 		if (Input.is_action_just_pressed("escape") 
 				&& !game.lobby_screen.e_net_host.is_connected(become_host)
-				&& !game.lobby_screen.e_net_join.is_connected(join_as_player)):
+				&& !game.lobby_screen.e_net_join.is_connected(join_as_client)):
 			game.lobby_screen.e_net_host.connect(become_host)
-			game.lobby_screen.e_net_join.connect(join_as_player)
+			game.lobby_screen.e_net_join.connect(join_as_client)
 			
 
 
@@ -139,4 +139,4 @@ func _input(_event):
 	
 	elif Input.is_action_just_pressed("TestJoin"):
 		print("Join as player pressed")
-		join_as_player()
+		join_as_client()

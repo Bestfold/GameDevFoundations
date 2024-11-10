@@ -1,5 +1,5 @@
 extends Node
-class_name Game
+class_name GameManager
 
 @onready var singleplayer_player: Player = $Player
 @onready var multiplayer_players: Node3D = $MultiplayerPlayers

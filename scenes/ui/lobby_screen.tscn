@@ -103,11 +103,6 @@ layout_mode = 2
 text = "List Lobbies
 "
 
-[node name="SteamUse" type="Button" parent="VBoxContainer/TabContainer/Steam/PanelContainer/MarginContainer/VBoxContainer"]
-layout_mode = 2
-text = "Use Steam
-"
-
 [node name="Lobbies" type="VScrollBar" parent="VBoxContainer/TabContainer/Steam/PanelContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
@@ -123,4 +118,6 @@ text = "Quit"
 
 [connection signal="pressed" from="VBoxContainer/TabContainer/ENet/Players/MarginContainer/VBoxContainer/ENetHost" to="." method="_on_e_net_host_pressed"]
 [connection signal="pressed" from="VBoxContainer/TabContainer/ENet/Players/MarginContainer/VBoxContainer/ENetJoin" to="." method="_on_e_net_join_pressed"]
+[connection signal="pressed" from="VBoxContainer/TabContainer/Steam/PanelContainer/MarginContainer/VBoxContainer/SteamHost" to="." method="_on_steam_host_pressed"]
+[connection signal="pressed" from="VBoxContainer/TabContainer/Steam/PanelContainer/MarginContainer/VBoxContainer/SteamListLobbies" to="." method="_on_steam_list_lobbies_pressed"]
 [connection signal="pressed" from="VBoxContainer/Quit" to="." method="_on_quit_pressed"]

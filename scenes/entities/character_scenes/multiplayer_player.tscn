@@ -1,8 +1,8 @@
 [gd_scene load_steps=35 format=4 uid="uid://d82venilpoaw"]
 
-[ext_resource type="Script" path="res://scripts/player_multiplayer.gd" id="1_5gb26"]
+[ext_resource type="Script" path="res://scripts/entities/player_multiplayer.gd" id="1_5gb26"]
 [ext_resource type="Script" path="res://scripts/state_scripts/state_machine.gd" id="2_77h7s"]
-[ext_resource type="Script" path="res://scripts/input_sync_multiplayer.gd" id="2_epx47"]
+[ext_resource type="Script" path="res://scripts/multiplayer/input_sync_multiplayer.gd" id="2_epx47"]
 [ext_resource type="Script" path="res://scripts/state_scripts/idle.gd" id="3_5jwau"]
 [ext_resource type="Script" path="res://scripts/state_scripts/walk.gd" id="4_528ha"]
 [ext_resource type="Script" path="res://scripts/state_scripts/run.gd" id="5_7hc4k"]
