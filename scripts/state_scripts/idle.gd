@@ -46,6 +46,7 @@ func process_physics(delta: float) -> State:
 	parent.move_and_slide()
 	return null
 
+
 func process_input(event: InputEvent) -> State:
 	# Mouse movement function from State class
 	look_component.handle_input(event, move_speed, lerp_val)
@@ -69,6 +70,7 @@ func process_input(event: InputEvent) -> State:
 	#if Input.is_action_just_pressed("crawl"):
 	#	return crawl_idle_state
 	return null
+
 
 func process_frame(_delta: float) -> State:
 	return null

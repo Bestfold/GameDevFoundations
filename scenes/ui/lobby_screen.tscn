@@ -59,7 +59,15 @@ text = "Host"
 layout_mode = 2
 text = "Join"
 
+[node name="Quit" type="Button" parent="TabContainer/ENet/Players/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Quit"
+
 [node name="Steam" type="Control" parent="TabContainer"]
 visible = false
 layout_mode = 2
 metadata/_tab_index = 1
+
+[connection signal="pressed" from="TabContainer/ENet/Players/MarginContainer/VBoxContainer/ENetHost" to="." method="_on_e_net_host_pressed"]
+[connection signal="pressed" from="TabContainer/ENet/Players/MarginContainer/VBoxContainer/ENetJoin" to="." method="_on_e_net_join_pressed"]
+[connection signal="pressed" from="TabContainer/ENet/Players/MarginContainer/VBoxContainer/Quit" to="." method="_on_quit_pressed"]

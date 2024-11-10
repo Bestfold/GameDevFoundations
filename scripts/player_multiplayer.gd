@@ -7,6 +7,28 @@ class_name PlayerMultiplayer
 ## Passes refrences down to state machine
 ## Sets authority for replication. Position, rotation and states replicate from owner-client
 
+
+# LOG
+
+# 08.11.24
+# Bytta slik at client har authority over position og rotation. Nest er å replicate state til server,
+#  og det er noe rot med kamera. Virker som man kun kan ha ett current camera når man åpner 2 viewports?
+# Det er også mye rot igjen etter byttet fra server authoritative til client.
+
+# 09.11.24
+# Fiksa kamera, og replicate-er velocity, ikke state. Må da sørge for å implementere rpc for alle inputs
+#  som kan endre state, som jump og run (ikke movement). Litt usikker på hvordan rpc-er funker, og må
+#  kalles per nå.
+
+# 10.11.24
+# Fikser lobby-ui. Nå har jeg en meny som åpner og lukker med Escape fra game-instansen. Fra game, så endres
+#  en menu_visible attributt hos både single- og multiplayer-player, som avgjør om look_component.capture_mouse
+#  capture eller visible mus. Masse debug
+
+# END LOG
+
+
+
 # Child refrences
 @onready var spring_arm: SpringArm3D = %SpringArm3D
 @onready var armature: Node3D = $Armature
@@ -21,6 +43,25 @@ class_name PlayerMultiplayer
 @onready var head_bobbing: Node3D = %Head_bobbing
 @onready var camera: Camera3D = %Camera3D
 
+# Player can control the character
+@export var is_controlable := true
+# Mouse should be captured
+@export var capture_mouse := false
+# Menu is visible and should capture mouse and remove control over character
+@export var menu_visible := false:
+	set(value):
+		capture_mouse = !value
+		is_controlable = !value
+
+
+# When given an id, authority over certain replication is taken
+var player_id:
+	set(id):
+		player_id = id
+		# Replication-authority
+		%InputSynchronizer.set_multiplayer_authority(id)
+		%PlayerClientAuthSynchronizer.set_multiplayer_authority(id)
+
 # Debug signals -> values to screen
 signal var_monitoring_1(value_to_monitor)
 signal var_monitoring_2(value_to_monitor)
@@ -28,28 +69,6 @@ signal var_monitoring_2(value_to_monitor)
 #signal var_monitoring_4(value_to_monitor)
 #signal var_monitoring_5(value_to_monitor)
 
-# LOG
-
-# 08.11.24
-# Bytta slik at client har authority over position og rotation. Nest er å replicate state til server,
-#  og det er noe rot med kamera. Virker som man kun kan ha ett current camera når man åpner 2 viewports?
-# Det er også mye rot igjen etter byttet fra server authoritative til client.
-
-# 09.11.24
-# Fiksa kamera, og replicate-er velocity, ikke state. Må da sørge for å implementere rpc for alle inputs
-#  som kan endre state, som jump og run (ikke movement). Litt usikker på hvordan rpc-er funker, og må
-#  kalles per nå.
-
-# END LOG
-
-
-# I don't understand this yet. But it sets the player id whenever you set the id X)
-var player_id:
-	set(id):
-		player_id = id
-		# Replication-authority
-		%InputSynchronizer.set_multiplayer_authority(id)
-		%PlayerClientAuthSynchronizer.set_multiplayer_authority(id)
 
 # Player is controlled by state-children, as exception to common standard.
 
@@ -62,7 +81,7 @@ func _ready() -> void:
 	# Run on client who owns player
 	if multiplayer.get_unique_id() == player_id:
 		camera.make_current()
-		#look_component.capture_mouse()
+		look_component.capture_mouse()
 
 		# Sets head invisible for player
 		head_mesh.visible = false
@@ -71,14 +90,11 @@ func _ready() -> void:
 	
 
 func _unhandled_input(event: InputEvent) -> void:
+
 	# Runs input on owning client
 	if multiplayer.get_unique_id() == player_id:
 		# Passes _unhandled_input() to state machine
 		state_machine.process_input(event)
-	
-	# Debug quit
-	if Input.is_action_just_pressed("quit"):
-		get_tree().quit()
 
 
 func _physics_process(delta: float) -> void:

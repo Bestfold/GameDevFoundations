@@ -7,7 +7,9 @@ extends Node
 const SERVER_PORT = 8080
 const SERVER_IP = "127.0.0.1"
 
-#signal player_list_changed()
+# Whenever a player joins or leaves
+signal player_list_changed()
+
 #signal connection_failed()
 #signal connection_succeeded()
 #signal game_ended()
@@ -18,14 +20,21 @@ const SERVER_IP = "127.0.0.1"
 var _player_spawn_node: Node3D
 var multiplayer_mode_enabled: bool = false
 var host_mode_enabled: bool = false
+var join_mode_enabled: bool = false
 # Midlertidig spawn point
 var respawn_point = Vector3(0,0,0)
 
 # Player scene to instantiate
 var multiplayer_scene = preload("res://scenes/entities/character_scenes/multiplayer_player.tscn")
 
+# Game instance
+@onready var game: Game = get_tree().get_current_scene().get_node(".")
 
 func become_host():
+	if multiplayer_mode_enabled:
+		print("host failed. multiplayer already enabled")
+		return
+
 	print("Starting host")
 
 	# Getting refrence to spawn-player-under-this-node
@@ -56,9 +65,14 @@ func become_host():
 
 
 func join_as_player():
+	if multiplayer_mode_enabled:
+		print("join failed. multiplayer already enabled")
+		return
+	
 	print("Player joining")
 
 	multiplayer_mode_enabled = true
+	join_mode_enabled = true
 
 	# Creating a new ENet peer
 	var client_peer = ENetMultiplayerPeer.new()
@@ -83,6 +97,8 @@ func _add_player_to_game(id: int):
 
 	# Put instantiated player with given id in the node for spawned players
 	_player_spawn_node.add_child(player_to_add, true)
+	player_list_changed.emit()
+	print("player_list_changed emitted")
 
 
 func _delete_player(id: int):
@@ -105,10 +121,21 @@ func _remove_single_player():
 
 # Multiplayer host and join for testing purposes
 func _input(_event):
-	
+
+	# En rar måte sjekke om game er instantiated, for å å connect-e signaler til lobby-knappene
+	if game != null:
+		if (Input.is_action_just_pressed("escape") 
+				&& !game.lobby_screen.e_net_host.is_connected(become_host)
+				&& !game.lobby_screen.e_net_join.is_connected(join_as_player)):
+			game.lobby_screen.e_net_host.connect(become_host)
+			game.lobby_screen.e_net_join.connect(join_as_player)
+			
+
+
 	if Input.is_action_just_pressed("TestHost"):
 		print("Become host pressed")
 		become_host()
+
 	
 	elif Input.is_action_just_pressed("TestJoin"):
 		print("Join as player pressed")

@@ -15,6 +15,16 @@ class_name Player
 @onready var can_interact_component: CanInteractInterface = $CanInteract
 @onready var head_bobbing: Node3D = %Head_bobbing
 
+# Player can control the character
+@export var is_controlable := true
+# Mouse should be captured
+@export var capture_mouse := true
+# Menu is visible and should capture mouse and remove control over character
+@export var menu_visible := false:
+	set(value):
+		capture_mouse = !value
+		is_controlable = !value
+
 # Debug signals -> values to screen
 signal var_monitoring_1(value_to_monitor)
 signal var_monitoring_2(value_to_monitor)
@@ -28,7 +38,7 @@ func _ready() -> void:
 	# Initialize state machine, passing a refrence of player to the states
 	state_machine.init(self, animation_player, move_component, look_component,
 			can_interact_component)
-	#look_component.capture_mouse()
+	look_component.capture_mouse()
 
 	# Sets head invisible for player
 	head_mesh.visible = false
@@ -36,11 +46,9 @@ func _ready() -> void:
 	
 
 func _unhandled_input(event: InputEvent) -> void:
-		# Passes _unhandled_input() to state machine
+	# Passes _unhandled_input() to state machine
 	state_machine.process_input(event)
-	
-	if Input.is_action_just_pressed("quit"):
-		get_tree().quit()
+
 
 func _physics_process(delta: float) -> void:
 	# Passing function

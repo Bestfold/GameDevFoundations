@@ -35,7 +35,7 @@ func change_state(new_state : State):
 		current_state.exit()
 	
 	current_state = new_state
-	print("current state: " + current_state.name)
+	#print("current state: " + current_state.name)
 	current_state.enter()
 
 # Passes process_physics, AND "listens" for any returned state changes

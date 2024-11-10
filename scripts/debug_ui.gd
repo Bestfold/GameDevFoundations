@@ -1,4 +1,4 @@
-extends CanvasLayer
+extends Control
 class_name DebugUI
 
 # Variable to keep trach of in runtime
