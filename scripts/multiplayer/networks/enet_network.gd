@@ -35,10 +35,6 @@ var respawn_point = Vector3(0,0,0)
 
 
 func _ready():
-	#if !game.lobby_screen.enet_host.is_connected(become_host):
-	#	game.lobby_screen.enet_host.connect(become_host)
-	#if !game.lobby_screen.enet_join.is_connected(join_as_client):
-	#	game.lobby_screen.enet_join.connect(join_as_client)
 	pass
 
 

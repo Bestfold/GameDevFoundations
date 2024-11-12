@@ -21,5 +21,7 @@
 
 # 12.11.24
 # Fortsetter Steam multiplayer implementation. 
+# Initiell implementasjon fullført (fullført Battery Acid Devs Steam tutorial 1 og 2 med endringer for mitt
+#  oppsett). Mangler å teste med en annen Steam-bruker på en annen maskin. Skal spørre om hjelp fra venner :>
 
 # END LOG

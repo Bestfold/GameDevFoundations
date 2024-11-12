@@ -20,38 +20,31 @@ var _hosted_lobby_id = 0
 
 
 func _ready():
-	#if !game.lobby_screen.enet_host.is_connected(become_host):
-	#	game.lobby_screen.enet_host.connect(become_host)
-	#if !game.lobby_screen.enet_join.is_connected(join_as_client):
-	#	game.lobby_screen.enet_join.connect(join_as_client)
-	multiplayer_peer.lobby_created.connect(_on_lobby_created)
+	#multiplayer_peer.lobby_created.connect(_on_lobby_created)
+	Steam.lobby_created.connect(_on_lobby_created.bind())
 
 func become_host():
 	print("Starting host")
-
-	# Creating a server peer on the created Steam peer object
-	multiplayer_peer.create_lobby(SteamMultiplayerPeer, SteamManager.lobby_max_members) # .LOBBY_TYPE_PUBLIC  bak SteamMultiplayerPeer
-
-	# Setting this game instance's multiplayerAPI's peer as the server peer
-	# The multiplayer_peer tells the API that this is P2P (?)
-	multiplayer.multiplayer_peer = multiplayer_peer
 
 	# Handling connection and disconnection signals on API
 	multiplayer.peer_connected.connect(_add_player_to_game)
 	multiplayer.peer_disconnected.connect(_delete_player)
 
-	# Adding multiplayer_player with id 1 (server)
-	_add_player_to_game(1)
+	# Connect callback to Steam joining lobby
+	Steam.lobby_joined.connect(_on_lobby_joined.bind())
+
+	# Create Steam lobby through Steam API
+	Steam.createLobby(Steam.LOBBY_TYPE_PUBLIC, SteamManager.lobby_max_members)
 
 
 func join_as_client(lobby_id):
 	print("Joining lobby: %s " % lobby_id)
 
-	# Creating client peer with ip and port
-	multiplayer_peer.connect_lobby(lobby_id)
+	# Connect callback to Steam joining lobby
+	Steam.lobby_joined.connect(_on_lobby_joined.bind())
 
-	# Setting API's peer to client
-	multiplayer.multiplayer_peer = multiplayer_peer
+	# Join Steam lobby through Steam API
+	Steam.joinLobby(int(lobby_id))
 
 
 func _on_lobby_created(connection: int, lobby_id):
@@ -65,9 +58,67 @@ func _on_lobby_created(connection: int, lobby_id):
 		Steam.setLobbyData(_hosted_lobby_id, "name", LOBBY_NAME)
 		Steam.setLobbyData(_hosted_lobby_id, "mode", LOBBY_MODE)
 
+		_create_host()
+
+# Creating host through multiplayer_peer API, checking for errors, before setting 
+#  peer in Godot's mutliplayer
+func _create_host():
+	print("Create host")
+	var error = multiplayer_peer.create_host(0) # (0, []) i tutorial
+	if error == OK:
+		multiplayer.set_multiplayer_peer(multiplayer_peer)
+
+		if not OS.has_feature("dedicated_server"):
+			_add_player_to_game(1)
+	else:
+
+		print("error creating host_ %s " % str(error))
+
+
+func _on_lobby_joined(lobby_id: int, _permissions: int, _locked: bool, response: int):
+	print("On lobby joined")
+
+	if response == 1:
+		print("we in B)")
+		# Gets the id of the lobby owner
+		var id = Steam.getLobbyOwner(lobby_id)
+		# Any other client than the owner:
+		if id != Steam.getSteamID():
+			print("Connecting client to socket...")
+			connect_socket(id)
+	else:
+		print("we NAT in :(")
+		# Get the failure reason
+		var FAIL_REASON: String
+		match response:
+			2:  FAIL_REASON = "This lobby no longer exists."
+			3:  FAIL_REASON = "You don't have permission to join this lobby."
+			4:  FAIL_REASON = "The lobby is now full."
+			5:  FAIL_REASON = "Uh... something unexpected happened!"
+			6:  FAIL_REASON = "You are banned from this lobby."
+			7:  FAIL_REASON = "You cannot join due to having a limited account."
+			8:  FAIL_REASON = "This lobby is locked or disabled."
+			9:  FAIL_REASON = "This lobby is community locked."
+			10: FAIL_REASON = "A user in the lobby has blocked you from joining."
+			11: FAIL_REASON = "A user you have blocked is in the lobby."
+		print(FAIL_REASON)
+
+# Connecting through internet (?)
+func connect_socket(steam_id: int):
+	var error = multiplayer_peer.create_client(steam_id, 0)
+	if error == OK:
+		print("Connecting peer to host...")
+		# This instance's multiplayer peer added to Godot's multiplayer API
+		multiplayer.set_multiplayer_peer(multiplayer_peer)
+	else:
+		print("error creating client: %s " % str(error))
+
 
 func list_lobbies():
 	Steam.addRequestLobbyListDistanceFilter(Steam.LOBBY_DISTANCE_FILTER_WORLDWIDE)
+	# NOTE: If using the Steam test APP ID : 480, we have to apply a name-filter for lobby-list,
+	#  otherwise might not show up on Clients' lobby list
+	Steam.addRequestLobbyListStringFilter("name", LOBBY_NAME, Steam.LOBBY_COMPARISON_EQUAL)
 	Steam.requestLobbyList()
 
 

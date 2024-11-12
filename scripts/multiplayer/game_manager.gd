@@ -62,14 +62,14 @@ func _on_lobby_match_list(lobbies: Array):
 	print("On lobby match list")
 
 	# Removes all exisiting lobbies from list
-	for lobby_child in lobby_screen.lobby_container:
+	for lobby_child in lobby_screen.lobby_container.get_children():
 		lobby_child.queue_free()
 
 	# Checks if returned lobbies pass filter, and adds button with connection to lobby
 	for lobby in lobbies:
 		var lobby_name: String = Steam.getLobbyData(lobby, "name")
 
-		if lobby_name != "" && lobby_name == "ABEKADD":
+		if lobby_name != "": #&& lobby_name == "ABEKADD":
 			var lobby_mode: String = Steam.getLobbyData(lobby, "mode")
 
 			var lobby_button: Button = Button.new()
