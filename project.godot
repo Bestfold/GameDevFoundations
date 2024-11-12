@@ -22,8 +22,8 @@ SteamManager="*res://scripts/multiplayer/steam/steam_manager.gd"
 
 [display]
 
-window/size/window_width_override=640
-window/size/window_height_override=380
+window/size/window_width_override=1280
+window/size/window_height_override=800
 
 [editor]
 
