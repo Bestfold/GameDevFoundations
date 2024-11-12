@@ -11,7 +11,7 @@ class_name GameManager
 func _ready():
 	if OS.has_feature("dedicated_server"):
 		print("Starting dedicated server")
-		%NetworkManager.become_host()
+		%NetworkManager.become_host(true)
 
 	lobby_screen.hide()
 	debug_ui.hide()
@@ -19,11 +19,11 @@ func _ready():
 	lobby_screen.enet_host.connect(become_host)
 	lobby_screen.enet_join.connect(join_as_client)
 	
-	lobby_screen.steam_host.connect(become_host)
 	lobby_screen.steam_host.connect(use_steam)
+	lobby_screen.steam_host.connect(become_host)
 	
-	lobby_screen.steam_list_lobbies.connect(list_steam_lobbies)
 	lobby_screen.steam_list_lobbies.connect(use_steam)
+	lobby_screen.steam_list_lobbies.connect(list_steam_lobbies)
 
 	#lobby_screen.steam_join.connect(join_as_client)
 	#lobby_screen.steam_join.connect(use_steam)
@@ -37,8 +37,7 @@ func become_host():
 
 func join_as_client():
 	print("Join game")
-	_remove_single_player()
-	%NetworkManager.join_as_client()
+	join_lobby()
 
 
 func list_steam_lobbies():
@@ -46,15 +45,52 @@ func list_steam_lobbies():
 	%NetworkManager.list_lobbies()
 
 
+func join_lobby(lobby_id: int = 0):
+	print("Joining lobby %s" % lobby_id)
+	_remove_single_player()
+	%NetworkManager.join_as_client(lobby_id)
+
+# Initialization and running config for steam multiplayer
 func use_steam():
 	print("Using Steam")
 	SteamManager.initialize_steam()
 	Steam.lobby_match_list.connect(_on_lobby_match_list)
 	%NetworkManager.active_network_type = %NetworkManager.MULTIPLAYER_NETWORK_TYPE.STEAM
 
-
+# Handles returned lobbies from Steam. Adds joinable lobbies in lobby list GUI
 func _on_lobby_match_list(lobbies: Array):
 	print("On lobby match list")
+
+	# Removes all exisiting lobbies from list
+	for lobby_child in lobby_screen.lobby_container:
+		lobby_child.queue_free()
+
+	# Checks if returned lobbies pass filter, and adds button with connection to lobby
+	for lobby in lobbies:
+		var lobby_name: String = Steam.getLobbyData(lobby, "name")
+
+		if lobby_name != "" && lobby_name == "ABEKADD":
+			var lobby_mode: String = Steam.getLobbyData(lobby, "mode")
+
+			var lobby_button: Button = Button.new()
+			lobby_button.set_text(lobby_name + " | " + lobby_mode)
+			lobby_button.set_size(Vector2(100, 30))
+			lobby_button.add_theme_font_size_override("font_size", 8)
+
+			# Custom font
+			#var fv = FontVariation.new()
+			#fv.set_base_font(load("filepath"))
+			#lobby_button.add_theme_font_override("font", fv)
+
+			lobby_button.set_name("lobby_%s" % lobby)
+			lobby_button.alignment = HORIZONTAL_ALIGNMENT_LEFT
+
+			# Signal definition. "pressed" signal, set ut Callable to define what function of self, and bind argument to the call (lobby)
+			lobby_button.connect("pressed", Callable(self, "join_lobby").bind(lobby))
+
+			lobby_screen.lobby_container.add_child(lobby_button)
+
+
 	# 	Avslutta her 10.11.24: Battery Acid Dev's Godot + Steam P2P Multiplayer Tutorial video - 40:00
 	
 # Removes single player controller

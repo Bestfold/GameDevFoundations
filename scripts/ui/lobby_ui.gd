@@ -1,6 +1,7 @@
 extends VBoxContainer
 
 @onready var network_manager: Node = %NetworkManager
+@onready var lobby_container: VBoxContainer = %LobbyContainer
 
 
 #signal game_log(message: String)

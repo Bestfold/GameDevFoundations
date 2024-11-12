@@ -19,6 +19,8 @@ func build_multiplayer_network():
 	if not active_network: 
 		print("Setting active_network")
 
+		MultiplayerManager.multiplayer_mode_enabled = true
+
 		match active_network_type:
 			MULTIPLAYER_NETWORK_TYPE.ENET:
 				print("Setting network type to ENet")
@@ -39,13 +41,17 @@ func _set_active_network(active_network_scene):
 	add_child(active_network)
 
 
-func become_host():
+func become_host(is_dedicated_server = false):
 	build_multiplayer_network()
+	MultiplayerManager.host_mode_enabled = true if is_dedicated_server == false else false # wtf
+	MultiplayerManager.join_mode_enabled = false
 	active_network.become_host()
 
 
 func join_as_client(lobby_id = 0):
 	build_multiplayer_network()
+	MultiplayerManager.join_mode_enabled = true
+	MultiplayerManager.host_mode_enabled = false
 	active_network.join_as_client(lobby_id)
 
 

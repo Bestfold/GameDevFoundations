@@ -8,29 +8,6 @@ class_name PlayerMultiplayer
 ## Sets authority for replication. Position, rotation and states replicate from owner-client
 
 
-# LOG
-
-# 08.11.24
-# Bytta slik at client har authority over position og rotation. Nest er å replicate state til server,
-#  og det er noe rot med kamera. Virker som man kun kan ha ett current camera når man åpner 2 viewports?
-# Det er også mye rot igjen etter byttet fra server authoritative til client.
-
-# 09.11.24
-# Fiksa kamera, og replicate-er velocity, ikke state. Må da sørge for å implementere rpc for alle inputs
-#  som kan endre state, som jump og run (ikke movement). Litt usikker på hvordan rpc-er funker, og må
-#  kalles per nå.
-
-# 10.11.24
-# Fikser lobby-ui. Nå har jeg en meny som åpner og lukker med Escape fra game-instansen. Fra game, så endres
-#  en menu_visible attributt hos både single- og multiplayer-player, som avgjør om look_component.capture_mouse
-#  capture eller visible mus. Masse debug
-
-# 10.11.24 BUG: When hosting or joining, player has movement controll, even though menu is up
-
-# END LOG
-
-
-
 # Child refrences
 @onready var spring_arm: SpringArm3D = %SpringArm3D
 @onready var armature: Node3D = $Armature
@@ -55,6 +32,7 @@ class_name PlayerMultiplayer
 		capture_mouse = !value
 		is_controlable = !value
 
+var username = ""
 
 # When given an id, authority over certain replication is taken
 var player_id:
@@ -89,6 +67,11 @@ func _unhandled_input(event: InputEvent) -> void:
 	if multiplayer.get_unique_id() == player_id:
 		# Passes _unhandled_input() to state machine
 		state_machine.process_input(event)
+
+		# Far from best practise! Find better solution ;)
+		# Currently setting username locally in InputSynchronizer, and syncing with authority to all clients, and here; 
+		#  setting the username on all clients
+		username = %InputSynchronizer.username
 
 
 func _physics_process(delta: float) -> void:
