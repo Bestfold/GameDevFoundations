@@ -2,7 +2,7 @@
 
 [ext_resource type="MeshLibrary" uid="uid://deetsral7i5dx" path="res://assets/brickwall/brickwallTileset.tres" id="1_o4gn4"]
 [ext_resource type="PackedScene" uid="uid://w482w0w2x31k" path="res://scenes/entities/character_scenes/player.tscn" id="2_2i8er"]
-[ext_resource type="PackedScene" uid="uid://bhq0phkmsfg6f" path="res://scenes/entities/templates/components/Interactable.tscn" id="2_iy2cm"]
+[ext_resource type="PackedScene" uid="uid://bhq0phkmsfg6f" path="res://scenes/templates/components/Interactable.tscn" id="2_iy2cm"]
 [ext_resource type="Script" path="res://scripts/components/interact_components/interactable/test_interactable.gd" id="3_kcecg"]
 [ext_resource type="Script" path="res://scripts/components/move_components/movement_enemy_test.gd" id="3_qo5e8"]
 [ext_resource type="Script" path="res://scripts/components/look_components/look_enemy_test.gd" id="4_ky8kg"]
@@ -78,13 +78,43 @@ skeleton = NodePath("../..")
 shape = SubResource("BoxShape3D_q1wv1")
 
 [node name="MeshInstance3D3" type="MeshInstance3D" parent="TestBoxes"]
-transform = Transform3D(1.02016, 0, 0, 0, 3.0173, 0, 0, 0, 1.22671, 4.52129, 3.85861, -7.71291)
+transform = Transform3D(-4.45926e-08, 0, -1.22671, 0, 3.0173, 0, 1.02016, 0, -5.36212e-08, 9.52017, 7.70625, -11.871)
 mesh = SubResource("BoxMesh_hdip4")
 skeleton = NodePath("../..")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="TestBoxes/MeshInstance3D3"]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="TestBoxes/MeshInstance3D3/StaticBody3D"]
+shape = SubResource("BoxShape3D_q1wv1")
+
+[node name="MeshInstance3D8" type="MeshInstance3D" parent="TestBoxes"]
+transform = Transform3D(-4.45926e-08, 0, -1.22671, 0, 3.0173, 0, 1.02016, 0, -5.36212e-08, 11.274, 8.80476, -14.9855)
+mesh = SubResource("BoxMesh_hdip4")
+skeleton = NodePath("../..")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="TestBoxes/MeshInstance3D8"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="TestBoxes/MeshInstance3D8/StaticBody3D"]
+shape = SubResource("BoxShape3D_q1wv1")
+
+[node name="MeshInstance3D7" type="MeshInstance3D" parent="TestBoxes"]
+transform = Transform3D(1.02016, 0, 0, 0, 3.0173, 0, 0, 0, 1.22671, 4.52129, 3.85861, -7.71291)
+mesh = SubResource("BoxMesh_hdip4")
+skeleton = NodePath("../..")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="TestBoxes/MeshInstance3D7"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="TestBoxes/MeshInstance3D7/StaticBody3D"]
+shape = SubResource("BoxShape3D_q1wv1")
+
+[node name="MeshInstance3D5" type="MeshInstance3D" parent="TestBoxes"]
+transform = Transform3D(0.570552, 1.81026, 0.701759, -0.825944, 1.64014, 0.271641, -0.181699, -1.77116, 0.968795, 7.37227, 6.67226, -9.1155)
+mesh = SubResource("BoxMesh_hdip4")
+skeleton = NodePath("../..")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="TestBoxes/MeshInstance3D5"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="TestBoxes/MeshInstance3D5/StaticBody3D"]
 shape = SubResource("BoxShape3D_q1wv1")
 
 [node name="MeshInstance3D4" type="MeshInstance3D" parent="TestBoxes"]
@@ -135,19 +165,19 @@ shape = SubResource("BoxShape3D_ps6dd")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.19752, -2.98023e-07, 0.0954694)
 
 [node name="Skeleton3D" parent="NPC/Armature" index="0"]
-bones/0/position = Vector3(-1.52458e-11, 1.19568, 5.0288e-09)
+bones/0/position = Vector3(3.93901e-11, 1.18559, 3.64581e-09)
 bones/0/rotation = Quaternion(-0.0222822, 1.1918e-07, -2.65625e-09, 0.999752)
 bones/1/rotation = Quaternion(0.120888, -1.87045e-14, 2.8822e-08, 0.992666)
-bones/2/rotation = Quaternion(-0.0146798, -0.00778426, 0.993366, -0.113787)
+bones/2/rotation = Quaternion(-0.0149026, -0.00784278, 0.992649, -0.119855)
 bones/3/rotation = Quaternion(0.111725, 0.00241308, 0.0179131, 0.993575)
-bones/4/rotation = Quaternion(0.0451604, -0.00546265, 0.997911, -0.0458837)
-bones/5/rotation = Quaternion(-0.0676734, -2.53084e-05, 0.000980152, 0.997707)
-bones/6/rotation = Quaternion(0.618528, 0.0153873, -0.0632057, 0.783065)
-bones/7/rotation = Quaternion(0.0181119, -0.00323093, 0.994153, 0.106401)
+bones/4/rotation = Quaternion(0.0437152, 0.034194, 0.997328, -0.0475043)
+bones/5/rotation = Quaternion(-0.147403, -2.5082e-05, 0.00213496, 0.989074)
+bones/6/rotation = Quaternion(0.649708, 0.0177507, -0.0635613, 0.757314)
+bones/7/rotation = Quaternion(0.0182333, -0.00327043, 0.993832, 0.10934)
 bones/8/rotation = Quaternion(0.111725, -0.00241307, -0.0179131, 0.993575)
-bones/9/rotation = Quaternion(-0.0747085, -0.00416156, 0.99604, 0.0480201)
-bones/10/rotation = Quaternion(-0.0676733, 2.53068e-05, -0.000980164, 0.997707)
-bones/11/rotation = Quaternion(0.616373, -0.0398442, 0.0799262, 0.782374)
+bones/9/rotation = Quaternion(-0.0731548, 0.0354476, 0.995394, 0.050821)
+bones/10/rotation = Quaternion(-0.147403, 2.50813e-05, -0.00213497, 0.989074)
+bones/11/rotation = Quaternion(0.647523, -0.0428629, 0.0792842, 0.756697)
 bones/12/rotation = Quaternion(-0.0305826, 0.706445, -0.706445, 0.0305826)
 bones/13/rotation = Quaternion(0.0305826, 0.706445, -0.706445, -0.0305826)
 

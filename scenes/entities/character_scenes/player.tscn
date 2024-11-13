@@ -16,7 +16,7 @@
 [ext_resource type="Script" path="res://scripts/state_scripts/die_state.gd" id="14_ckyrl"]
 [ext_resource type="Script" path="res://scripts/components/move_components/movement_player.gd" id="15_qs07g"]
 [ext_resource type="Script" path="res://scripts/components/look_components/look_player.gd" id="16_i50rv"]
-[ext_resource type="PackedScene" uid="uid://b6p03bxamgi63" path="res://scenes/entities/templates/components/CanInteract.tscn" id="17_lv6e0"]
+[ext_resource type="PackedScene" uid="uid://b6p03bxamgi63" path="res://scenes/templates/components/CanInteract.tscn" id="17_lv6e0"]
 [ext_resource type="Script" path="res://scripts/components/interact_components/can_interact/can_interact_singleplayer_player.gd" id="18_ygfd3"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wkdf0"]
