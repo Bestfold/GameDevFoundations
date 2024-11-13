@@ -24,4 +24,8 @@
 # Initiell implementasjon fullført (fullført Battery Acid Devs Steam tutorial 1 og 2 med endringer for mitt
 #  oppsett). Mangler å teste med en annen Steam-bruker på en annen maskin. Skal spørre om hjelp fra venner :>
 
+# 13.11.24
+# Skal få testa med venner i dag. Før det gjør jeg noen små-endringer og prøver å danne forståelse for
+#  Steam API løsningen.
+
 # END LOG

@@ -95,13 +95,13 @@ func _delete_player(id: int):
 
 
 # Multiplayer host and join for testing purposes
-func _input(_event):
+#func _input(_event):
 
-	if Input.is_action_just_pressed("TestHost"):
-		print("Become host pressed")
-		become_host()
+#	if Input.is_action_just_pressed("TestHost"):
+#		print("Become host pressed")
+#		become_host()
 
 	
-	elif Input.is_action_just_pressed("TestJoin"):
-		print("Join as player pressed")
-		join_as_client(0)
+#	elif Input.is_action_just_pressed("TestJoin"):
+#		print("Join as player pressed")
+#		join_as_client(0)

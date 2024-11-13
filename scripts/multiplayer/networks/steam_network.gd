@@ -20,7 +20,6 @@ var _hosted_lobby_id = 0
 
 
 func _ready():
-	#multiplayer_peer.lobby_created.connect(_on_lobby_created)
 	Steam.lobby_created.connect(_on_lobby_created.bind())
 
 func become_host():
@@ -75,6 +74,7 @@ func _create_host():
 		print("error creating host_ %s " % str(error))
 
 
+# Remote joined
 func _on_lobby_joined(lobby_id: int, _permissions: int, _locked: bool, response: int):
 	print("On lobby joined")
 
@@ -103,7 +103,7 @@ func _on_lobby_joined(lobby_id: int, _permissions: int, _locked: bool, response:
 			11: FAIL_REASON = "A user you have blocked is in the lobby."
 		print(FAIL_REASON)
 
-# Connecting through internet (?)
+# Adding peer as client to Godot Multiplayer API
 func connect_socket(steam_id: int):
 	var error = multiplayer_peer.create_client(steam_id, 0)
 	if error == OK:
@@ -151,13 +151,13 @@ func _delete_player(id: int):
 
 
 # Multiplayer host and join for testing purposes
-func _input(_event):
+#func _input(_event):
 
-	if Input.is_action_just_pressed("TestHost"):
-		print("Become host pressed")
-		become_host()
+	#if Input.is_action_just_pressed("TestHost"):
+	#	print("Become host pressed")
+	#	become_host()
 
 	
-	elif Input.is_action_just_pressed("TestJoin"):
-		print("Join as player pressed")
-		join_as_client(0)
+	#elif Input.is_action_just_pressed("TestJoin"):
+	#	print("Join as player pressed")
+	#	join_as_client(0)

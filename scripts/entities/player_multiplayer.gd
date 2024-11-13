@@ -44,6 +44,9 @@ var player_id:
 
 # Player is controlled by state-children, as exception to common standard.
 
+# Debug logger
+#signal player_log(value)
+
 func _ready() -> void:
 	# Initialize state machine, passing a refrence of player to the states
 	state_machine.init(self, animation_player, move_component, look_component,

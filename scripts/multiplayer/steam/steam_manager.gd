@@ -13,6 +13,9 @@ var lobby_max_members: int = 4
 
 var steam_initialized = false
 
+# Debug logger
+#signal steam_manager_log(value)
+
 func _init():
 	print("Init Steam")
 	# Environment variables of OS
@@ -24,8 +27,10 @@ func _process(_delta):
 
 func initialize_steam():
 	if steam_initialized:
+		print("Steam already initialized")
 		return
 
+	# Initializing the Steam API connection (?)
 	var initialize_response: Dictionary = Steam.steamInitEx()
 	print("Steam init response: %s " % initialize_response)
 

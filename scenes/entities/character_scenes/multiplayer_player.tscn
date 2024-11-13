@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=4 uid="uid://d82venilpoaw"]
+[gd_scene load_steps=36 format=4 uid="uid://d82venilpoaw"]
 
 [ext_resource type="Script" path="res://scripts/entities/player_multiplayer.gd" id="1_5gb26"]
 [ext_resource type="Script" path="res://scripts/state_scripts/state_machine.gd" id="2_77h7s"]
@@ -18,6 +18,7 @@
 [ext_resource type="Script" path="res://scripts/components/move_components/movement_multiplayer_player.gd" id="16_lcvv5"]
 [ext_resource type="Script" path="res://scripts/components/look_components/look_player.gd" id="16_wae6s"]
 [ext_resource type="PackedScene" uid="uid://b6p03bxamgi63" path="res://scenes/entities/templates/components/CanInteract.tscn" id="17_h1rka"]
+[ext_resource type="Script" path="res://scripts/components/interact_components/can_interact/can_interact_multiplayer_player.gd" id="19_gk85r"]
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_d7ye2"]
 properties/0/path = NodePath(".:player_id")
@@ -646,7 +647,7 @@ bones/0/name = "torso"
 bones/0/parent = -1
 bones/0/rest = Transform3D(1, 6.66134e-15, 2.38419e-07, -1.06224e-08, 0.999007, 0.0445534, -2.38182e-07, -0.0445534, 0.999007, 0, 1.19711, 0)
 bones/0/enabled = true
-bones/0/position = Vector3(9.88933e-11, 1.19118, 3.4282e-09)
+bones/0/position = Vector3(1.43558e-10, 1.19539, 4.32181e-09)
 bones/0/rotation = Quaternion(-0.0222822, 1.1918e-07, -2.65625e-09, 0.999752)
 bones/0/scale = Vector3(1, 1, 1)
 bones/1/name = "head"
@@ -661,7 +662,7 @@ bones/2/parent = 0
 bones/2/rest = Transform3D(-0.928782, 0.370483, -0.01018, -0.37025, -0.928731, -0.0193172, -0.0166112, -0.0141724, 0.999762, 0.233065, 0.607809, -0.0121001)
 bones/2/enabled = true
 bones/2/position = Vector3(0.233065, 0.607809, -0.0121001)
-bones/2/rotation = Quaternion(-0.0147778, -0.00780998, 0.993056, -0.116451)
+bones/2/rotation = Quaternion(-0.0146854, -0.0077857, 0.993349, -0.113938)
 bones/2/scale = Vector3(0.999999, 1, 1)
 bones/3/name = "lowerarm.l"
 bones/3/parent = 2
@@ -675,28 +676,28 @@ bones/4/parent = 0
 bones/4/rest = Transform3D(-0.996395, 0.0850034, -0.00105896, -0.084927, -0.99587, -0.0321071, -0.00378385, -0.0319009, 0.999486, 0.0971104, 0.0519771, -0.0295931)
 bones/4/enabled = true
 bones/4/position = Vector3(0.0971104, 0.0519771, -0.0295931)
-bones/4/rotation = Quaternion(0.0443581, 0.0158311, 0.997797, -0.0467184)
+bones/4/rotation = Quaternion(0.0450933, -0.0037395, 0.997919, -0.0459485)
 bones/4/scale = Vector3(1.00004, 1, 1.00001)
 bones/5/name = "lowerleg.l"
 bones/5/parent = 4
 bones/5/rest = Transform3D(0.999999, -0.00140046, -0.000118713, 0.00140537, 0.995297, 0.0968625, -1.7497e-05, -0.0968625, 0.995298, 2.16447e-08, 0.588518, 1.17871e-09)
 bones/5/enabled = true
 bones/5/position = Vector3(2.16447e-08, 0.588518, 1.17871e-09)
-bones/5/rotation = Quaternion(-0.11054, -2.52073e-05, 0.00160103, 0.99387)
+bones/5/rotation = Quaternion(-0.0711459, -2.53018e-05, 0.00103045, 0.997465)
 bones/5/scale = Vector3(1, 1, 1)
 bones/6/name = "foot.l"
 bones/6/parent = 5
 bones/6/rest = Transform3D(0.996259, 0.02847, -0.0815952, -0.0861105, 0.247266, -0.965114, -0.00730111, 0.968529, 0.248792, 2.75634e-08, 0.581016, -1.74623e-09)
 bones/6/enabled = true
 bones/6/position = Vector3(2.75634e-08, 0.581016, -1.74623e-09)
-bones/6/rotation = Quaternion(0.63538, 0.0166364, -0.0633573, 0.769416)
+bones/6/rotation = Quaternion(0.619901, 0.0154869, -0.0632149, 0.781976)
 bones/6/scale = Vector3(1.00001, 1.00001, 1)
 bones/7/name = "upperarm.r"
 bones/7/parent = 0
 bones/7/rest = Transform3D(-0.928782, -0.370483, 0.0101795, 0.37025, -0.928731, -0.0193172, 0.0166107, -0.0141725, 0.999762, -0.233065, 0.607809, -0.0121002)
 bones/7/enabled = true
 bones/7/position = Vector3(-0.233065, 0.607809, -0.0121002)
-bones/7/rotation = Quaternion(0.0181664, -0.00324867, 0.99401, 0.107721)
+bones/7/rotation = Quaternion(0.0181108, -0.00323059, 0.994156, 0.106377)
 bones/7/scale = Vector3(0.999999, 1, 1)
 bones/8/name = "lowerarm.r"
 bones/8/parent = 7
@@ -710,21 +711,21 @@ bones/9/parent = 0
 bones/9/rest = Transform3D(-0.996395, -0.0850034, 0.00105847, 0.084927, -0.99587, -0.0321071, 0.00378336, -0.0319009, 0.999486, -0.0971104, 0.0519771, -0.0295932)
 bones/9/enabled = true
 bones/9/position = Vector3(-0.0971104, 0.0519771, -0.0295932)
-bones/9/rotation = Quaternion(-0.0738537, 0.017106, 0.995894, 0.0494882)
+bones/9/rotation = Quaternion(-0.0746376, -0.00244058, 0.996045, 0.0481361)
 bones/9/scale = Vector3(1.00004, 1, 1.00001)
 bones/10/name = "lowerleg.r"
 bones/10/parent = 9
 bones/10/rest = Transform3D(0.999999, 0.00140046, 0.000118714, -0.00140537, 0.995297, 0.0968625, 1.74966e-05, -0.0968625, 0.995298, 4.41847e-09, 0.588518, 1.23691e-09)
 bones/10/enabled = true
 bones/10/position = Vector3(4.41847e-09, 0.588518, 1.23691e-09)
-bones/10/rotation = Quaternion(-0.11054, 2.52105e-05, -0.00160104, 0.99387)
+bones/10/rotation = Quaternion(-0.0711459, 2.53046e-05, -0.00103046, 0.997465)
 bones/10/scale = Vector3(1, 1, 1)
 bones/11/name = "foot.r"
 bones/11/parent = 10
 bones/11/rest = Transform3D(0.996259, -0.02847, 0.0815952, 0.0861105, 0.247266, -0.965114, 0.00730111, 0.968529, 0.248792, -2.7611e-08, 0.581016, -2.79397e-09)
 bones/11/enabled = true
 bones/11/position = Vector3(-2.7611e-08, 0.581016, -2.79397e-09)
-bones/11/rotation = Quaternion(0.633211, -0.0414499, 0.0795455, 0.768764)
+bones/11/rotation = Quaternion(0.617745, -0.0399731, 0.0798924, 0.781288)
 bones/11/scale = Vector3(1.00001, 1.00001, 1)
 bones/12/name = "iklegtarget.l"
 bones/12/parent = -1
@@ -881,8 +882,32 @@ parent = NodePath("..")
 script = ExtResource("16_wae6s")
 parent = NodePath("..")
 
-[node name="CanInteract" parent="." instance=ExtResource("17_h1rka")]
+[node name="CanInteract" parent="." node_paths=PackedStringArray("parent", "interact_ray", "text_label") instance=ExtResource("17_h1rka")]
+script = ExtResource("19_gk85r")
+parent = NodePath("..")
+interact_ray = NodePath("../SpringArmPivot/Head_bobbing/SpringArm3D/InteractRay")
+text_label = NodePath("../InteractLabel")
 
 [node name="Username" type="Label" parent="."]
-offset_right = 40.0
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -20.0
+offset_right = 20.0
 offset_bottom = 23.0
+grow_horizontal = 2
+size_flags_horizontal = 4
+text = "
+"
+
+[node name="InteractLabel" type="Label" parent="."]
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = -11.5
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+horizontal_alignment = 1
+vertical_alignment = 1

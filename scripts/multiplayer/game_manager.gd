@@ -7,6 +7,8 @@ class_name GameManager
 @onready var debug_ui: DebugUI = %DebugUI
 @onready var lobby_screen: VBoxContainer = %LobbyScreen
 
+# Debug logger
+#signal game_log(value)
 
 func _ready():
 	if OS.has_feature("dedicated_server"):
@@ -103,8 +105,9 @@ func _remove_single_player():
 
 
 
-# Escape-menu for game-instance
+
 func _input(_event):
+	# Escape-menu for game-instance
 	if Input.is_action_just_pressed("escape"):
 		if lobby_screen.visible:
 			lobby_screen.hide()
@@ -112,6 +115,13 @@ func _input(_event):
 		else:
 			lobby_screen.show()
 			toggle_menu_control_at_player(true)
+	
+	# Debug window for values
+	if Input.is_action_just_pressed("debug"):
+		if debug_ui.visible:
+			debug_ui.hide()
+		else:
+			debug_ui.show()
 
 # Changes menu_visible atribute at either single- or multiplayer-player, which again determines wether
 #  look_component.capture_mouse captures or free's mouse

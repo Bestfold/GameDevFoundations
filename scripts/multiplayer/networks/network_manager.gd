@@ -14,6 +14,9 @@ var steam_network_scene := preload("res://scenes/networks/steam_network.tscn")
 
 var active_network
 
+# Debug logger
+#signal network_log(value)
+
 
 func build_multiplayer_network():
 	if not active_network: 
