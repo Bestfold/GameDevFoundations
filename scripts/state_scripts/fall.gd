@@ -23,7 +23,8 @@ func enter():
 	#if move_component.wants_run():
 	#	move_speed = 8
 
-	look_component.capture_mouse()
+	#look_component.capture_mouse()
+	pass
 
 #func exit():
 #	pass

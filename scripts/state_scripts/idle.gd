@@ -20,7 +20,7 @@ class_name IdleState
 func enter():
 	# Calling State default call (animation_tree.animation(animation_name)
 	super()
-	look_component.capture_mouse()
+	#look_component.capture_mouse()
 	
 	
 func exit():
@@ -46,23 +46,31 @@ func process_physics(delta: float) -> State:
 	parent.move_and_slide()
 	return null
 
+
 func process_input(event: InputEvent) -> State:
 	# Mouse movement function from State class
 	look_component.handle_input(event, move_speed, lerp_val)
 
 	var input_dir := move_component.get_movement_input()
 	
+	# Jump
 	if move_component.wants_jump() and parent.is_on_floor():
 		return jump_state
+
+	# Run
 	if input_dir != Vector2.ZERO && move_component.wants_run():
 		return run_state
+
+	# Walk
 	if input_dir != Vector2.ZERO:
 		return walk_state
+		
 	#if Input.is_action_just_pressed("crouch"):
 	#	return crouch_idle_state
 	#if Input.is_action_just_pressed("crawl"):
 	#	return crawl_idle_state
 	return null
+
 
 func process_frame(_delta: float) -> State:
 	return null
