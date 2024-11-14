@@ -1,7 +1,7 @@
 extends Node
 class_name CanInteractInterface
 
-@export var parent: CharacterBody3D
+@export var parent: Character
 @export var interact_ray: RayCast3D
 @export var text_label: Label
 

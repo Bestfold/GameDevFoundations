@@ -1,4 +1,4 @@
-extends CharacterBody3D
+extends PlayerCharacter
 
 class_name PlayerMultiplayer
 
@@ -22,15 +22,6 @@ class_name PlayerMultiplayer
 @onready var head_bobbing: Node3D = %Head_bobbing
 @onready var camera: Camera3D = %Camera3D
 
-# Player can control the character
-@export var is_controlable := true
-# Mouse should be captured
-@export var capture_mouse := false
-# Menu is visible and should capture mouse and remove control over character
-@export var menu_visible := false:
-	set(value):
-		capture_mouse = !value
-		is_controlable = !value
 
 var username = ""
 

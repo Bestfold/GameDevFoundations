@@ -35,4 +35,7 @@
 #  kan ikke se at det haster heller. Så for første prototype kan jeg heller fokusere på annet.
 # Neste er å sette opp en plan for hva som skal gjøres videre.
 
+# 14.11.24
+# Begynner planlegging og prototype av "internett"-lokalt nett-pc-skjerm (ingame).
+
 # END LOG

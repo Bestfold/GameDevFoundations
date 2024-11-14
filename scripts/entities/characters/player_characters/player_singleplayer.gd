@@ -1,6 +1,6 @@
-extends CharacterBody3D
+extends PlayerCharacter
 
-class_name Player
+class_name PlayerSingleplayer
 
 # Child refrences
 @onready var spring_arm: SpringArm3D = %SpringArm3D
@@ -15,15 +15,6 @@ class_name Player
 @onready var can_interact_component: CanInteractInterface = $CanInteract
 @onready var head_bobbing: Node3D = %Head_bobbing
 
-# Player can control the character
-@export var is_controlable := true
-# Mouse should be captured
-@export var capture_mouse := true
-# Menu is visible and should capture mouse and remove control over character
-@export var menu_visible := false:
-	set(value):
-		capture_mouse = !value
-		is_controlable = !value
 
 # Debug signals -> values to screen
 signal var_monitoring_1(value_to_monitor)

@@ -1,7 +1,7 @@
 extends Node
 class_name GameManager
 
-@onready var singleplayer_player: Player = $Player
+@onready var singleplayer_player: PlayerSingleplayer = $PlayerSingleplayer
 @onready var multiplayer_players: Node3D = $MultiplayerPlayers
 
 @onready var debug_ui: DebugUI = %DebugUI
@@ -97,8 +97,8 @@ func _on_lobby_match_list(lobbies: Array):
 	
 # Removes single player controller
 func _remove_single_player():
-	if has_node("Player"):
-		var player_to_remove = get_tree().get_current_scene().get_node("Player")
+	if has_node("PlayerSingleplayer"):
+		var player_to_remove = get_tree().get_current_scene().get_node("PlayerSingleplayer")
 		player_to_remove.queue_free()
 	
 
