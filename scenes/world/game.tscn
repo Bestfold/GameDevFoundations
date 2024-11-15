@@ -1,12 +1,14 @@
-[gd_scene load_steps=8 format=3 uid="uid://p0lt5frr2lxa"]
+[gd_scene load_steps=10 format=3 uid="uid://p0lt5frr2lxa"]
 
 [ext_resource type="Script" path="res://scripts/multiplayer/game_manager.gd" id="1_hkswb"]
-[ext_resource type="PackedScene" uid="uid://c26siogmy1l2f" path="res://scenes/world/world.tscn" id="1_meb3y"]
+[ext_resource type="PackedScene" uid="uid://c26siogmy1l2f" path="res://scenes/levels/world/world.tscn" id="1_meb3y"]
 [ext_resource type="PackedScene" uid="uid://2l2wfhlphuem" path="res://scenes/ui/debug_ui.tscn" id="1_my32x"]
 [ext_resource type="Script" path="res://scripts/multiplayer/networks/network_manager.gd" id="2_a3uxx"]
 [ext_resource type="PackedScene" uid="uid://w482w0w2x31k" path="res://scenes/entities/character_scenes/player.tscn" id="2_l1e6r"]
 [ext_resource type="PackedScene" uid="uid://bd75nn2huo38l" path="res://scenes/ui/lobby_screen.tscn" id="4_h5od1"]
 [ext_resource type="PackedScene" uid="uid://csh7gkr4sx6is" path="res://scenes/mechanic_systems/net/shared_net.tscn" id="5_qsaxk"]
+[ext_resource type="PackedScene" uid="uid://baj4t5p18w880" path="res://scenes/mechanic_systems/digital_rooms/digital_rooms_manager.tscn" id="6_5c5e7"]
+[ext_resource type="PackedScene" uid="uid://c2l3rv6frpdkm" path="res://scenes/mechanic_systems/net/pc_computer.tscn" id="6_o64x3"]
 
 [node name="Game" type="Node"]
 script = ExtResource("1_hkswb")
@@ -28,6 +30,16 @@ spawn_limit = 4
 [node name="MultiplayerPlayers" type="Node3D" parent="."]
 
 [node name="SharedNet" parent="." instance=ExtResource("5_qsaxk")]
+unique_name_in_owner = true
+
+[node name="PcComputer1" parent="SharedNet" instance=ExtResource("6_o64x3")]
+unique_name_in_owner = true
+transform = Transform3D(-0.707107, 0, -0.707107, 0, 1, 0, 0.707107, 0, -0.707107, 6.4278, 5.96046e-07, 7.3845)
+
+[node name="DigitalRoomsManager" parent="." instance=ExtResource("6_5c5e7")]
+unique_name_in_owner = true
+z_position_for_rooms = null
+distance_between_rooms = null
 
 [node name="UI" type="CanvasLayer" parent="."]
 
@@ -36,5 +48,3 @@ unique_name_in_owner = true
 
 [node name="LobbyScreen" parent="UI" instance=ExtResource("4_h5od1")]
 unique_name_in_owner = true
-
-[node name="GameManager" type="Node" parent="."]

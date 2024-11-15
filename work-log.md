@@ -38,4 +38,12 @@
 # 14.11.24
 # Begynner planlegging og prototype av "internett"-lokalt nett-pc-skjerm (ingame).
 
+# 15.11.24
+# Planen min er å implementere "rommene" slik at de blir instantiated under det vanlige map-et, på posisjoner
+#  dynamisk avhengig av antall spillere. Så blir de fjernet enten ved at man ønsker å åpne en ny, eller at det har
+#  gått en god stund, eller at man manuelt lukker døra.
+# Så langt har jeg lagd en signal-lenke fra pc-en til digital_rooms_manager, som skal dele ut plass, og så
+#  instantiate rommet. Så det blir neste
+
+
 # END LOG

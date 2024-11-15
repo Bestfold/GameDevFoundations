@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://c26siogmy1l2f"]
+[gd_scene load_steps=17 format=3 uid="uid://c26siogmy1l2f"]
 
 [ext_resource type="MeshLibrary" uid="uid://deetsral7i5dx" path="res://assets/brickwall/brickwallTileset.tres" id="1_o4gn4"]
 [ext_resource type="PackedScene" uid="uid://w482w0w2x31k" path="res://scenes/entities/character_scenes/player.tscn" id="2_2i8er"]
@@ -6,7 +6,6 @@
 [ext_resource type="Script" path="res://scripts/components/interact_components/interactable/test_interactable.gd" id="3_kcecg"]
 [ext_resource type="Script" path="res://scripts/components/move_components/movement_enemy_test.gd" id="3_qo5e8"]
 [ext_resource type="Script" path="res://scripts/components/look_components/look_enemy_test.gd" id="4_ky8kg"]
-[ext_resource type="PackedScene" uid="uid://c2l3rv6frpdkm" path="res://scenes/mechanic_systems/net/pc_computer.tscn" id="7_r6qod"]
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_pjvrq"]
 size = Vector2(20, 20)
@@ -143,10 +142,9 @@ skeleton = NodePath("../..")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="TestBoxes/MeshInstance3D2"]
 
-[node name="Interactable" parent="TestBoxes/MeshInstance3D2/StaticBody3D" node_paths=PackedStringArray("parent", "interact_area") instance=ExtResource("2_iy2cm")]
+[node name="Interactable" parent="TestBoxes/MeshInstance3D2/StaticBody3D" node_paths=PackedStringArray("interact_area") instance=ExtResource("2_iy2cm")]
 script = ExtResource("3_kcecg")
 interact_prompt = "[E] to ponder"
-parent = NodePath("../..")
 interact_area = NodePath("..")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="TestBoxes/MeshInstance3D2/StaticBody3D"]
@@ -164,19 +162,19 @@ shape = SubResource("BoxShape3D_ps6dd")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.19752, -2.98023e-07, 0.0954694)
 
 [node name="Skeleton3D" parent="NPC/Armature" index="0"]
-bones/0/position = Vector3(-1.89766e-11, 1.19533, 5.52042e-09)
+bones/0/position = Vector3(2.74432e-11, 1.19694, 5.44915e-09)
 bones/0/rotation = Quaternion(-0.0222822, 1.1918e-07, -2.65625e-09, 0.999752)
 bones/1/rotation = Quaternion(0.120888, -1.87045e-14, 2.8822e-08, 0.992666)
-bones/2/rotation = Quaternion(-0.0146841, -0.00778539, 0.993353, -0.113904)
+bones/2/rotation = Quaternion(-0.0146475, -0.00777572, 0.993468, -0.112905)
 bones/3/rotation = Quaternion(0.111725, 0.00241308, 0.0179131, 0.993575)
-bones/4/rotation = Quaternion(0.045082, -0.00346681, 0.99792, -0.045958)
-bones/5/rotation = Quaternion(-0.0716949, -2.53027e-05, 0.0010384, 0.997426)
-bones/6/rotation = Quaternion(0.620118, 0.0155024, -0.0632154, 0.781804)
-bones/7/rotation = Quaternion(0.0181154, -0.00323207, 0.994144, 0.106486)
+bones/4/rotation = Quaternion(0.045549, -0.0152185, 0.997808, -0.0455263)
+bones/5/rotation = Quaternion(-0.0480055, -2.53351e-05, 0.000695291, 0.998847)
+bones/6/rotation = Quaternion(0.610722, 0.014828, -0.0631663, 0.789182)
+bones/7/rotation = Quaternion(0.0180856, -0.00322239, 0.994221, 0.105766)
 bones/8/rotation = Quaternion(0.111725, -0.00241307, -0.0179131, 0.993575)
-bones/9/rotation = Quaternion(-0.0746258, -0.00216826, 0.996046, 0.0481538)
-bones/10/rotation = Quaternion(-0.0716948, 2.53001e-05, -0.00103841, 0.997426)
-bones/11/rotation = Quaternion(0.617962, -0.0399932, 0.0798863, 0.781116)
+bones/9/rotation = Quaternion(-0.0751166, -0.0139049, 0.995952, 0.0473727)
+bones/10/rotation = Quaternion(-0.0480055, 2.53367e-05, -0.000695298, 0.998847)
+bones/11/rotation = Quaternion(0.608573, -0.0391177, 0.080128, 0.788472)
 bones/12/rotation = Quaternion(-0.0305826, 0.706445, -0.706445, 0.0305826)
 bones/13/rotation = Quaternion(0.0305826, 0.706445, -0.706445, -0.0305826)
 
@@ -194,8 +192,5 @@ environment = SubResource("Environment_hpduf")
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="env"]
 transform = Transform3D(-0.866025, -0.433013, 0.25, 0, 0.5, 0.866025, -0.5, 0.75, -0.433013, 0, 0, 0)
 shadow_enabled = true
-
-[node name="PcComputer" parent="." instance=ExtResource("7_r6qod")]
-transform = Transform3D(-0.707107, 0, -0.707107, 0, 1, 0, 0.707107, 0, -0.707107, 6.4278, 5.96046e-07, 7.3845)
 
 [editable path="NPC"]
