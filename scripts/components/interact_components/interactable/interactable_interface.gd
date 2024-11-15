@@ -5,5 +5,5 @@ class_name InteractableInterface
 @export var parent: Node3D
 @export var interact_area: CollisionObject3D
 
-func execute_interaction():
+func execute_interaction(_interacter):
 	pass

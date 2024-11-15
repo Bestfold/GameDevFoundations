@@ -17,7 +17,7 @@
 #  capture eller visible mus. Masse debug
 # Begynt steam-multiplayer, kommet ganske langt i tutorial. 
 
-# 10.11.24 BUG: When hosting or joining, player has movement controll, even though menu is up
+# 10.11.24 BUG: When hosting or joining, movement controll remains in players hands, even though menu is up
 
 # 12.11.24
 # Fortsetter Steam multiplayer implementation. 
@@ -27,5 +27,15 @@
 # 13.11.24
 # Skal få testa med venner i dag. Før det gjør jeg noen små-endringer og prøver å danne forståelse for
 #  Steam API løsningen.
+# Implementerte et komponentbasert interaction-system. Kun bare-bones nå, legg til på systemet, og så bør det nok
+#  skrives om i framtiden.
+# STEAM FUNKER!!! Fikk tiden til Timo og fikk sett at det fungerer å Host og Join hverandres lobby! Lite lag og!
+#  Systemet har per nå ikke mulighet for å bytte mellom ENet og Steam uten å starte spillet opp igjen. Og det
+#  er heller ikke mulig å gå tilbake til singleplayer. Kan være fint å lage en god implementasjon av dette, men
+#  kan ikke se at det haster heller. Så for første prototype kan jeg heller fokusere på annet.
+# Neste er å sette opp en plan for hva som skal gjøres videre.
+
+# 14.11.24
+# Begynner planlegging og prototype av "internett"-lokalt nett-pc-skjerm (ingame).
 
 # END LOG

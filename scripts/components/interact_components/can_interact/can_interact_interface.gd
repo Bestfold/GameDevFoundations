@@ -1,7 +1,7 @@
 extends Node
 class_name CanInteractInterface
 
-@export var parent: CharacterBody3D
+@export var parent: Character
 @export var interact_ray: RayCast3D
 @export var text_label: Label
 
@@ -20,7 +20,7 @@ func _physics_process(_delta):
 			message = colliding_interactable.interact_prompt
 		
 			if get_request_for_interaction():
-				colliding_interactable.execute_interaction()
+				colliding_interactable.execute_interaction(parent)
 
 	if text_label:
 		# Debug
