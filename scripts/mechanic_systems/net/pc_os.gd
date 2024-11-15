@@ -14,4 +14,4 @@ func _ready():
 func load_room(room_name: String):
 	request_room_load.emit(room_name)
 	
-	print("PC os emitted: " + room_name)
+	#print("PC os emitted: " + room_name)

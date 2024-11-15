@@ -17,9 +17,9 @@ signal request_room_instantiation(room_name: String)
 func _ready():
 	
 	computers = get_children()
-	print("Getting computer children")
+	#print("Getting computer children")
 	for computer in computers:
-		print(computer)
+		#print(computer)
 		computer.request_room_load.connect(instantiate_room)
 
 
@@ -27,4 +27,4 @@ func _ready():
 func instantiate_room(room_name: String):
 	request_room_instantiation.emit(room_name)
 	
-	print("Shared net emitted: " + room_name)
+	#print("Shared net emitted: " + room_name)

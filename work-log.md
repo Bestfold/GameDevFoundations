@@ -43,7 +43,11 @@
 #  dynamisk avhengig av antall spillere. Så blir de fjernet enten ved at man ønsker å åpne en ny, eller at det har
 #  gått en god stund, eller at man manuelt lukker døra.
 # Så langt har jeg lagd en signal-lenke fra pc-en til digital_rooms_manager, som skal dele ut plass, og så
-#  instantiate rommet. Så det blir neste
+#  instantiate rommet.
+# I tillegg til å ha fått til et system for å fjerne og legge til "posisjon-noder" til digitale rom. Avhengig av
+#  max-spillere, så kan man legge til x antall rom. Skal det legges til et rom når det allerede er maks rom sjekkes
+#  det etter et rom uten spillere, også blir det fjerna. Skulle det være spillere i alle så skjer ingenting. 
+# Neste blir å implementere en dynamisk måte å gi posisjoner til disse nodene.
 
 
 # END LOG
