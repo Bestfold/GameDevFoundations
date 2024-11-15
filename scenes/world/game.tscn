@@ -36,3 +36,5 @@ unique_name_in_owner = true
 
 [node name="LobbyScreen" parent="UI" instance=ExtResource("4_h5od1")]
 unique_name_in_owner = true
+
+[node name="GameManager" type="Node" parent="."]

@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://dkwd7h6ojq4d5"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_xev2y"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_q3ggo"]
+albedo_color = Color(0.233925, 0.233925, 0.233925, 1)
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_50ipu"]
+
+[node name="Room1" type="Node"]
+
+[node name="Ground" type="MeshInstance3D" parent="."]
+transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, 0, 0, 0)
+mesh = SubResource("PlaneMesh_xev2y")
+surface_material_override/0 = SubResource("StandardMaterial3D_q3ggo")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Ground"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Ground/StaticBody3D"]
+shape = SubResource("ConcavePolygonShape3D_50ipu")
