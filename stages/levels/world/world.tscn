@@ -46,6 +46,7 @@ fog_density = 0.1
 
 [node name="Ground" type="MeshInstance3D" parent="."]
 transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 0, 0, 0)
+visible = false
 mesh = SubResource("PlaneMesh_pjvrq")
 surface_material_override/0 = SubResource("StandardMaterial3D_vymgn")
 
@@ -163,19 +164,19 @@ shape = SubResource("BoxShape3D_ps6dd")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.19752, -2.98023e-07, 0.0954694)
 
 [node name="Skeleton3D" parent="NPC/Armature" index="0"]
-bones/0/position = Vector3(-4.96904e-11, 1.19243, 6.99002e-09)
+bones/0/position = Vector3(1.23198e-10, 1.19347, 3.82971e-09)
 bones/0/rotation = Quaternion(-0.0222822, 1.1918e-07, -2.65625e-09, 0.999752)
 bones/1/rotation = Quaternion(0.120888, -1.87045e-14, 2.8822e-08, 0.992666)
-bones/2/rotation = Quaternion(-0.0147502, -0.00780276, 0.993144, -0.115703)
+bones/2/rotation = Quaternion(-0.0147277, -0.00779684, 0.993215, -0.11509)
 bones/3/rotation = Quaternion(0.111725, 0.00241308, 0.0179131, 0.993575)
-bones/4/rotation = Quaternion(0.0445416, 0.0108137, 0.997866, -0.0465147)
-bones/5/rotation = Quaternion(-0.100449, -2.52363e-05, 0.00145488, 0.994941)
-bones/6/rotation = Quaternion(0.631432, 0.0163383, -0.0633136, 0.772669)
-bones/7/rotation = Quaternion(0.0181495, -0.00324316, 0.994055, 0.107311)
+bones/4/rotation = Quaternion(0.0447107, 0.00631305, 0.997905, -0.0463377)
+bones/5/rotation = Quaternion(-0.0913931, -2.52593e-05, 0.00132371, 0.995814)
+bones/6/rotation = Quaternion(0.627885, 0.0160732, -0.0632782, 0.775563)
+bones/7/rotation = Quaternion(0.0181343, -0.00323822, 0.994094, 0.106944)
 bones/8/rotation = Quaternion(0.111725, -0.00241307, -0.0179131, 0.993575)
-bones/9/rotation = Quaternion(-0.0740508, 0.0120947, 0.99597, 0.0491353)
-bones/10/rotation = Quaternion(-0.100449, 2.52276e-05, -0.00145489, 0.994941)
-bones/11/rotation = Quaternion(0.629267, -0.0410688, 0.0796278, 0.772008)
+bones/9/rotation = Quaternion(-0.0742315, 0.00759951, 0.996016, 0.0488243)
+bones/10/rotation = Quaternion(-0.0913931, 2.52646e-05, -0.00132372, 0.995814)
+bones/11/rotation = Quaternion(0.625717, -0.0407294, 0.0797079, 0.774898)
 bones/12/rotation = Quaternion(-0.0305826, 0.706445, -0.706445, 0.0305826)
 bones/13/rotation = Quaternion(0.0305826, 0.706445, -0.706445, -0.0305826)
 

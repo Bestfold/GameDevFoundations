@@ -31,11 +31,12 @@ mesh = SubResource("BoxMesh_y33vq")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Screen/StaticBody3D"]
 shape = SubResource("BoxShape3D_oulgw")
 
-[node name="Interactable" parent="Screen/StaticBody3D" instance=ExtResource("2_0r75e")]
+[node name="InteractScreen" parent="Screen/StaticBody3D" node_paths=PackedStringArray("interact_area") instance=ExtResource("2_0r75e")]
 unique_name_in_owner = true
 script = ExtResource("3_rakn8")
 debug_room_name = "room_1"
-interact_prompt = "[E] to conputer"
+interact_prompt = "[E] to add player"
+interact_area = NodePath("..")
 
 [node name="Keyboard" type="MeshInstance3D" parent="."]
 transform = Transform3D(-4.02253e-08, 7.05812e-09, -0.999488, 0.404057, 0.367754, 0, 0.920248, -0.161471, -4.3689e-08, -0.115778, 0.947311, 0.205267)
@@ -45,3 +46,10 @@ mesh = SubResource("PrismMesh_jhc4p")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Keyboard/StaticBody3D"]
 shape = SubResource("BoxShape3D_oulgw")
+
+[node name="InteractKeyboard" parent="Keyboard/StaticBody3D" node_paths=PackedStringArray("interact_area") instance=ExtResource("2_0r75e")]
+unique_name_in_owner = true
+script = ExtResource("3_rakn8")
+debug_room_name = "room_1"
+interact_prompt = "[E] to conputer"
+interact_area = NodePath("..")

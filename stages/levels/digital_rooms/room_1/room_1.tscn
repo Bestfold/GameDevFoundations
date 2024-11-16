@@ -45,5 +45,4 @@ spawn_path = NodePath("../PlayerSpawnNode")
 spawn_limit = 4
 
 [node name="PlayerSpawnNode" type="Node3D" parent="."]
-
-[node name="Node3D" type="Node3D" parent="PlayerSpawnNode"]
+unique_name_in_owner = true

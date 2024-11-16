@@ -1,6 +1,8 @@
 extends Node
 class_name CanInteractInterface
 
+# Put under Collisionbody
+
 @export var parent: Character
 @export var interact_ray: RayCast3D
 @export var text_label: Label
@@ -13,15 +15,19 @@ func _physics_process(_delta):
 	
 	if interact_ray.is_colliding():
 		var colliding_body = interact_ray.get_collider()
-		
-		if colliding_body.has_node("Interactable"):
-			var colliding_interactable = colliding_body.get_node("Interactable")
-			
-			message = colliding_interactable.interact_prompt
-		
-			if get_request_for_interaction():
-				colliding_interactable.execute_interaction(parent)
 
+		var colliding_body_children = colliding_body.get_children()
+
+		for child in colliding_body_children:
+			if child is InteractableInterface:
+			
+				message = child.interact_prompt
+
+				# Get implementation from inhereted scripts
+				if get_request_for_interaction():
+					child.execute_interaction(parent)
+				
+			
 	if text_label:
 		# Debug
 		text_label.text = message

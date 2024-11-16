@@ -9,18 +9,23 @@ class_name SharedNet
 var computers
 
 signal request_room_instantiation(room_name: String)
+signal request_room_controller(room_name: String)
 
 func _ready():
 	
 	computers = get_tree().get_nodes_in_group("computers")
-	print("Getting computer children")
+	#print("Getting computer children")
 	for computer in computers:
 		print(computer)
 		computer.request_room_load.connect(instantiate_room)
+		computer.request_add_player.connect(add_controller_to_room)
 
 
 
 func instantiate_room(room_name: String):
 	request_room_instantiation.emit(room_name)
 	
-	print("Shared net emitted: " + room_name)
+	#print("Shared net emitted: " + room_name)
+
+func add_controller_to_room(room_name: String):
+	request_room_controller.emit(room_name)

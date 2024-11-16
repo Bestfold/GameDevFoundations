@@ -51,7 +51,9 @@
 
 # 16.11.24
 # Endret filstrukturen til å være organisert etter funksjon, i stedet for asset-type.
-# Skal også fikse en signal-bus for debug, sette opp asynkrone signaler, og ___
+# Har satt opp en muligheten for asynkrone signal-calls med noden Service
+# Digital rooms blir nå dynamisk tildelt en posisjon. Neste er å skape en data-type for rommene, lagre dem, og kunne
+#  sende dem som parameter og hente fra en "database"
 
 
 # END LOG
