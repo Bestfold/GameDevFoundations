@@ -12,6 +12,7 @@ func _ready():
 
 # Send request to load room
 func load_room(room_name: String):
+	#print("requesting load room")
 	request_room_load.emit(room_name)
 	
 	#print("PC os emitted: " + room_name)

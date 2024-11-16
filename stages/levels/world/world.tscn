@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://c26siogmy1l2f"]
+[gd_scene load_steps=18 format=3 uid="uid://c26siogmy1l2f"]
 
 [ext_resource type="MeshLibrary" uid="uid://deetsral7i5dx" path="res://stages/brickwall/brickwallTileset.tres" id="1_o4gn4"]
 [ext_resource type="PackedScene" uid="uid://w482w0w2x31k" path="res://entities/characters/player_characters/singleplayer_player/player.tscn" id="2_2i8er"]
@@ -6,6 +6,7 @@
 [ext_resource type="Script" path="res://common/components/interactable/test_interactable.gd" id="3_kcecg"]
 [ext_resource type="Script" path="res://common/components/move_components/movement_enemy_test.gd" id="3_qo5e8"]
 [ext_resource type="Script" path="res://common/components/look_components/look_enemy_test.gd" id="4_ky8kg"]
+[ext_resource type="PackedScene" uid="uid://c2l3rv6frpdkm" path="res://entities/net/computers/pc/pc_computer.tscn" id="7_lgpmj"]
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_pjvrq"]
 size = Vector2(20, 20)
@@ -162,15 +163,21 @@ shape = SubResource("BoxShape3D_ps6dd")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.19752, -2.98023e-07, 0.0954694)
 
 [node name="Skeleton3D" parent="NPC/Armature" index="0"]
-bones/0/position = Vector3(-4.82132e-13, 1.19706, 5.28547e-09)
-bones/2/rotation = Quaternion(-0.0146466, -0.0077755, 0.99347, -0.112882)
-bones/4/rotation = Quaternion(0.045565, -0.0156113, 0.997802, -0.0455122)
-bones/5/rotation = Quaternion(-0.0472137, -2.53357e-05, 0.000683822, 0.998885)
-bones/6/rotation = Quaternion(0.610407, 0.0148056, -0.0631651, 0.789427)
-bones/7/rotation = Quaternion(0.0180848, -0.00322212, 0.994223, 0.105747)
-bones/9/rotation = Quaternion(-0.0751334, -0.0142972, 0.995946, 0.0473469)
-bones/10/rotation = Quaternion(-0.0472137, 2.53432e-05, -0.000683828, 0.998885)
-bones/11/rotation = Quaternion(0.608258, -0.0390886, 0.0801365, 0.788716)
+bones/0/position = Vector3(-4.96904e-11, 1.19243, 6.99002e-09)
+bones/0/rotation = Quaternion(-0.0222822, 1.1918e-07, -2.65625e-09, 0.999752)
+bones/1/rotation = Quaternion(0.120888, -1.87045e-14, 2.8822e-08, 0.992666)
+bones/2/rotation = Quaternion(-0.0147502, -0.00780276, 0.993144, -0.115703)
+bones/3/rotation = Quaternion(0.111725, 0.00241308, 0.0179131, 0.993575)
+bones/4/rotation = Quaternion(0.0445416, 0.0108137, 0.997866, -0.0465147)
+bones/5/rotation = Quaternion(-0.100449, -2.52363e-05, 0.00145488, 0.994941)
+bones/6/rotation = Quaternion(0.631432, 0.0163383, -0.0633136, 0.772669)
+bones/7/rotation = Quaternion(0.0181495, -0.00324316, 0.994055, 0.107311)
+bones/8/rotation = Quaternion(0.111725, -0.00241307, -0.0179131, 0.993575)
+bones/9/rotation = Quaternion(-0.0740508, 0.0120947, 0.99597, 0.0491353)
+bones/10/rotation = Quaternion(-0.100449, 2.52276e-05, -0.00145489, 0.994941)
+bones/11/rotation = Quaternion(0.629267, -0.0410688, 0.0796278, 0.772008)
+bones/12/rotation = Quaternion(-0.0305826, 0.706445, -0.706445, 0.0305826)
+bones/13/rotation = Quaternion(0.0305826, 0.706445, -0.706445, -0.0305826)
 
 [node name="MoveComponent" parent="NPC" index="6"]
 script = ExtResource("3_qo5e8")
@@ -186,5 +193,8 @@ environment = SubResource("Environment_hpduf")
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="env"]
 transform = Transform3D(-0.866025, -0.433013, 0.25, 0, 0.5, 0.866025, -0.5, 0.75, -0.433013, 0, 0, 0)
 shadow_enabled = true
+
+[node name="PcComputer1" parent="." groups=["computers"] instance=ExtResource("7_lgpmj")]
+transform = Transform3D(-0.707107, 0, -0.707107, 0, 1, 0, 0.707107, 0, -0.707107, 6.4278, 5.96046e-07, 7.3845)
 
 [editable path="NPC"]

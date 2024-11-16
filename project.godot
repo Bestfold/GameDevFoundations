@@ -34,6 +34,8 @@ version_control/autoload_on_startup=true
 [global_group]
 
 logs="Logger components to be called by debugger"
+computers="Computers connected to shared_net"
+digital_rooms="Digital rooms added to the digital_rooms_manager"
 
 [input]
 
