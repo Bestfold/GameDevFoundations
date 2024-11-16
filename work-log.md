@@ -49,5 +49,9 @@
 #  det etter et rom uten spillere, også blir det fjerna. Skulle det være spillere i alle så skjer ingenting. 
 # Neste blir å implementere en dynamisk måte å gi posisjoner til disse nodene.
 
+# 16.11.24
+# Endret filstrukturen til å være organisert etter funksjon, i stedet for asset-type.
+# Skal også fikse en signal-bus for debug, sette opp asynkrone signaler, og ___
+
 
 # END LOG

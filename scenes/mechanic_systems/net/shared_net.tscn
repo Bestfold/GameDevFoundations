@@ -1,6 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://csh7gkr4sx6is"]
-
-[ext_resource type="Script" path="res://scripts/mechanic_systems/net/shared_net.gd" id="1_5nurv"]
-
-[node name="SharedNet" type="Node"]
-script = ExtResource("1_5nurv")

@@ -1,6 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://baj4t5p18w880"]
-
-[ext_resource type="Script" path="res://scripts/mechanic_systems/digital_rooms/digital_rooms_manager.gd" id="1_hwgs0"]
-
-[node name="DigitalRooms" type="Node3D"]
-script = ExtResource("1_hwgs0")

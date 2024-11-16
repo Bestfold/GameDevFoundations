@@ -11,15 +11,15 @@ config_version=5
 [application]
 
 config/name="tutorial_3dcharacter"
-run/main_scene="res://scenes/world/game.tscn"
+run/main_scene="res://stages/game/game.tscn"
 config/features=PackedStringArray("4.3", "Forward Plus")
 config/icon="res://icon.svg"
 
 [autoload]
 
-MultiplayerManager="*res://scripts/multiplayer/multiplayer_manager.gd"
-SteamManager="*res://scripts/multiplayer/steam/steam_manager.gd"
-InternetManager="*res://scripts/mechanic_systems/net/internet_manager.gd"
+MultiplayerManager="*res://utilities/multiplayer/multiplayer_manager.gd"
+SteamManager="*res://utilities/multiplayer/steam/steam_manager.gd"
+InternetManager="*res://entities/net/internet_manager.gd"
 
 [display]
 
@@ -30,13 +30,6 @@ window/size/window_height_override=800
 
 version_control/plugin_name="GitPlugin"
 version_control/autoload_on_startup=true
-
-[file_customization]
-
-folder_colors={
-"res://assets/brickwall/": "purple",
-"res://assets/characters/": "purple"
-}
 
 [global_group]
 

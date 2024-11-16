@@ -1,0 +1,49 @@
+[gd_scene load_steps=8 format=3 uid="uid://dkwd7h6ojq4d5"]
+
+[ext_resource type="Script" path="res://stages/levels/digital_rooms/room_1/room_1.gd" id="1_ux32r"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_xev2y"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_q3ggo"]
+albedo_color = Color(0.233925, 0.233925, 0.233925, 1)
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_50ipu"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6e10x"]
+albedo_color = Color(1, 0.266022, 0.486429, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_f3wur"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_hfku1"]
+
+[node name="Room1" type="Node3D" node_paths=PackedStringArray("player_spawn_node")]
+script = ExtResource("1_ux32r")
+player_spawn_node = NodePath("PlayerSpawnNode")
+
+[node name="Ground" type="MeshInstance3D" parent="."]
+transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, 0, 0, 0)
+mesh = SubResource("PlaneMesh_xev2y")
+surface_material_override/0 = SubResource("StandardMaterial3D_q3ggo")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Ground"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Ground/StaticBody3D"]
+shape = SubResource("ConcavePolygonShape3D_50ipu")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(8.81188, 0, 0, 0, 1, 0, 0, 0, 8.62291, 0, 3, 0)
+material_override = SubResource("StandardMaterial3D_6e10x")
+mesh = SubResource("BoxMesh_f3wur")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="MeshInstance3D"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D/StaticBody3D"]
+shape = SubResource("BoxShape3D_hfku1")
+
+[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
+spawn_path = NodePath("../PlayerSpawnNode")
+spawn_limit = 4
+
+[node name="PlayerSpawnNode" type="Node3D" parent="."]
+
+[node name="Node3D" type="Node3D" parent="PlayerSpawnNode"]
