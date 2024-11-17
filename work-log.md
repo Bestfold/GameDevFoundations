@@ -55,5 +55,9 @@
 # Digital rooms blir nå dynamisk tildelt en posisjon. Neste er å skape en data-type for rommene, lagre dem, og kunne
 #  sende dem som parameter og hente fra en "database"
 
+# 17.11.24
+# Rommene replikeres ikke slik de skal. Bør bygge om systemet slik at clients caller rpc som spawner hos server.
+#  Og trenger måte å skille mellom singleplayer og multiplayer
+
 
 # END LOG
