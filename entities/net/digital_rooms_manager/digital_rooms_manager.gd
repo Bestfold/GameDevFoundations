@@ -15,10 +15,18 @@ var max_rooms = SteamManager.lobby_max_members
 
 
 func _ready():
+	#MultiplayerManager.multiplayer_enabled.connect(multiplayer_active)
+
 	shared_net.request_room_instantiation.connect(instantiate_room)
 	shared_net.request_room_controller.connect(add_controller)
 
 	add_position_nodes()
+
+
+#func multiplayer_active(enabled: bool)
+	#if enabled && multiplayer.get_unique_id() != 0:
+		
+		
 
 # Creates nodes with positions to add rooms to
 func add_position_nodes():
@@ -74,6 +82,7 @@ func _make_space_for_new_room() -> Node3D:
 			print("Room: " + room.name)
 
 			var room_player_count : int = room.get_tree().get_node_count_in_group("players")
+			print("Nodes in players group: " + str(room_player_count))
 
 			if room_player_count == 0:
 				
@@ -83,10 +92,10 @@ func _make_space_for_new_room() -> Node3D:
 
 			i += 1
 
-			if (i == max_rooms):
+			if (i >= max_rooms):
 				return null
 	
-	available_position = get_child(0)
+		available_position = get_child(i)
 	return available_position
 
 

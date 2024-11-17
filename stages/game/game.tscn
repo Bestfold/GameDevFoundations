@@ -21,7 +21,8 @@ _player_spawn_node = NodePath("../MultiplayerPlayers")
 
 [node name="PlayerSingleplayer" parent="." instance=ExtResource("4_2aaaw")]
 
-[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
+[node name="Playerspawner" type="MultiplayerSpawner" parent="."]
+_spawnable_scenes = PackedStringArray("res://entities/characters/player_characters/multiplayer_player/multiplayer_player.tscn")
 spawn_path = NodePath("../MultiplayerPlayers")
 spawn_limit = 4
 
@@ -29,6 +30,10 @@ spawn_limit = 4
 
 [node name="SharedNet" parent="." instance=ExtResource("5_gv280")]
 unique_name_in_owner = true
+
+[node name="Roomspawner" type="MultiplayerSpawner" parent="."]
+spawn_path = NodePath("../DigitalRoomsManager")
+spawn_limit = 8
 
 [node name="DigitalRoomsManager" parent="." instance=ExtResource("7_371by")]
 unique_name_in_owner = true
