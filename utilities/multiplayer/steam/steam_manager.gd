@@ -17,7 +17,7 @@ var steam_initialized = false
 #signal steam_manager_log(value)
 
 func _init():
-	print("Init Steam")
+	#print("Init Steam")
 	# Environment variables of OS
 	OS.set_environment("SteamAppId", str(steam_app_id))
 	OS.set_environment("SteamGameId", str(steam_app_id))

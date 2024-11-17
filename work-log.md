@@ -58,6 +58,8 @@
 # 17.11.24
 # Rommene replikeres ikke slik de skal. Bør bygge om systemet slik at clients caller rpc som spawner hos server.
 #  Og trenger måte å skille mellom singleplayer og multiplayer
+#
+# Må først bygge om slik at man enten velger singleplayer eller multiplayer
 
 
 # END LOG

@@ -1,7 +1,7 @@
 [gd_scene load_steps=18 format=3 uid="uid://c26siogmy1l2f"]
 
 [ext_resource type="MeshLibrary" uid="uid://deetsral7i5dx" path="res://stages/brickwall/brickwallTileset.tres" id="1_o4gn4"]
-[ext_resource type="PackedScene" uid="uid://w482w0w2x31k" path="res://entities/characters/player_characters/singleplayer_player/player.tscn" id="2_2i8er"]
+[ext_resource type="PackedScene" uid="uid://w482w0w2x31k" path="res://entities/characters/player_characters/singleplayer_player/singleplayer_player.tscn" id="2_2i8er"]
 [ext_resource type="PackedScene" uid="uid://bhq0phkmsfg6f" path="res://common/components/interactable/Interactable.tscn" id="2_iy2cm"]
 [ext_resource type="Script" path="res://common/components/interactable/test_interactable.gd" id="3_kcecg"]
 [ext_resource type="Script" path="res://common/components/move_components/movement_enemy_test.gd" id="3_qo5e8"]
@@ -164,21 +164,15 @@ shape = SubResource("BoxShape3D_ps6dd")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.19752, -2.98023e-07, 0.0954694)
 
 [node name="Skeleton3D" parent="NPC/Armature" index="0"]
-bones/0/position = Vector3(-6.14426e-11, 1.18309, 5.12092e-09)
-bones/0/rotation = Quaternion(-0.0222822, 1.1918e-07, -2.65625e-09, 0.999752)
-bones/1/rotation = Quaternion(0.120888, -1.87045e-14, 2.8822e-08, 0.992666)
-bones/2/rotation = Quaternion(-0.0149403, -0.00785267, 0.992523, -0.120883)
-bones/3/rotation = Quaternion(0.111725, 0.00241308, 0.0179131, 0.993575)
-bones/4/rotation = Quaternion(0.0434256, 0.0429055, 0.996985, -0.0479004)
-bones/5/rotation = Quaternion(-0.166174, -2.50082e-05, 0.00240681, 0.986094)
-bones/6/rotation = Quaternion(0.656438, 0.0182934, -0.0636821, 0.751464)
-bones/7/rotation = Quaternion(0.0182531, -0.00327688, 0.993779, 0.10982)
-bones/8/rotation = Quaternion(0.111725, -0.00241307, -0.0179131, 0.993575)
-bones/9/rotation = Quaternion(-0.072835, 0.0441493, 0.995036, 0.0514767)
-bones/10/rotation = Quaternion(-0.166174, 2.5013e-05, -0.00240683, 0.986094)
-bones/11/rotation = Quaternion(0.654246, -0.0435443, 0.0791824, 0.750863)
-bones/12/rotation = Quaternion(-0.0305826, 0.706445, -0.706445, 0.0305826)
-bones/13/rotation = Quaternion(0.0305826, 0.706445, -0.706445, -0.0305826)
+bones/0/position = Vector3(1.42177e-10, 1.19625, 6.02592e-09)
+bones/2/rotation = Quaternion(-0.0146686, -0.00778129, 0.993401, -0.113481)
+bones/4/rotation = Quaternion(0.0453097, -0.00925322, 0.997882, -0.0457428)
+bones/5/rotation = Quaternion(-0.0600331, -2.53193e-05, 0.000869496, 0.998196)
+bones/6/rotation = Quaternion(0.615502, 0.015169, -0.0631879, 0.785452)
+bones/7/rotation = Quaternion(0.0180973, -0.0032262, 0.994191, 0.10605)
+bones/9/rotation = Quaternion(-0.0748656, -0.00794729, 0.996017, 0.0477665)
+bones/10/rotation = Quaternion(-0.0600331, 2.53149e-05, -0.000869498, 0.998196)
+bones/11/rotation = Quaternion(0.613349, -0.0395612, 0.0800024, 0.784753)
 
 [node name="MoveComponent" parent="NPC" index="6"]
 script = ExtResource("3_qo5e8")

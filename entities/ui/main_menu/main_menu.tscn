@@ -1,0 +1,75 @@
+[gd_scene load_steps=2 format=3 uid="uid://cefpph1huhwth"]
+
+[ext_resource type="Script" path="res://entities/ui/main_menu/main_menu.gd" id="1_th86c"]
+
+[node name="MainMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource("1_th86c")
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="Panel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -119.0
+offset_top = -130.5
+offset_right = 119.0
+offset_bottom = 130.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 32
+theme_override_constants/margin_top = 32
+theme_override_constants/margin_right = 32
+theme_override_constants/margin_bottom = 64
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel/MarginContainer"]
+layout_mode = 2
+
+[node name="MainMenu" type="Label" parent="Panel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_font_sizes/font_size = 32
+text = "Main Menu"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="VBoxButtons" type="VBoxContainer" parent="Panel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 10
+
+[node name="Singeplayer" type="Button" parent="Panel/MarginContainer/VBoxContainer/VBoxButtons"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "Singleplayer"
+
+[node name="Multiplayer" type="Button" parent="Panel/MarginContainer/VBoxContainer/VBoxButtons"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "Multiplayer"
+
+[node name="Quit" type="Button" parent="Panel/MarginContainer/VBoxContainer/VBoxButtons"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "Quit Game
+"
+
+[connection signal="pressed" from="Panel/MarginContainer/VBoxContainer/VBoxButtons/Singeplayer" to="." method="_on_singeplayer_pressed"]
+[connection signal="pressed" from="Panel/MarginContainer/VBoxContainer/VBoxButtons/Multiplayer" to="." method="_on_multiplayer_pressed"]
+[connection signal="pressed" from="Panel/MarginContainer/VBoxContainer/VBoxButtons/Quit" to="." method="_on_quit_pressed"]

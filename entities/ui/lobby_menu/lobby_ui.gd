@@ -11,6 +11,7 @@ signal enet_join()
 signal steam_host()
 signal steam_list_lobbies()
 #signal steam_join()
+signal back()
 
 
 func _ready():
@@ -25,10 +26,6 @@ func _on_enet_host_pressed() -> void:
 func _on_enet_join_pressed() -> void:
 	enet_join.emit()
 
-# Easy quit implementation for debug purposes
-func _on_quit_pressed() -> void:
-	get_tree().quit()
-
 
 func _on_steam_host_pressed() -> void:
 	steam_host.emit()
@@ -36,3 +33,7 @@ func _on_steam_host_pressed() -> void:
 
 func _on_steam_list_lobbies_pressed() -> void:
 	steam_list_lobbies.emit()
+
+
+func _on_back_pressed() -> void:
+	back.emit()
