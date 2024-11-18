@@ -7,6 +7,7 @@ class_name GameManager
 @export var world_scene: PackedScene
 @export var singleplayer_player_scene: PackedScene
 
+var currently_ingame = false
 
 # Debug logger
 #signal game_log(value)
@@ -16,38 +17,68 @@ func _ready():
 		print("Starting dedicated server")
 		%NetworkManager.become_host(true)
 	
-	ui.main_menu.singleplayer_chosen.connect(start_singleplayer)
+	ui.singleplayer_chosen.connect(start_singleplayer)
 	
-	ui.lobby_menu.enet_host.connect(become_host)
-	ui.lobby_menu.enet_join.connect(join_as_client)
+	ui.enet_host.connect(become_host)
+	ui.enet_join.connect(join_as_client)
 	
-	ui.lobby_menu.steam_host.connect(use_steam)
-	ui.lobby_menu.steam_host.connect(become_host)
+	ui.steam_host.connect(become_host)
+	ui.steam_list_lobbies.connect(list_steam_lobbies)
+
+	ui.use_enet.connect(use_enet)
+	ui.use_steam.connect(use_steam)
 	
-	ui.lobby_menu.steam_list_lobbies.connect(use_steam)
-	ui.lobby_menu.steam_list_lobbies.connect(list_steam_lobbies)
-	
+	ui.leave_current_game.connect(leave_game)
 
 	#lobby_menu.steam_join.connect(join_as_client)
 	#lobby_menu.steam_join.connect(use_steam)
 
 func start_singleplayer():
+	if MultiplayerManager.multiplayer_enabled:
+		multiplayer_disconnect()
+
 	_add_world()
 
 	preload("res://entities/characters/player_characters/singleplayer_player/singleplayer_player.tscn")
 	var singleplayer_player = singleplayer_player_scene.instantiate()
+	singleplayer_player.name = "singleplayer_player"
 	add_child(singleplayer_player)
+
+# Disconnects from multiplayer
+func multiplayer_disconnect():
+	pass
+
 
 func start_multiplayer():
 	_add_world()
 
+
 func _add_world():
+	currently_ingame = true
+	
 	preload("res://stages/levels/world/world.tscn")
 	var world = world_scene.instantiate()
 	add_child(world)
 	move_child(world, 1)
 
+
+func leave_game():
+	_remove_world()
+
+
+func _remove_world():
+	currently_ingame = false
+	var world = find_child("World")
+
+	multiplayer_disconnect()
+	remove_child(world)
+
+
 func become_host():
+	if MultiplayerManager.host_mode_enabled:
+		print("Already host")
+		return
+	
 	print("Host game")
 	start_multiplayer()
 	_remove_single_player()
@@ -55,6 +86,10 @@ func become_host():
 
 
 func join_as_client():
+	if MultiplayerManager.join_mode_enabled:
+		print("Already joined ENet")
+		return
+	
 	print("Join game")
 	join_lobby()
 
@@ -76,6 +111,11 @@ func use_steam():
 	SteamManager.initialize_steam()
 	Steam.lobby_match_list.connect(_on_lobby_match_list)
 	%NetworkManager.active_network_type = %NetworkManager.MULTIPLAYER_NETWORK_TYPE.STEAM
+
+
+func use_enet():
+	print("Using ENet")
+	%NetworkManager.active_network_type = %NetworkManager.MULTIPLAYER_NETWORK_TYPE.ENET
 
 # Handles returned lobbies from Steam. Adds joinable lobbies in lobby list GUI
 func _on_lobby_match_list(lobbies: Array):
@@ -120,39 +160,44 @@ func _remove_single_player():
 		player_to_remove.queue_free()
 	
 
-
-
-
-
 func _input(_event):
-	# Escape-menu for game-instance
-	if Input.is_action_just_pressed("escape"):
-		if ui.lobby_menu.visible:
-			ui.lobby_menu.hide()
-			#toggle_menu_control_at_player(false)
-		else:
-			ui.lobby_menu.show()
-			#toggle_menu_control_at_player(true)
-	
-	# Debug window for values
+		# Debug window for values
 	if Input.is_action_just_pressed("debug"):
 		if ui.debug_ui.visible:
 			ui.debug_ui.hide()
 		else:
 			ui.debug_ui.show()
 
+	
+	if not currently_ingame:
+		return
+
+	# Escape-menu for game-instance
+	if Input.is_action_just_pressed("escape"):
+		if not ui.ingame_menu.visible:
+			ui.toggle_ingame_menu(true)
+			toggle_menu_control_at_player(true)
+		else:
+			ui.toggle_ingame_menu(false)
+			toggle_menu_control_at_player(false)
+	
+
+
 # Changes menu_visible atribute at either single- or multiplayer-player, which again determines wether
 #  look_component.capture_mouse captures or free's mouse
 #		Could be changed to a signal, which players connect to, but in order to
 #		 keep player without refrence to game, this is done:
 
-#func toggle_menu_control_at_player(value: bool):
-#	if singleplayer_player != null:
-#		singleplayer_player.menu_visible = value
-#		singleplayer_player.look_component.capture_mouse()
+func toggle_menu_control_at_player(value: bool):
+	var singleplayer_player = get_node("singleplayer_player")
+	print(singleplayer_player)
+	if singleplayer_player != null:
+		print("singleplayer " + str(value))
+		singleplayer_player.menu_visible = value
+		singleplayer_player.look_component.capture_mouse()
 		
-#	var id = multiplayer.get_unique_id()
-#	if multiplayer_players.has_node(str(id)):
-#		var multiplayer_player = multiplayer_players.get_node(str(id))
-#		multiplayer_player.menu_visible = value
-#		multiplayer_player.look_component.capture_mouse()
+	var id = multiplayer.get_unique_id()
+	if multiplayer_players.has_node(str(id)):
+		var multiplayer_player = multiplayer_players.get_node(str(id))
+		multiplayer_player.menu_visible = value
+		multiplayer_player.look_component.capture_mouse()

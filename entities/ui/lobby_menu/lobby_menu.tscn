@@ -27,10 +27,10 @@ size_flags_vertical = 3
 [node name="TabContainer" type="TabContainer" parent="VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
-current_tab = 1
+current_tab = 0
 
 [node name="ENet" type="Control" parent="VBoxContainer/TabContainer"]
-visible = false
+unique_name_in_owner = true
 layout_mode = 2
 metadata/_tab_index = 0
 
@@ -68,6 +68,8 @@ layout_mode = 2
 text = "Join"
 
 [node name="Steam" type="Control" parent="VBoxContainer/TabContainer"]
+unique_name_in_owner = true
+visible = false
 layout_mode = 2
 metadata/_tab_index = 1
 
@@ -121,6 +123,7 @@ layout_mode = 2
 text = "Back
 "
 
+[connection signal="tab_changed" from="VBoxContainer/TabContainer" to="." method="_on_tab_container_tab_changed"]
 [connection signal="pressed" from="VBoxContainer/TabContainer/ENet/Players/MarginContainer/VBoxContainer/ENetHost" to="." method="_on_enet_host_pressed"]
 [connection signal="pressed" from="VBoxContainer/TabContainer/ENet/Players/MarginContainer/VBoxContainer/ENetJoin" to="." method="_on_enet_join_pressed"]
 [connection signal="visibility_changed" from="VBoxContainer/TabContainer/Steam" to="." method="_on_steam_visibility_changed"]

@@ -60,6 +60,9 @@
 #  Og trenger måte å skille mellom singleplayer og multiplayer
 #
 # Må først bygge om slik at man enten velger singleplayer eller multiplayer
+# Dette viser seg å være en del jobb, siden jeg har gjort noen valg som må utbedres
 
+# 18.11.24
+# Jobba på meny-styring, og satt opp funksjoner for leave game 
 
 # END LOG

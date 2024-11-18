@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://p0lt5frr2lxa"]
+[gd_scene load_steps=12 format=3 uid="uid://p0lt5frr2lxa"]
 
 [ext_resource type="Script" path="res://stages/game/game_manager.gd" id="1_2kuyy"]
 [ext_resource type="Script" path="res://utilities/multiplayer/networks/network_manager.gd" id="2_f3rom"]
@@ -10,6 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://cefpph1huhwth" path="res://entities/ui/main_menu/main_menu.tscn" id="9_lddfg"]
 [ext_resource type="PackedScene" uid="uid://2l2wfhlphuem" path="res://entities/ui/debug/debug_ui.tscn" id="9_xldnb"]
 [ext_resource type="PackedScene" uid="uid://bd75nn2huo38l" path="res://entities/ui/lobby_menu/lobby_menu.tscn" id="10_gg4l2"]
+[ext_resource type="PackedScene" uid="uid://xvjqeogbjnj7" path="res://entities/ui/ingame_menu/ingame_menu.tscn" id="11_meq5o"]
 
 [node name="Game" type="Node"]
 script = ExtResource("1_2kuyy")
@@ -49,4 +50,7 @@ unique_name_in_owner = true
 unique_name_in_owner = true
 
 [node name="MainMenu" parent="UI" instance=ExtResource("9_lddfg")]
+unique_name_in_owner = true
+
+[node name="IngameMenu" parent="UI" instance=ExtResource("11_meq5o")]
 unique_name_in_owner = true
