@@ -3,3 +3,7 @@ class_name Character
 
 # Player can control the character
 @export var is_controlable := true
+
+
+func set_controlable(value: bool):
+	is_controlable = value

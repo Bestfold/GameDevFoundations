@@ -74,5 +74,5 @@ func _physics_process(delta: float) -> void:
 
 # Passing function
 func _process(delta: float) -> void:
-	if multiplayer.is_server():
-		state_machine.process_frame(delta)
+	#if multiplayer.is_server():
+	state_machine.process_frame(delta)

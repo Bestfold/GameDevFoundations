@@ -16,6 +16,7 @@ signal steam_list_lobbies()
 signal use_enet()
 signal use_steam()
 
+signal continue_current_game()
 signal leave_current_game()
 
 func _ready():
@@ -34,10 +35,7 @@ func _ready():
 	lobby_menu.enet_tab_chosen.connect(enet_tab)
 	lobby_menu.steam_tab_chosen.connect(steam_tab)
 
-	ingame_menu.continue_pressed.connect(
-		func():
-			toggle_ingame_menu(true)
-	)
+	ingame_menu.continue_pressed.connect(continue_game)
 	ingame_menu.leave_pressed.connect(leave_game)
 	
 
@@ -46,7 +44,6 @@ func _ready():
 func toggle_ingame_menu(value: bool):
 	if value:
 		ingame_menu.show()
-		print("Show ingame menu")
 	elif not value:
 		ingame_menu.hide()
 
@@ -56,13 +53,19 @@ func _open_main_menu():
 	lobby_menu.hide()
 	ingame_menu.hide()
 
-func _open_lobby_menu():
-	main_menu.hide()
-	lobby_menu.show()
 
 func _close_main_menu():
 	main_menu.hide()
 	ingame_menu.hide()
+
+
+func _open_lobby_menu():
+	main_menu.hide()
+	lobby_menu.show()
+
+func close_lobby_menu():
+	lobby_menu.hide()
+
 
 
 # Passed main-menu-signals:
@@ -79,12 +82,15 @@ func chose_multiplayer():
 
 func host_enet():
 	enet_host.emit()
+	close_lobby_menu()
 
 func join_enet():
 	enet_join.emit()
+	close_lobby_menu()
 
 func host_steam():
 	steam_host.emit()
+	close_lobby_menu()
 
 func list_steam_lobbies():
 	steam_list_lobbies.emit()
@@ -95,6 +101,11 @@ func enet_tab():
 
 func steam_tab():
 	use_steam.emit()
+
+
+func continue_game():
+	toggle_ingame_menu(false)
+	continue_current_game.emit()
 
 func leave_game():
 	_open_main_menu()

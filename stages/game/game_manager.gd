@@ -28,6 +28,7 @@ func _ready():
 	ui.use_enet.connect(use_enet)
 	ui.use_steam.connect(use_steam)
 	
+	ui.continue_current_game.connect(continue_game)
 	ui.leave_current_game.connect(leave_game)
 
 	#lobby_menu.steam_join.connect(join_as_client)
@@ -41,7 +42,7 @@ func start_singleplayer():
 
 	preload("res://entities/characters/player_characters/singleplayer_player/singleplayer_player.tscn")
 	var singleplayer_player = singleplayer_player_scene.instantiate()
-	singleplayer_player.name = "singleplayer_player"
+	singleplayer_player.name = "PlayerSingleplayer"
 	add_child(singleplayer_player)
 
 # Disconnects from multiplayer
@@ -58,17 +59,26 @@ func _add_world():
 	
 	preload("res://stages/levels/world/world.tscn")
 	var world = world_scene.instantiate()
+	world.name = "World"
 	add_child(world)
 	move_child(world, 1)
 
 
+func continue_game():
+	toggle_menu_control_at_player(false)
+
+
 func leave_game():
+	
+	if not MultiplayerManager.multiplayer_mode_enabled:
+		_remove_single_player()
 	_remove_world()
 
 
 func _remove_world():
 	currently_ingame = false
-	var world = find_child("World")
+	var world = get_node("World")
+	world.queue_free()
 
 	multiplayer_disconnect()
 	remove_child(world)
@@ -147,6 +157,7 @@ func _on_lobby_match_list(lobbies: Array):
 
 			# Signal definition. "pressed" signal, set ut Callable to define what function of self, and bind argument to the call (lobby)
 			lobby_button.connect("pressed", Callable(self, "join_lobby").bind(lobby))
+			ui.close_lobby_menu()
 
 			ui.lobby_menu.lobby_container.add_child(lobby_button)
 
@@ -189,15 +200,17 @@ func _input(_event):
 #		 keep player without refrence to game, this is done:
 
 func toggle_menu_control_at_player(value: bool):
-	var singleplayer_player = get_node("singleplayer_player")
-	print(singleplayer_player)
-	if singleplayer_player != null:
-		print("singleplayer " + str(value))
-		singleplayer_player.menu_visible = value
-		singleplayer_player.look_component.capture_mouse()
+	if MultiplayerManager.multiplayer_mode_enabled:
+		var id = multiplayer.get_unique_id()
+		if multiplayer_players.has_node(str(id)):
+			var multiplayer_player = multiplayer_players.get_node(str(id))
+			multiplayer_player.set_menu_visible(value)
+			multiplayer_player.look_component.capture_mouse()
+	else:
+		var singleplayer_player = get_node("PlayerSingleplayer")
+		if singleplayer_player != null:
+			singleplayer_player.set_menu_visible(value)
+			singleplayer_player.look_component.capture_mouse()
 		
-	var id = multiplayer.get_unique_id()
-	if multiplayer_players.has_node(str(id)):
-		var multiplayer_player = multiplayer_players.get_node(str(id))
-		multiplayer_player.menu_visible = value
-		multiplayer_player.look_component.capture_mouse()
+		
+	

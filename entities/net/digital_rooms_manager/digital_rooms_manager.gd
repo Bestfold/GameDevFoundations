@@ -57,6 +57,7 @@ func instantiate_room(room_name: String):
 		print("Not space for room!")
 		return
 	else:
+		print("init room")
 		preload("res://stages/levels/digital_rooms/room_1/room_1.tscn")
 		var scene_to_instantiate = debug_room_1.instantiate()
 		scene_to_instantiate.name = room_name

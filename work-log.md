@@ -64,5 +64,14 @@
 
 # 18.11.24
 # Jobba på meny-styring, og satt opp funksjoner for leave game 
+# Må fortsatt få til _remove_game
+
+# 20.11.24
+# Meny-styring fiksing. Ønsker å ha menyene oppe og gå før jeg begynner på "room"-replication
+# Rot og fanteri med menyene, fiksa alt jeg fant B>
+# Neste blir å gjøre om shared-net til global singleton (om dette passer seg). digital_rooms_manager fant ikke 
+#  gruppemedlemmer av "computers", fordi de var i World-scene treet. Og i tillegg har jeg tenkt at det gir mer 
+#  mening å ha shared-net som en global, siden den skal være felles interaface mellom alle som skal interact med
+#  "nettet"
 
 # END LOG

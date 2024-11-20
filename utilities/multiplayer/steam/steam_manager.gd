@@ -36,7 +36,8 @@ func initialize_steam():
 
 	if initialize_response['status'] > 0:
 		print("Failed to initialize Steam! Shitting down. %s " % initialize_response)
-		get_tree().quit()
+		#get_tree().quit()
+		return
 	
 	is_owned = Steam.isSubscribed()
 	steam_id = Steam.getSteamID()

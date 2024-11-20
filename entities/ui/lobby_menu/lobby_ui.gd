@@ -4,6 +4,7 @@ extends VBoxContainer
 @onready var lobby_container: VBoxContainer = %LobbyContainer
 @onready var steam_tab: Control = %Steam
 @onready var enet_tab: Control = %ENet
+@onready var tab_container: TabContainer = %TabContainer
 
 
 #signal game_log(message: String)
@@ -45,7 +46,9 @@ func _on_back_pressed() -> void:
 
 
 func _on_tab_container_tab_changed(_tab: int) -> void:
-	if steam_tab.visible:
-		steam_tab_chosen.emit()
-	elif enet_tab.visible:
+	var tab_title = tab_container.get_tab_title(_tab)
+
+	if tab_title == enet_tab.name: # enet_tab
 		enet_tab_chosen.emit()
+	elif tab_title == steam_tab.name: # steam_tab
+		steam_tab_chosen.emit()
