@@ -2,8 +2,6 @@ extends Node3D
 
 # Manages generating, instantiating and placement of digital rooms
 
-@onready var shared_net: SharedNet = %SharedNet
-
 @export var y_position_for_rooms: int = -100
 @export var distance_between_rooms: int = 100
 
@@ -17,8 +15,8 @@ var max_rooms = SteamManager.lobby_max_members
 func _ready():
 	#MultiplayerManager.multiplayer_enabled.connect(multiplayer_active)
 
-	shared_net.request_room_instantiation.connect(instantiate_room)
-	shared_net.request_room_controller.connect(add_controller)
+	SharedNet.request_room_instantiation.connect(instantiate_room)
+	SharedNet.request_room_controller.connect(add_controller)
 
 	add_position_nodes()
 

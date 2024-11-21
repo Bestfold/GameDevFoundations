@@ -164,19 +164,19 @@ shape = SubResource("BoxShape3D_ps6dd")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.19752, -2.98023e-07, 0.0954694)
 
 [node name="Skeleton3D" parent="NPC/Armature" index="0"]
-bones/0/position = Vector3(-4.98515e-11, 1.19242, 6.97538e-09)
+bones/0/position = Vector3(-5.67189e-11, 1.18312, 5.03916e-09)
 bones/0/rotation = Quaternion(-0.0222822, 1.1918e-07, -2.65625e-09, 0.999752)
 bones/1/rotation = Quaternion(0.120888, -1.87045e-14, 2.8822e-08, 0.992666)
-bones/2/rotation = Quaternion(-0.0147506, -0.00780285, 0.993143, -0.115712)
+bones/2/rotation = Quaternion(-0.0149394, -0.00785243, 0.992526, -0.120858)
 bones/3/rotation = Quaternion(0.111725, 0.00241308, 0.0179131, 0.993575)
-bones/4/rotation = Quaternion(0.0445392, 0.0108772, 0.997865, -0.0465172)
-bones/5/rotation = Quaternion(-0.100577, -2.5236e-05, 0.00145673, 0.994928)
-bones/6/rotation = Quaternion(0.631482, 0.016342, -0.0633141, 0.772628)
-bones/7/rotation = Quaternion(0.0181497, -0.00324323, 0.994054, 0.107316)
+bones/4/rotation = Quaternion(0.0434285, 0.0428155, 0.996989, -0.0478962)
+bones/5/rotation = Quaternion(-0.165896, -2.50083e-05, 0.00240279, 0.98614)
+bones/6/rotation = Quaternion(0.656369, 0.0182877, -0.0636808, 0.751525)
+bones/7/rotation = Quaternion(0.0182525, -0.00327666, 0.99378, 0.109804)
 bones/8/rotation = Quaternion(0.111725, -0.00241307, -0.0179131, 0.993575)
-bones/9/rotation = Quaternion(-0.0740483, 0.0121581, 0.995969, 0.0491397)
-bones/10/rotation = Quaternion(-0.100577, 2.52271e-05, -0.00145674, 0.994928)
-bones/11/rotation = Quaternion(0.629317, -0.0410736, 0.0796267, 0.771967)
+bones/9/rotation = Quaternion(-0.0728382, 0.0440595, 0.99504, 0.0514698)
+bones/10/rotation = Quaternion(-0.165896, 2.50131e-05, -0.00240281, 0.98614)
+bones/11/rotation = Quaternion(0.654177, -0.0435372, 0.0791834, 0.750924)
 bones/12/rotation = Quaternion(-0.0305826, 0.706445, -0.706445, 0.0305826)
 bones/13/rotation = Quaternion(0.0305826, 0.706445, -0.706445, -0.0305826)
 
@@ -195,7 +195,7 @@ environment = SubResource("Environment_hpduf")
 transform = Transform3D(-0.866025, -0.433013, 0.25, 0, 0.5, 0.866025, -0.5, 0.75, -0.433013, 0, 0, 0)
 shadow_enabled = true
 
-[node name="PcComputer1" parent="." groups=["computers"] instance=ExtResource("7_lgpmj")]
+[node name="PcComputer1" parent="." instance=ExtResource("7_lgpmj")]
 transform = Transform3D(-0.707107, 0, -0.707107, 0, 1, 0, 0.707107, 0, -0.707107, 6.4278, 5.96046e-07, 7.3845)
 
 [editable path="NPC"]

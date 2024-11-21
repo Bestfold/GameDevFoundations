@@ -20,6 +20,7 @@ config/icon="res://icon.svg"
 MultiplayerManager="*res://utilities/multiplayer/multiplayer_manager.gd"
 SteamManager="*res://utilities/multiplayer/steam/steam_manager.gd"
 InternetManager="*res://entities/net/internet_manager.gd"
+SharedNet="*res://entities/net/shared_net/shared_net.gd"
 
 [display]
 

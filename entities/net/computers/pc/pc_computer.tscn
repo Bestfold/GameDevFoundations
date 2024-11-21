@@ -10,7 +10,7 @@
 
 [sub_resource type="PrismMesh" id="PrismMesh_jhc4p"]
 
-[node name="PcComputer" type="Node3D"]
+[node name="PcComputer" type="Node3D" groups=["computers"]]
 script = ExtResource("1_80blw")
 
 [node name="Body" type="MeshInstance3D" parent="."]

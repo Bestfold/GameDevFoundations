@@ -74,4 +74,10 @@
 #  mening å ha shared-net som en global, siden den skal være felles interaface mellom alle som skal interact med
 #  "nettet"
 
+# 21.11.24
+# Overgang fra scene til global for SharedNet gikk på skinner. Null stress. Fant også ut at medlemmer av gruppa
+#  "computers" trolig ikke ble funnet fordi _ready funksjonen som .connect til dem, lå i, ble kjørt øyeblikkelig,
+#  lenge før World blir lagt til og det finnes medlemmer av "computers"
+# SharedNet bruker nå rpc, krever fiksing som vil gi god forståelse for rpc. 
+
 # END LOG

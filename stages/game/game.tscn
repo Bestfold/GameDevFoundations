@@ -4,13 +4,14 @@
 [ext_resource type="Script" path="res://utilities/multiplayer/networks/network_manager.gd" id="2_f3rom"]
 [ext_resource type="PackedScene" uid="uid://c26siogmy1l2f" path="res://stages/levels/world/world.tscn" id="3_sgwgr"]
 [ext_resource type="PackedScene" uid="uid://w482w0w2x31k" path="res://entities/characters/player_characters/singleplayer_player/singleplayer_player.tscn" id="4_2aaaw"]
-[ext_resource type="PackedScene" uid="uid://csh7gkr4sx6is" path="res://entities/net/shared_net/shared_net.tscn" id="5_gv280"]
 [ext_resource type="PackedScene" uid="uid://baj4t5p18w880" path="res://entities/net/digital_rooms_manager/digital_rooms_manager.tscn" id="7_371by"]
 [ext_resource type="Script" path="res://entities/ui/ui.gd" id="7_vk4ue"]
 [ext_resource type="PackedScene" uid="uid://cefpph1huhwth" path="res://entities/ui/main_menu/main_menu.tscn" id="9_lddfg"]
 [ext_resource type="PackedScene" uid="uid://2l2wfhlphuem" path="res://entities/ui/debug/debug_ui.tscn" id="9_xldnb"]
 [ext_resource type="PackedScene" uid="uid://bd75nn2huo38l" path="res://entities/ui/lobby_menu/lobby_menu.tscn" id="10_gg4l2"]
 [ext_resource type="PackedScene" uid="uid://xvjqeogbjnj7" path="res://entities/ui/ingame_menu/ingame_menu.tscn" id="11_meq5o"]
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_h3txj"]
 
 [node name="Game" type="Node"]
 script = ExtResource("1_2kuyy")
@@ -29,15 +30,15 @@ spawn_limit = 4
 
 [node name="MultiplayerPlayers" type="Node3D" parent="."]
 
-[node name="SharedNet" parent="." instance=ExtResource("5_gv280")]
-unique_name_in_owner = true
-
 [node name="Roomspawner" type="MultiplayerSpawner" parent="."]
 spawn_path = NodePath("../DigitalRoomsManager")
 spawn_limit = 8
 
 [node name="DigitalRoomsManager" parent="." instance=ExtResource("7_371by")]
 unique_name_in_owner = true
+
+[node name="GameSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_h3txj")
 
 [node name="UI" type="CanvasLayer" parent="."]
 unique_name_in_owner = true

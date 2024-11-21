@@ -45,13 +45,20 @@ func start_singleplayer():
 	singleplayer_player.name = "PlayerSingleplayer"
 	add_child(singleplayer_player)
 
-# Disconnects from multiplayer
-func multiplayer_disconnect():
-	pass
+	# Needs to run here, after world is added
+	SharedNet.update_computers()
 
 
 func start_multiplayer():
 	_add_world()
+
+	# Needs to run here, after world is added
+	SharedNet.update_computers()
+
+
+# Disconnects from multiplayer
+func multiplayer_disconnect():
+	pass
 
 
 func _add_world():
