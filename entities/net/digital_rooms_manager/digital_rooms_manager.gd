@@ -2,6 +2,9 @@ extends Node3D
 
 # Manages generating, instantiating and placement of digital rooms
 
+#@export var multiplayer_player_scene: PlayerMultiplayer
+#@export var singleplayer_player_scene: PlayerSingleplayer
+
 @export var y_position_for_rooms: int = -100
 @export var distance_between_rooms: int = 100
 
@@ -44,7 +47,7 @@ func add_position_nodes():
 		i += 1
 
 # Instantiate the digital room scene under the world map when player wants to enter.
-func instantiate_room(room_name: String):
+func instantiate_room(room_name: String, _player_id: int):
 	
 	#print("instantiating room")
 
@@ -80,8 +83,9 @@ func _make_space_for_new_room() -> Node3D:
 		for room in rooms:
 			print("Room: " + room.name)
 
-			var room_player_count : int = room.get_tree().get_node_count_in_group("players")
-			print("Nodes in players group: " + str(room_player_count))
+			# A diver is a player in a digital room
+			var room_player_count : int = room.get_tree().get_node_count_in_group("divers")
+			print("Nodes in divers group: " + str(room_player_count))
 
 			if room_player_count == 0:
 				
@@ -99,14 +103,38 @@ func _make_space_for_new_room() -> Node3D:
 
 
 
-func add_controller(room_name: String):
+func add_controller(room_name: String, player_id: int):
 	print(" Adding controller ")
 	var rooms = get_tree().get_nodes_in_group("digital_rooms")
 	for room in rooms:
 		if room.name == room_name:
-			var new_node = Node3D.new()
-			new_node.add_to_group("players")
-			room.player_spawn_node.add_child(new_node)
+			
+			var new_diver = _load_and_setup_player_scene(player_id)
+
+			SharedNet.register_new_diver(room_name, new_diver.player_id)
+
+			room.player_spawn_node.add_child(new_diver, true)
+
+
+func _load_and_setup_player_scene(player_id: int) -> PlayerCharacter:
+	var player_scene
+
+	if MultiplayerManager.multiplayer_mode_enabled:
+		player_scene = preload("res://entities/characters/player_characters/multiplayer_player/multiplayer_player.tscn")
+		player_scene = player_scene.instantiate()
+	else:
+		player_scene = preload("res://entities/characters/player_characters/singleplayer_player/player_singleplayer.gd")
+		player_scene = player_scene.instantiate()
+
+	# Set the player_id and name of node
+	player_scene.player_id = player_id
+	player_scene.name = str(player_id)
+	# A diver is a player in a digital room
+	player_scene.add_to_group("divers")
+
+	return player_scene
+
+
 
 func generate_room():
 	pass

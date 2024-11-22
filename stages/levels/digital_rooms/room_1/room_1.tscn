@@ -31,7 +31,7 @@ surface_material_override/0 = SubResource("StandardMaterial3D_q3ggo")
 shape = SubResource("ConcavePolygonShape3D_50ipu")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-transform = Transform3D(8.81188, 0, 0, 0, 1, 0, 0, 0, 8.62291, 0, 3, 0)
+transform = Transform3D(8.81188, 0, 0, 0, 1, 0, 0, 0, 8.62291, 0, -0.469345, 0)
 material_override = SubResource("StandardMaterial3D_6e10x")
 mesh = SubResource("BoxMesh_f3wur")
 
@@ -41,6 +41,7 @@ mesh = SubResource("BoxMesh_f3wur")
 shape = SubResource("BoxShape3D_hfku1")
 
 [node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
+_spawnable_scenes = PackedStringArray("res://entities/characters/player_characters/multiplayer_player/multiplayer_player.tscn")
 spawn_path = NodePath("../PlayerSpawnNode")
 spawn_limit = 4
 

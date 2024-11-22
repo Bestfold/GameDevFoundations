@@ -80,4 +80,12 @@
 #  lenge før World blir lagt til og det finnes medlemmer av "computers"
 # SharedNet bruker nå rpc, krever fiksing som vil gi god forståelse for rpc. 
 
+# 22.11.24
+# Eksamen gikk veldig bra B>
+# I dag: Begynne på system for å sendes til rommet, og tilbake.
+# Plan: Hver spiller har en kropp i verden. Når man entrer et digitalt rom, mister man kontrollen over kroppen sin, 
+#  og med får kontroll over en ny "kropp" i rommet. Denne eksisterer bare så lenge spilleren er i rommet.
+# Bra så langt. Fått til at karakteren spawner "i rommet", men det er noe tull med replication. Får en warning, og 
+#  og karen replikerer ikke på host, men gjør det på client.
+
 # END LOG

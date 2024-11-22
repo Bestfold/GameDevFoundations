@@ -7,10 +7,15 @@ extends Node
 # Shared net which all PC-s interface with
 # Holds current "fastened" addresses, start address. resource-use
 
-var computers
+var computers: Array
 
-signal request_room_instantiation(room_name: String)
-signal request_room_controller(room_name: String)
+var divers: Array
+
+signal request_room_instantiation(room_name: String, player_id: int)
+signal request_room_controller(room_name: String, player_id: int)
+
+signal diver_added(room_name: String, player_id: int)
+
 
 func update_computers():
 	if not check_if_should_run():
@@ -26,20 +31,20 @@ func update_computers():
 
 
 @rpc("call_local", "any_peer")
-func instantiate_room(room_name: String):
+func instantiate_room(room_name: String, player_id: int):
 	#if not check_if_should_run():
 	#	return
 
 	print("Shared net emitting: " + room_name)
-	request_room_instantiation.emit(room_name)
+	request_room_instantiation.emit(room_name, player_id)
 
 
 @rpc("call_local", "any_peer")
-func add_controller_to_room(room_name: String):
+func add_controller_to_room(room_name: String, player_id: int):
 	#if not check_if_should_run():
 	#	return
 	
-	request_room_controller.emit(room_name)
+	request_room_controller.emit(room_name, player_id)
 
 
 func check_if_should_run() -> bool:
@@ -50,3 +55,25 @@ func check_if_should_run() -> bool:
 			return false
 	else:
 		return true
+
+
+func register_new_diver(room_name: String, player_id: int):
+	if is_diver(player_id):
+		push_error("DIVER ALREADY IN REGISTERED DIVERS ARRAY! player_id: %s" % player_id)
+		return
+
+	divers.append(player_id)
+
+	diver_added.emit(room_name, player_id)
+
+
+func is_diver(player_id: int) -> bool:
+	if divers.find(player_id) >= 0:
+		return true
+	else:
+		return false
+
+
+func unregister_diver(_room_name: String, player_id: int):
+	if is_diver(player_id):
+		divers.erase(player_id)

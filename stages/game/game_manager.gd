@@ -17,6 +17,8 @@ func _ready():
 		print("Starting dedicated server")
 		%NetworkManager.become_host(true)
 	
+	SharedNet.diver_added.connect(player_controls_when_diving)
+	
 	ui.singleplayer_chosen.connect(start_singleplayer)
 	
 	ui.enet_host.connect(become_host)
@@ -220,4 +222,14 @@ func toggle_menu_control_at_player(value: bool):
 			singleplayer_player.look_component.capture_mouse()
 		
 		
-	
+
+
+func player_controls_when_diving(_room_name: String, player_id: int):
+	var player_to_disable: PlayerCharacter
+
+	if MultiplayerManager.multiplayer_mode_enabled:
+		player_to_disable = multiplayer_players.get_node(str(player_id))
+	else:
+		player_to_disable = get_node("PlayerSingleplayer")
+
+	player_to_disable.set_controlable(false)
