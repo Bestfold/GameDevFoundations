@@ -89,5 +89,6 @@
 #  og karen replikerer ikke på host, men gjør det på client.
 # Nå replikeres det ganske så bra. Eneste er at is_controlable endrer seg kun på host når man bruker escape (tull 
 #  med toggle_menu_control). Har også begynt på "remove_controller_from_room", men her trengs det mer jobb
+# Noe tull med signal connections ved room-computers
 
 # END LOG

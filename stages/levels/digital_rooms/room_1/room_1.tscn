@@ -1,7 +1,8 @@
-[gd_scene load_steps=9 format=3 uid="uid://dkwd7h6ojq4d5"]
+[gd_scene load_steps=10 format=3 uid="uid://dkwd7h6ojq4d5"]
 
 [ext_resource type="Script" path="res://stages/levels/digital_rooms/room_1/room_1.gd" id="1_ux32r"]
 [ext_resource type="PackedScene" uid="uid://c2l3rv6frpdkm" path="res://entities/net/computers/pc/pc_computer.tscn" id="2_l2o17"]
+[ext_resource type="Script" path="res://entities/net/computers/pc/pc_os_return_to_world_test.gd" id="3_yfhqw"]
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_ymi7l"]
 size = Vector2(20, 20)
@@ -53,3 +54,4 @@ unique_name_in_owner = true
 
 [node name="PcComputer1" parent="." instance=ExtResource("2_l2o17")]
 transform = Transform3D(-0.707107, 0, -0.707107, 0, 1, 0, 0.707107, 0, -0.707107, 4.4278, 5.96046e-07, 4.3845)
+script = ExtResource("3_yfhqw")

@@ -24,9 +24,9 @@ func update_computers():
 
 	computers = get_tree().get_nodes_in_group("computers")
 	
-	#print("Getting computer children")
+	print("Getting computer children")
 	for computer in computers:
-		#print(computer)
+		print(computer)
 		computer.request_room_load.connect(instantiate_room.rpc)
 		computer.request_add_diver.connect(add_controller_to_room.rpc)
 		computer.request_remove_diver.connect(remove_controller_from_room.rpc)
@@ -45,6 +45,7 @@ func add_controller_to_room(room_name: String, player_id: int):
 
 @rpc("call_local", "any_peer")
 func remove_controller_from_room(room_name: String, player_id: int):
+	print("remove diver rpc called")
 	request_remove_controller.emit(room_name, player_id)
 
 
