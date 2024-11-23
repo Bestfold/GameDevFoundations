@@ -56,14 +56,15 @@ func check_if_should_run() -> bool:
 	return true
 
 
-func register_new_diver(room_name: String, player_id: int):
-	if is_diver(player_id):
-		push_error("DIVER ALREADY IN REGISTERED DIVERS ARRAY! player_id: %s" % player_id)
+func register_new_diver(room_name: String, player: PlayerCharacter):
+	if is_diver(player.player_id):
+		push_error("DIVER ALREADY IN REGISTERED DIVERS ARRAY! player_id: %s" % player.player_id)
 		return
+	player.name = player.player_id
+	
+	divers.append(player)
 
-	divers.append(player_id)
-
-	diver_added.emit(room_name, player_id)
+	diver_added.emit(room_name, player.player_id)
 
 
 func is_diver(player_id: int) -> bool:
@@ -75,4 +76,5 @@ func is_diver(player_id: int) -> bool:
 
 func unregister_diver(_room_name: String, player_id: int):
 	if is_diver(player_id):
+		# Needs work. Henter denne PlayerCharacter?
 		divers.erase(player_id)

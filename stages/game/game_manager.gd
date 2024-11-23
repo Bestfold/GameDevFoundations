@@ -33,8 +33,7 @@ func _ready():
 	ui.continue_current_game.connect(continue_game)
 	ui.leave_current_game.connect(leave_game)
 
-	#lobby_menu.steam_join.connect(join_as_client)
-	#lobby_menu.steam_join.connect(use_steam)
+
 
 func start_singleplayer():
 	if MultiplayerManager.multiplayer_enabled:
@@ -240,5 +239,5 @@ func player_controls_when_diving(_room_name: String, player_id: int):
 	else:
 		player_to_disable = get_node("PlayerSingleplayer")
 
-	player_to_disable.set_controlable(false)
+	player_to_disable.set_current_controller(false)
 	print("controlable? : " + str(player_to_disable.is_controlable))

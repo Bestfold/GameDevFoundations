@@ -14,6 +14,7 @@ func get_movement_input() -> Vector2:
 
 # Returns true if character wants to jump
 func wants_jump() -> bool:
+	print("jump says is_controlable: " + str(parent.is_controlable))
 	if multiplayer.get_unique_id() == parent.player_id && parent.is_controlable:
 		_do_jump = Input.is_action_pressed("jump")
 	return _do_jump

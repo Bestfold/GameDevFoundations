@@ -25,6 +25,8 @@ signal var_monitoring_2(value_to_monitor)
 
 # Player is controlled by state-children, as exception to common standard.
 
+const player_id = 0
+
 func _ready() -> void:
 	# Initialize state machine, passing a refrence of player to the states
 	state_machine.init(self, animation_player, move_component, look_component,

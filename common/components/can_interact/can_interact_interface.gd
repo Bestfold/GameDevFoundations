@@ -13,7 +13,7 @@ func set_physics(boolean: bool):
 func _physics_process(_delta):
 	var message:= ""
 	
-	if interact_ray.is_colliding():
+	if interact_ray.is_colliding() && parent.current_controller:
 		var colliding_body = interact_ray.get_collider()
 
 		var colliding_body_children = colliding_body.get_children()
