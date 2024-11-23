@@ -20,6 +20,7 @@ func _ready():
 
 	SharedNet.request_room_instantiation.connect(instantiate_room)
 	SharedNet.request_room_controller.connect(add_controller)
+	SharedNet.request_remove_controller.connect(remove_controller)
 
 	add_position_nodes()
 
@@ -104,6 +105,11 @@ func _make_space_for_new_room() -> Node3D:
 
 
 func add_controller(room_name: String, player_id: int):
+	# Only instantiate and spawn controller on server
+	if MultiplayerManager.multiplayer_mode_enabled:
+		if not multiplayer.is_server():
+			return
+
 	print(" Adding controller ")
 	var rooms = get_tree().get_nodes_in_group("digital_rooms")
 	for room in rooms:
@@ -111,7 +117,11 @@ func add_controller(room_name: String, player_id: int):
 			
 			var new_diver = _load_and_setup_player_scene(player_id)
 
-			SharedNet.register_new_diver(room_name, new_diver.player_id)
+			if new_diver is PlayerMultiplayer:
+				SharedNet.register_new_diver(room_name, new_diver.player_id)
+			else:
+				# Singeplayer-player doesn't have id attribute, so use parameter
+				SharedNet.register_new_diver(room_name, player_id)
 
 			room.player_spawn_node.add_child(new_diver, true)
 
@@ -122,18 +132,36 @@ func _load_and_setup_player_scene(player_id: int) -> PlayerCharacter:
 	if MultiplayerManager.multiplayer_mode_enabled:
 		player_scene = preload("res://entities/characters/player_characters/multiplayer_player/multiplayer_player.tscn")
 		player_scene = player_scene.instantiate()
+		
+		# Set the player_id and name of node
+		player_scene.player_id = player_id
+		player_scene.name = str(player_id)
 	else:
-		player_scene = preload("res://entities/characters/player_characters/singleplayer_player/player_singleplayer.gd")
+		player_scene = preload("res://entities/characters/player_characters/singleplayer_player/singleplayer_player.tscn")
 		player_scene = player_scene.instantiate()
+		
+		player_scene.name = str(player_id)
 
-	# Set the player_id and name of node
-	player_scene.player_id = player_id
-	player_scene.name = str(player_id)
+
 	# A diver is a player in a digital room
 	player_scene.add_to_group("divers")
 
 	return player_scene
 
+
+func remove_controller(room_name: String, player_id: int):
+	var rooms = get_tree().get_nodes_in_group("digital_rooms")
+
+	var player_spawn_node_in_room
+
+	for room in rooms:
+		if room.name == room_name:
+			player_spawn_node_in_room = room.player_spawn_node
+	
+	var player_to_remove = player_spawn_node_in_room.get_node(str(player_id))
+
+	player_spawn_node_in_room.remove_child(player_to_remove)
+	player_to_remove.queue_free()
 
 
 func generate_room():

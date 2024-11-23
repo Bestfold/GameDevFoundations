@@ -87,12 +87,13 @@ func leave_game():
 func _remove_world():
 	currently_ingame = false
 	var world = get_node("World")
-	world.queue_free()
 
 	multiplayer_disconnect()
+
 	remove_child(world)
+	world.queue_free()
 
-
+	
 func become_host():
 	if MultiplayerManager.host_mode_enabled:
 		print("Already host")
@@ -177,6 +178,7 @@ func _on_lobby_match_list(lobbies: Array):
 func _remove_single_player():
 	if has_node("PlayerSingleplayer"):
 		var player_to_remove = get_tree().get_current_scene().get_node("PlayerSingleplayer")
+		remove_child(player_to_remove)
 		player_to_remove.queue_free()
 	
 
@@ -225,11 +227,18 @@ func toggle_menu_control_at_player(value: bool):
 
 
 func player_controls_when_diving(_room_name: String, player_id: int):
+	if MultiplayerManager.multiplayer_mode_enabled:
+		if not multiplayer.is_server():
+			return
+
 	var player_to_disable: PlayerCharacter
 
+	print("player diving! id: " + str(player_id))
 	if MultiplayerManager.multiplayer_mode_enabled:
 		player_to_disable = multiplayer_players.get_node(str(player_id))
+		print(player_to_disable)
 	else:
 		player_to_disable = get_node("PlayerSingleplayer")
 
 	player_to_disable.set_controlable(false)
+	print("controlable? : " + str(player_to_disable.is_controlable))

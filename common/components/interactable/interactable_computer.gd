@@ -6,10 +6,12 @@ class_name InteractableComputer
 func execute_interaction(interacter):
 	#print("Test interactable interacted B>")
 
-	if interacter is PlayerCharacter:
+	if interacter is PlayerMultiplayer:
 		interacted_with.emit(debug_room_name, interacter.player_id)
-		#print("interactable pc emitted: " + debug_room_name)
-		
-		#interacter.position = Vector3(100,100,100)
 
-		interacter.position = MultiplayerManager.respawn_point
+		#interacter.position = MultiplayerManager.respawn_point
+		
+	elif interacter is PlayerSingleplayer:
+		interacted_with.emit(debug_room_name, 0)
+
+		#interacter.position = MultiplayerManager.respawn_point

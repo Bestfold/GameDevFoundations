@@ -87,5 +87,7 @@
 #  og med får kontroll over en ny "kropp" i rommet. Denne eksisterer bare så lenge spilleren er i rommet.
 # Bra så langt. Fått til at karakteren spawner "i rommet", men det er noe tull med replication. Får en warning, og 
 #  og karen replikerer ikke på host, men gjør det på client.
+# Nå replikeres det ganske så bra. Eneste er at is_controlable endrer seg kun på host når man bruker escape (tull 
+#  med toggle_menu_control). Har også begynt på "remove_controller_from_room", men her trengs det mer jobb
 
 # END LOG
