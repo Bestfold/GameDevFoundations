@@ -96,4 +96,10 @@
  Trenger å lage et global-script som holder styr på hvem og hvor gjeldende game instance skal være og kontrollere.
 
 
+# 25.11.24
+ Ser nå med Network Profiler, at replikeringen av state machine i "world" og i digital room er unødvendig krevende.
+  Om det i stedet er én spiller, som heller blir sendt bort til rommet, og så sitter en mesh med en hurtbox igjen i 
+  det som blir stolen.
+ Plan: Gjøre om slik at man kun flytter karakteren når man går til rom. Og forbedre kontroll (dette blir enklere da).
+
 # END LOG

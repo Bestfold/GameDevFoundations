@@ -18,7 +18,7 @@ func add_diver(player_id: int):
 		SharedNet.register_new_diver(name, new_diver.player_id)
 	else:
 		# Singeplayer-player doesn't have id attribute, so use parameter
-		SharedNet.register_new_diver(name, player_id)
+		SharedNet.register_new_diver(name, 0)
 
 	player_spawn_node.add_child(new_diver, true)
 	

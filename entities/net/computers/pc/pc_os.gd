@@ -4,6 +4,8 @@ class_name PcOs
 @onready var interact_keyboard: InteractableComputer = %InteractKeyboard
 @onready var interact_screen: InteractableComputer = %InteractScreen
 
+var connected_to_net := false
+
 @warning_ignore("unused_signal")
 signal request_room_load(room_name: String, player_id: int)
 signal request_add_diver(room_name: String, player_id: int)

@@ -26,10 +26,12 @@ func update_computers():
 	
 	print("Getting computer children")
 	for computer in computers:
-		print(computer)
-		computer.request_room_load.connect(instantiate_room.rpc)
-		computer.request_add_diver.connect(add_controller_to_room.rpc)
-		computer.request_remove_diver.connect(remove_controller_from_room.rpc)
+		if not computer.connected_to_net:
+			print(computer)
+			computer.request_room_load.connect(instantiate_room.rpc)
+			computer.request_add_diver.connect(add_controller_to_room.rpc)
+			computer.request_remove_diver.connect(remove_controller_from_room.rpc)
+			computer.connected_to_net = true
 
 
 @rpc("call_local", "any_peer")
@@ -56,15 +58,14 @@ func check_if_should_run() -> bool:
 	return true
 
 
-func register_new_diver(room_name: String, player: PlayerCharacter):
-	if is_diver(player.player_id):
-		push_error("DIVER ALREADY IN REGISTERED DIVERS ARRAY! player_id: %s" % player.player_id)
+func register_new_diver(room_name: String, player_id: int):
+	if is_diver(player_id):
+		push_error("DIVER ALREADY IN REGISTERED DIVERS ARRAY! player_id: %s" % player_id)
 		return
-	player.name = player.player_id
 	
-	divers.append(player)
+	divers.append(player_id)
 
-	diver_added.emit(room_name, player.player_id)
+	diver_added.emit(room_name, player_id)
 
 
 func is_diver(player_id: int) -> bool:

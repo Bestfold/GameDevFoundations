@@ -4,6 +4,8 @@ class_name PcOsReturnToWorldTest
 @onready var interact_keyboard: InteractableComputer = %InteractKeyboard
 @onready var interact_screen: InteractableComputer = %InteractScreen
 
+var connected_to_net:= false
+
 # Both signals here for Debug åuråposses
 @warning_ignore("unused_signal")
 signal request_room_load(room_name: String, player_id: int)

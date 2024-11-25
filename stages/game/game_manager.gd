@@ -226,6 +226,7 @@ func toggle_menu_control_at_player(value: bool):
 
 
 func player_controls_when_diving(_room_name: String, player_id: int):
+	DomainManager.set_in_digital_room(true)
 	if MultiplayerManager.multiplayer_mode_enabled:
 		if not multiplayer.is_server():
 			return
@@ -233,6 +234,7 @@ func player_controls_when_diving(_room_name: String, player_id: int):
 	var player_to_disable: PlayerCharacter
 
 	print("player diving! id: " + str(player_id))
+
 	if MultiplayerManager.multiplayer_mode_enabled:
 		player_to_disable = multiplayer_players.get_node(str(player_id))
 		print(player_to_disable)
