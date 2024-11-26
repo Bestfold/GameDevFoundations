@@ -14,6 +14,7 @@ var gravity: int = ProjectSettings.get_setting("physics/3d/default_gravity")
 #  controlled by the state
 var parent: CharacterBody3D
 var animation_player: AnimationPlayer
+var skeleton: Skeleton3D
 var move_component: MovementInterface
 var look_component: LookInterface
 var can_interact_component: CanInteractInterface

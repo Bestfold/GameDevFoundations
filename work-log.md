@@ -111,4 +111,7 @@
 
  Har gjennomført alt B>    
 
+ Begynte så vidt på å begynne med skeletal transform for å rotere hodet når man ser opp og ned, men også for muligheten
+  til å rotere hodet når man ser rundt på en skjerm.
+
 # END LOG
