@@ -1,0 +1,64 @@
+[gd_scene load_steps=12 format=3 uid="uid://p0lt5frr2lxa"]
+
+[ext_resource type="Script" path="res://stages/game/game_manager.gd" id="1_2kuyy"]
+[ext_resource type="Script" path="res://utilities/multiplayer/networks/network_manager.gd" id="2_f3rom"]
+[ext_resource type="PackedScene" uid="uid://c26siogmy1l2f" path="res://stages/levels/world/world.tscn" id="3_sgwgr"]
+[ext_resource type="PackedScene" uid="uid://w482w0w2x31k" path="res://entities/characters/player_characters/singleplayer_player/singleplayer_player.tscn" id="4_2aaaw"]
+[ext_resource type="PackedScene" uid="uid://baj4t5p18w880" path="res://entities/net/digital_rooms_manager/digital_rooms_manager.tscn" id="7_371by"]
+[ext_resource type="Script" path="res://entities/ui/ui.gd" id="7_vk4ue"]
+[ext_resource type="PackedScene" uid="uid://cefpph1huhwth" path="res://entities/ui/main_menu/main_menu.tscn" id="9_lddfg"]
+[ext_resource type="PackedScene" uid="uid://2l2wfhlphuem" path="res://entities/ui/debug/debug_ui.tscn" id="9_xldnb"]
+[ext_resource type="PackedScene" uid="uid://bd75nn2huo38l" path="res://entities/ui/lobby_menu/lobby_menu.tscn" id="10_gg4l2"]
+[ext_resource type="PackedScene" uid="uid://xvjqeogbjnj7" path="res://entities/ui/ingame_menu/ingame_menu.tscn" id="11_meq5o"]
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_h3txj"]
+
+[node name="Game" type="Node"]
+script = ExtResource("1_2kuyy")
+world_scene = ExtResource("3_sgwgr")
+singleplayer_player_scene = ExtResource("4_2aaaw")
+
+[node name="NetworkManager" type="Node" parent="." node_paths=PackedStringArray("_player_spawn_node")]
+unique_name_in_owner = true
+script = ExtResource("2_f3rom")
+_player_spawn_node = NodePath("../MultiplayerPlayers")
+
+[node name="Playerspawner" type="MultiplayerSpawner" parent="."]
+_spawnable_scenes = PackedStringArray("res://entities/characters/player_characters/multiplayer_player/multiplayer_player.tscn")
+spawn_path = NodePath("../MultiplayerPlayers")
+spawn_limit = 4
+
+[node name="MultiplayerPlayers" type="Node3D" parent="."]
+
+[node name="LeftBehindBodySpawner" type="MultiplayerSpawner" parent="."]
+spawn_path = NodePath("../LeftBehindBodies")
+spawn_limit = 4
+
+[node name="LeftBehindBodies" type="Node3D" parent="."]
+unique_name_in_owner = true
+
+[node name="Roomspawner" type="MultiplayerSpawner" parent="."]
+spawn_path = NodePath("../DigitalRoomsManager")
+spawn_limit = 8
+
+[node name="DigitalRoomsManager" parent="." instance=ExtResource("7_371by")]
+unique_name_in_owner = true
+
+[node name="GameSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_h3txj")
+
+[node name="UI" type="CanvasLayer" parent="."]
+unique_name_in_owner = true
+script = ExtResource("7_vk4ue")
+
+[node name="DebugUI" parent="UI" instance=ExtResource("9_xldnb")]
+unique_name_in_owner = true
+
+[node name="LobbyMenu" parent="UI" instance=ExtResource("10_gg4l2")]
+unique_name_in_owner = true
+
+[node name="MainMenu" parent="UI" instance=ExtResource("9_lddfg")]
+unique_name_in_owner = true
+
+[node name="IngameMenu" parent="UI" instance=ExtResource("11_meq5o")]
+unique_name_in_owner = true

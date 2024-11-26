@@ -1,6 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://bhq0phkmsfg6f"]
-
-[ext_resource type="Script" path="res://scripts/components/interact_components/interactable/interactable_interface.gd" id="1_dvbkn"]
-
-[node name="Interactable" type="Node"]
-script = ExtResource("1_dvbkn")

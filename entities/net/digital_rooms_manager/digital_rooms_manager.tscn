@@ -1,0 +1,8 @@
+[gd_scene load_steps=3 format=3 uid="uid://baj4t5p18w880"]
+
+[ext_resource type="Script" path="res://entities/net/digital_rooms_manager/digital_rooms_manager.gd" id="1_alr2m"]
+[ext_resource type="PackedScene" uid="uid://dkwd7h6ojq4d5" path="res://stages/levels/digital_rooms/room_1/room_1.tscn" id="2_4as6j"]
+
+[node name="DigitalRooms" type="Node3D"]
+script = ExtResource("1_alr2m")
+debug_room_1 = ExtResource("2_4as6j")

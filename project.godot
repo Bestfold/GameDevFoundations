@@ -11,36 +11,32 @@ config_version=5
 [application]
 
 config/name="tutorial_3dcharacter"
-run/main_scene="res://scenes/world/game.tscn"
+run/main_scene="res://stages/game/game.tscn"
 config/features=PackedStringArray("4.3", "Forward Plus")
 config/icon="res://icon.svg"
 
 [autoload]
 
-MultiplayerManager="*res://scripts/multiplayer/multiplayer_manager.gd"
-SteamManager="*res://scripts/multiplayer/steam/steam_manager.gd"
-InternetManager="*res://scripts/mechanic_systems/net/internet_manager.gd"
+MultiplayerManager="*res://utilities/multiplayer/multiplayer_manager.gd"
+SteamManager="*res://utilities/multiplayer/steam/steam_manager.gd"
+InternetManager="*res://entities/net/internet_manager.gd"
+SharedNet="*res://entities/net/shared_net/shared_net.gd"
 
 [display]
 
-window/size/window_width_override=1280
-window/size/window_height_override=800
+window/size/window_width_override=800
+window/size/window_height_override=600
 
 [editor]
 
 version_control/plugin_name="GitPlugin"
 version_control/autoload_on_startup=true
 
-[file_customization]
-
-folder_colors={
-"res://assets/brickwall/": "purple",
-"res://assets/characters/": "purple"
-}
-
 [global_group]
 
 logs="Logger components to be called by debugger"
+computers="Computers connected to shared_net"
+digital_rooms="Digital rooms added to the digital_rooms_manager"
 
 [input]
 

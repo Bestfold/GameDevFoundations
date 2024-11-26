@@ -1,0 +1,57 @@
+[gd_scene load_steps=10 format=3 uid="uid://dkwd7h6ojq4d5"]
+
+[ext_resource type="Script" path="res://stages/levels/digital_rooms/room_1/room_1.gd" id="1_ux32r"]
+[ext_resource type="PackedScene" uid="uid://c2l3rv6frpdkm" path="res://entities/net/computers/pc/pc_computer.tscn" id="2_l2o17"]
+[ext_resource type="Script" path="res://entities/net/computers/pc/pc_os_return_to_world_test.gd" id="3_yfhqw"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_ymi7l"]
+size = Vector2(20, 20)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_lwgd7"]
+albedo_color = Color(0.241156, 0.241156, 0.241156, 1)
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_gtest"]
+data = PackedVector3Array(10, 0, 10, -10, 0, 10, 10, 0, -10, -10, 0, 10, -10, 0, -10, 10, 0, -10)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6e10x"]
+albedo_color = Color(1, 0.266022, 0.486429, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_f3wur"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_hfku1"]
+
+[node name="Room1" type="Node3D" node_paths=PackedStringArray("player_spawn_node")]
+script = ExtResource("1_ux32r")
+player_spawn_node = NodePath("PlayerSpawnNode")
+
+[node name="Ground" type="MeshInstance3D" parent="."]
+transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 0, 0, 0)
+mesh = SubResource("PlaneMesh_ymi7l")
+surface_material_override/0 = SubResource("StandardMaterial3D_lwgd7")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Ground"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Ground/StaticBody3D"]
+shape = SubResource("ConcavePolygonShape3D_gtest")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(8.81188, 0, 0, 0, 1, 0, 0, 0, 8.62291, 0, -0.469345, 0)
+material_override = SubResource("StandardMaterial3D_6e10x")
+mesh = SubResource("BoxMesh_f3wur")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="MeshInstance3D"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D/StaticBody3D"]
+shape = SubResource("BoxShape3D_hfku1")
+
+[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
+_spawnable_scenes = PackedStringArray("res://entities/characters/player_characters/multiplayer_player/multiplayer_player.tscn")
+spawn_path = NodePath("../PlayerSpawnNode")
+spawn_limit = 4
+
+[node name="PlayerSpawnNode" type="Node3D" parent="."]
+unique_name_in_owner = true
+
+[node name="PcComputer1" parent="." instance=ExtResource("2_l2o17")]
+transform = Transform3D(-0.707107, 0, -0.707107, 0, 1, 0, 0.707107, 0, -0.707107, 4.4278, 5.96046e-07, 4.3845)
+script = ExtResource("3_yfhqw")
