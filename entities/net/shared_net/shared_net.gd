@@ -19,7 +19,7 @@ signal diver_added(room_name: String, player_id: int)
 
 
 func update_computers():
-	if not check_if_should_run():
+	if not check_if_should_run(): # Makes it so it only runs on server (if multiplayer)
 		return
 
 	computers = get_tree().get_nodes_in_group("computers")
@@ -28,24 +28,21 @@ func update_computers():
 	for computer in computers:
 		if not computer.connected_to_net:
 			print(computer)
-			computer.request_room_load.connect(instantiate_room.rpc)
-			computer.request_add_diver.connect(add_controller_to_room.rpc)
-			computer.request_remove_diver.connect(remove_controller_from_room.rpc)
+			computer.request_room_load.connect(instantiate_room)
+			computer.request_add_diver.connect(add_controller_to_room)
+			computer.request_remove_diver.connect(remove_controller_from_room)
 			computer.connected_to_net = true
 
 
-@rpc("call_local", "any_peer")
 func instantiate_room(room_name: String, player_id: int):
 	print("Shared net emitting: " + room_name)
 	request_room_instantiation.emit(room_name, player_id)
 
 
-@rpc("call_local", "any_peer")
 func add_controller_to_room(room_name: String, player_id: int):
 	request_room_controller.emit(room_name, player_id)
 
 
-@rpc("call_local", "any_peer")
 func remove_controller_from_room(room_name: String, player_id: int):
 	print("remove diver rpc called")
 	request_remove_controller.emit(room_name, player_id)
@@ -56,6 +53,10 @@ func check_if_should_run() -> bool:
 		if not multiplayer.is_server():
 			return false
 	return true
+
+
+
+
 
 
 func register_new_diver(room_name: String, player_id: int):

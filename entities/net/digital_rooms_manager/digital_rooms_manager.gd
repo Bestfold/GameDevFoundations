@@ -14,21 +14,21 @@ extends Node3D
 # TODO: Change to a value in game_manager or a global
 var max_rooms = SteamManager.lobby_max_members
 
+signal move_player_to_room(room_name: String, player_id: int)
+signal return_player_to_world(room_name: String, player_id: int)
 
 func _ready():
-	#MultiplayerManager.multiplayer_enabled.connect(multiplayer_active)
-
-	SharedNet.request_room_instantiation.connect(instantiate_room)
-	SharedNet.request_room_controller.connect(add_controller)
-	SharedNet.request_remove_controller.connect(remove_controller)
-
 	add_position_nodes()
 
+	# Only connect if server or singleplayer
+	if MultiplayerManager.multiplayer_mode_enabled:
+		if not multiplayer.is_server():
+			return
 
-#func multiplayer_active(enabled: bool)
-	#if enabled && multiplayer.get_unique_id() != 0:
-		
-		
+	SharedNet.request_room_instantiation.connect(instantiate_room.rpc)
+	SharedNet.request_room_controller.connect(add_diver)
+	SharedNet.request_remove_controller.connect(remove_diver)
+
 
 # Creates nodes with positions to add rooms to
 func add_position_nodes():
@@ -48,6 +48,7 @@ func add_position_nodes():
 		i += 1
 
 # Instantiate the digital room scene under the world map when player wants to enter.
+@rpc("any_peer", "call_local")
 func instantiate_room(room_name: String, _player_id: int):
 	
 	#print("instantiating room")
@@ -70,9 +71,6 @@ func instantiate_room(room_name: String, _player_id: int):
 
 		SharedNet.update_computers()
 
-	
-
-
 # Removes first room with no players if room limit (player limit) is reached. 
 # Returns position node with no room
 func _make_space_for_new_room() -> Node3D:
@@ -87,7 +85,7 @@ func _make_space_for_new_room() -> Node3D:
 			print("Room: " + room.name)
 
 			# A diver is a player in a digital room
-			var room_player_count : int = room.get_tree().get_node_count_in_group("divers")
+			var room_player_count : int = room.get_diver_count()
 			print("Nodes in divers group: " + str(room_player_count))
 
 			if room_player_count == 0:
@@ -105,27 +103,23 @@ func _make_space_for_new_room() -> Node3D:
 	return available_position
 
 
-func add_controller(room_name: String, player_id: int):
-	# Only instantiate and spawn controller on server
-	if MultiplayerManager.multiplayer_mode_enabled:
-		if not multiplayer.is_server():
-			return
+func add_diver(room_name: String, player_id: int):
+	print(" Adding controller ")	
+	move_player_to_room.emit(room_name, player_id)
 
-	print(" Adding controller ")
-	var rooms = get_tree().get_nodes_in_group("digital_rooms")
-	for room in rooms:
-		if room.name == room_name:
+
+func remove_diver(room_name: String, player_id: int):
+	return_player_to_world.emit(room_name, player_id)
 			
-			room.add_diver(player_id)
-
-
-func remove_controller(room_name: String, player_id: int):
-	var rooms = get_tree().get_nodes_in_group("digital_rooms")
-	for room in rooms:
-		if room.name == room_name:
-
-			room.remove_diver(player_id)
 
 
 func generate_room():
 	pass
+
+
+# Helper function
+func get_room_by_name(room_name: String):
+	var rooms = get_tree().get_nodes_in_group("digital_rooms")
+	for room in rooms:
+		if room.name == room_name:
+			return room

@@ -102,4 +102,13 @@
   det som blir stolen.
  Plan: Gjøre om slik at man kun flytter karakteren når man går til rom. Og forbedre kontroll (dette blir enklere da).
 
+# 26.11.24
+ Plan: Bygge om dive-mechanic sånn at det kun er én CharacterBody per spiller, som replikerer verdier.
+  Delmål:
+  - Sende kontroller til rom i stedet for å lage en ny kontroller
+  - Legge igjen en mesh (med mulighet for hurtbox) etter spilleren når karakteren sendes til rommet.
+  - Fjerne mesh og plassere karakter tilbake, men ta mesh dynamisk fra den som er der.
+
+ Har gjennomført alt B>    
+
 # END LOG

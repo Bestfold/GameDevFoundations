@@ -15,6 +15,11 @@ signal request_add_diver(room_name: String, player_id: int)
 signal request_remove_diver(room_name: String, player_id: int)
 
 func _ready():
+	# Only connect if server or singleplayer
+	if MultiplayerManager.multiplayer_mode_enabled:
+		if not multiplayer.is_server():
+			return
+	
 	interact_keyboard.interacted_with.connect(load_room)
 	interact_screen.interacted_with.connect(add_player)
 

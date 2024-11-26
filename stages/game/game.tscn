@@ -30,6 +30,13 @@ spawn_limit = 4
 
 [node name="MultiplayerPlayers" type="Node3D" parent="."]
 
+[node name="LeftBehindBodySpawner" type="MultiplayerSpawner" parent="."]
+spawn_path = NodePath("../LeftBehindBodies")
+spawn_limit = 4
+
+[node name="LeftBehindBodies" type="Node3D" parent="."]
+unique_name_in_owner = true
+
 [node name="Roomspawner" type="MultiplayerSpawner" parent="."]
 spawn_path = NodePath("../DigitalRoomsManager")
 spawn_limit = 8

@@ -3,6 +3,9 @@ class_name GameManager
 
 @onready var multiplayer_players: Node3D = $MultiplayerPlayers
 @onready var ui: CanvasLayer = %UI
+@onready var digital_rooms_manager: Node3D = %DigitalRoomsManager
+@onready var left_behind_bodies_node: Node3D = %LeftBehindBodies
+
 
 @export var world_scene: PackedScene
 @export var singleplayer_player_scene: PackedScene
@@ -16,8 +19,6 @@ func _ready():
 	if OS.has_feature("dedicated_server"):
 		print("Starting dedicated server")
 		%NetworkManager.become_host(true)
-	
-	SharedNet.diver_added.connect(player_controls_when_diving)
 	
 	ui.singleplayer_chosen.connect(start_singleplayer)
 	
@@ -33,6 +34,8 @@ func _ready():
 	ui.continue_current_game.connect(continue_game)
 	ui.leave_current_game.connect(leave_game)
 
+	digital_rooms_manager.move_player_to_room.connect(move_player_to_room.rpc)
+	digital_rooms_manager.return_player_to_world.connect(return_player_to_world.rpc)
 
 
 func start_singleplayer():
@@ -179,7 +182,68 @@ func _remove_single_player():
 		var player_to_remove = get_tree().get_current_scene().get_node("PlayerSingleplayer")
 		remove_child(player_to_remove)
 		player_to_remove.queue_free()
+
+@rpc("any_peer", "call_local")
+func move_player_to_room(room_name: String, player_id: int):
+	print("Moving player: " + str(player_id) + " to room: " + str(room_name))
+
+	var player_to_move = get_player_by_id(player_id)
+	var room = digital_rooms_manager.get_room_by_name(room_name)
+
+	var old_position = player_to_move.position
+	player_to_move.position = room.player_spawn_node.global_position
+	room.add_diver(player_id)
 	
+	add_left_behind_body(player_id, old_position)
+
+	
+
+@rpc("any_peer", "call_local")
+func return_player_to_world(room_name: String, player_id: int):
+	print("Returning player: " + str(player_id) + " from: " + str(room_name))
+
+	var room = digital_rooms_manager.get_room_by_name(room_name)
+	var returning_player = get_player_by_id(player_id)
+	
+	returning_player.position = Vector3(0,0,0)
+	room.remove_diver(player_id)
+	# TODO: Change to MemLink position
+	remove_left_behind_body(player_id)
+
+	
+
+
+
+func add_left_behind_body(player_id: int, player_position: Vector3):
+	var left_behind_body = preload("res://entities/characters/player_characters/left_behind_bodies/LeftBehindBody.tscn")
+	var left_behind_body_instance = left_behind_body.instantiate()
+	#left_behind_body.change_mesh( ___ )
+	left_behind_body_instance.name = "body_" + str(player_id)
+
+	print("Player_id at left_behind_body func: " + str(player_id))
+
+	left_behind_bodies_node.add_child(left_behind_body_instance)
+
+	left_behind_body_instance.position = player_position
+
+
+func remove_left_behind_body(player_id: int):
+	var body_name = "body_" + str(player_id)
+	
+	var left_behind_bodies = left_behind_bodies_node.get_children()
+	for body_to_remove in left_behind_bodies:
+		if body_to_remove.name == body_name:
+
+			left_behind_bodies_node.remove_child(body_to_remove)
+			return
+			
+	push_error("Tried to remove 'LeftBehindBody', but found none of name: " + body_name)
+
+
+
+
+
+
 
 func _input(_event):
 		# Debug window for values
@@ -222,24 +286,12 @@ func toggle_menu_control_at_player(value: bool):
 			singleplayer_player.set_menu_visible(value)
 			singleplayer_player.look_component.capture_mouse()
 		
-		
 
 
-func player_controls_when_diving(_room_name: String, player_id: int):
-	DomainManager.set_in_digital_room(true)
+
+# Helper-function
+func get_player_by_id(player_id: int) -> PlayerCharacter:
 	if MultiplayerManager.multiplayer_mode_enabled:
-		if not multiplayer.is_server():
-			return
-
-	var player_to_disable: PlayerCharacter
-
-	print("player diving! id: " + str(player_id))
-
-	if MultiplayerManager.multiplayer_mode_enabled:
-		player_to_disable = multiplayer_players.get_node(str(player_id))
-		print(player_to_disable)
+		return multiplayer_players.get_node(str(player_id))
 	else:
-		player_to_disable = get_node("PlayerSingleplayer")
-
-	player_to_disable.set_current_controller(false)
-	print("controlable? : " + str(player_to_disable.is_controlable))
+		return get_node("PlayerSingleplayer")
