@@ -1,0 +1,2 @@
+extends WorkStationInterface
+class_name Computer00sWorkStation

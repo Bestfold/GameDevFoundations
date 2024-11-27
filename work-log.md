@@ -113,5 +113,19 @@
 
  Begynte så vidt på å begynne med skeletal transform for å rotere hodet når man ser opp og ned, men også for muligheten
   til å rotere hodet når man ser rundt på en skjerm.
+ Dette krever Quaternions (som jeg tror jeg skjønner helt greit. Man setter opp en vektor, og så roterer man med en 
+  vinkel rundt denne vektoren). Neste blir å forstå seg på bone_pose_rotation for å flytte hodet.
+
+# 27.11.24
+ Plan: Lage og sette opp det som ligger foran en visuelt funksjonabel "terminal"
+  Delmål:
+  - Lage en "terminal"/datamaskin i blender
+  - Lage karakter-animasjon for å sitte på datamaskin (samt å falle, og crouch i samme slengen)
+  - Logikken og eventuell state for å interagere med pc.
+  - Sette opp skjerm
+  - Sette opp at man styrer det på skjermen med mus og tastatur
+
+  Fikk laget datamaskin og satt opp scene og script filer. Neste blir å lage animasjoner, sette opp work-station for
+   datamaskin, og så begynne på datamaskinens funksjonalitet.
 
 # END LOG

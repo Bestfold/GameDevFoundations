@@ -1,0 +1,29 @@
+[gd_scene load_steps=5 format=3 uid="uid://cxnfgo2ddgk47"]
+
+[ext_resource type="Script" path="res://entities/net/computers/work_stations/Computer00sWorkStation/computer_00s_work_station.gd" id="1_8xggx"]
+[ext_resource type="PackedScene" uid="uid://crkybx8yt7rju" path="res://entities/net/computers/pc_00s/computer_00s.tscn" id="1_i1o82"]
+[ext_resource type="PackedScene" uid="uid://bhq0phkmsfg6f" path="res://common/components/interactable/Interactable.tscn" id="2_n2ctd"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_s2j0d"]
+size = Vector3(0.51062, 0.432739, 0.124804)
+
+[node name="Computer00sWorkStation" type="Node3D" node_paths=PackedStringArray("user_position")]
+script = ExtResource("1_8xggx")
+user_position = NodePath("UserPosition")
+user_sitting = true
+
+[node name="computer_00s" parent="." instance=ExtResource("1_i1o82")]
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0122681, 0.252258, 0.00329494)
+shape = SubResource("BoxShape3D_s2j0d")
+
+[node name="InteractableBody" parent="StaticBody3D" node_paths=PackedStringArray("interact_area") instance=ExtResource("2_n2ctd")]
+unique_name_in_owner = true
+interact_prompt = "[E] to conputer"
+interact_area = NodePath("..")
+
+[node name="UserPosition" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.578826)

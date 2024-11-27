@@ -26,6 +26,14 @@ func handle_input(event: InputEvent, _move_speed: float, _lerp_val: float) -> vo
 		#	atan2(parent.velocity.x, parent.velocity.z), lerp_val)
 		parent.armature.rotation.y = parent.spring_arm_pivot.rotation.y
 
+		#var target_vector = Vector3(parent.spring_arm.rotation.x, 0, 0)
+
+		var bone_index = parent.skeleton.find_bone("torso")
+		parent.skeleton.set_bone_pose_rotation(bone_index, Quaternion(Vector3(1,0,0).normalized(), parent.spring_arm.rotation.x).normalized())
+		
+		#var head_bone_pose: Transform3D = parent.skeleton.get_bone_global_pose(bone_index)
+		#head_bone_pose = head_bone_pose.looking_at(target_vector)
+		#parent.skeleton.set_bone_pose(bone_index, head_bone_pose)
 
 #func handle_physics(delta: float, move_speed: float, lerp_val: float) -> void:
 	# Head-bobbing if moving:
