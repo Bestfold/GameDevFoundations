@@ -19,9 +19,12 @@ class_name IdleState
 
 func enter():
 	# Calling State default call (animation_tree.animation(animation_name)
-	super()
-	#look_component.capture_mouse()
+	#super()
 	
+	#animation_tree.set("parameters/conditions/standing", true)
+	
+	#look_component.capture_mouse()
+	pass
 	
 func exit():
 	pass
@@ -39,7 +42,7 @@ func process_physics(delta: float) -> State:
 	var _velocity_vector_x_and_z = Vector2(parent.velocity.x, parent.velocity.z)
 	
 	# Animation blending between idle and run
-	animation_tree.set("parameters/BlendSpace1D/blend_position", _velocity_vector_x_and_z.length() / 10) #/ move_speed)
+	animation_tree.set("parameters/IdleVsRun/Run/blend_position", _velocity_vector_x_and_z.length() / 10) #/ move_speed)
 
 	look_component.handle_physics(delta, move_speed, lerp_val)
 

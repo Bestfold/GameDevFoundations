@@ -1,0 +1,20 @@
+[gd_resource type="AnimationNodeBlendTree" load_steps=4 format=3 uid="uid://vfmo7k2k1r0u"]
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_aj8hn"]
+animation = &"idle"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_jp7lh"]
+animation = &"run"
+
+[sub_resource type="AnimationNodeBlendSpace1D" id="AnimationNodeBlendSpace1D_3t4j7"]
+blend_point_0/node = SubResource("AnimationNodeAnimation_aj8hn")
+blend_point_0/pos = 0.0
+blend_point_1/node = SubResource("AnimationNodeAnimation_jp7lh")
+blend_point_1/pos = 1.0
+min_space = 0.0
+
+[resource]
+graph_offset = Vector2(-216, 58)
+nodes/Run/node = SubResource("AnimationNodeBlendSpace1D_3t4j7")
+nodes/Run/position = Vector2(-20, 140)
+node_connections = [&"output", 0, &"Run"]

@@ -4,7 +4,7 @@ class_name State
 
 # State base class
 
-@export var animation_name: String
+@export var animation_condition_name: String
 @export var move_speed: float = 5
 @export var lerp_val: float = 0.3
 
@@ -21,6 +21,8 @@ var can_interact_component: CanInteractInterface
 
 func enter():
 	#animation_tree.play(animation_name)
+	#var animation_condition_path := "parameters/conditions/" + str(animation_condition_name)
+	#animation_tree.set(animation_condition_path, true)
 	pass
 
 func exit():

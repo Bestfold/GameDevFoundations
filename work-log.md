@@ -131,4 +131,8 @@
  Alle animasjoner fullført B>
  Nå må jeg sette meg inn i AnimationTree for å få til overgang mellom disse.
 
+# 27.11.24
+ Er på ferten av å få til AnimationTree. Men det trenger arbeid. Sist endra jeg AnimationTree på single_player, fortsett
+  her.
+
 # END LOG
