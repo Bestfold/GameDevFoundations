@@ -15,7 +15,7 @@ class_name FallState
 
 
 func enter():
-	#super()
+	super()
 
 	# Possible bad implementation of move_speed changing:
 	#move_speed = 5

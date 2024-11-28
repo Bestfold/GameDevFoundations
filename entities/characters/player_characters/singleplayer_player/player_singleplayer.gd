@@ -17,7 +17,7 @@ const player_id = 0
 
 func _ready() -> void:
 	# Initialize state machine, passing a refrence of player to the states
-	state_machine.init(self, animation_player, skeleton, move_component, 
+	state_machine.init(self, animation_tree, skeleton, move_component, 
 			look_component,	can_interact_component)
 
 	look_component.capture_mouse()

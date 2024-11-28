@@ -128,4 +128,7 @@
   Fikk laget datamaskin og satt opp scene og script filer. Neste blir å lage animasjoner, sette opp work-station for
    datamaskin, og så begynne på datamaskinens funksjonalitet.
 
+ Alle animasjoner fullført B>
+ Nå må jeg sette meg inn i AnimationTree for å få til overgang mellom disse.
+
 # END LOG

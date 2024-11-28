@@ -15,7 +15,7 @@ class_name JumpState
 @export var operating_state: State
 
 func enter():
-	#super()
+	super()
 	parent.velocity.y += jump_velocity
 	parent.move_and_slide()
 	

@@ -9,7 +9,7 @@ class_name PlayerCharacter
 # Child refrences
 @onready var spring_arm: SpringArm3D = %SpringArm3D
 @onready var armature: Node3D = $Armature
-@onready var animation_tree: AnimationTree = $AnimationTree
+@onready var animation_tree: AnimationTree = %AnimationTree
 @onready var skeleton: Skeleton3D = %Skeleton3D
 @onready var spring_arm_pivot: Node3D = %SpringArmPivot
 @onready var state_machine: StateMachine = $StateMachine
