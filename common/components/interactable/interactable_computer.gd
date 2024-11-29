@@ -12,6 +12,9 @@ func execute_interaction(interacter):
 	elif interacter is PlayerSingleplayer:
 		interacted_with.emit()
 
+		#interacter.interacted.emit(owner)
+		#print("Owner: " + owner.name)
+
 		#interacter.position = MultiplayerManager.respawn_point
 
 @rpc("any_peer", "call_local")

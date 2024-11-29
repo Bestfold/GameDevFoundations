@@ -27,7 +27,7 @@ func init(parent: CharacterBody3D, animation_tree: AnimationTree,
 		child.move_component = move_component
 		child.look_component = look_component
 		child.can_interact_component = can_interact_component
-	
+
 	# Initialize to the default state
 	change_state(initial_state)
 

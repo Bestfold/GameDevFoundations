@@ -138,5 +138,8 @@
 # 29.11.24
  AnimationTree er løst ved å bruke AnimationNodeStateMachinePlayback sin .travel() metode, og sette animasjons-state-navn 
   i export under hver state-machine state.
+ Har satt opp begynnelsen av "ComputerState". Den setter posisjon og rotasjon(men gir ikke riktig på rotasjon). Trenger å 
+  fikse en generell meny-kontroll også.
+ Neste blir å sette seg inn i 2D skjerm, og prøve å fikse en meny manager
 
 # END LOG

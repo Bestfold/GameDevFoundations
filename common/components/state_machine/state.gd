@@ -40,3 +40,6 @@ func process_input(_event: InputEvent) -> State:
 
 func process_frame(_delta: float) -> State:
 	return null
+
+#func interacted(_interactable: InteractableInterface, _value):
+#	return null

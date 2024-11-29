@@ -48,6 +48,11 @@ func process_physics(delta: float) -> State:
 
 	look_component.handle_physics(delta, _passed_move_speed, lerp_val)
 
+	var interactable = can_interact_component.handle_physics(delta)
+	if interactable:
+		if interactable.owner is WorkStationInterface:
+			return computer_state
+
 	parent.move_and_slide()
 
 	if parent.velocity.y > 0:

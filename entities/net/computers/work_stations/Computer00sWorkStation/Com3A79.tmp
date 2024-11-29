@@ -12,9 +12,8 @@ size = Vector3(1.22702, 0.666077, 0.515906)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_81daw"]
 
-[node name="Computer00sWorkStation" type="Node3D" node_paths=PackedStringArray("user_return_position", "user_position")]
+[node name="Computer00sWorkStation" type="Node3D" node_paths=PackedStringArray("user_position")]
 script = ExtResource("1_8xggx")
-user_return_position = NodePath("UserReturnPosition")
 user_position = NodePath("UserPosition")
 user_sitting = true
 
@@ -66,6 +65,3 @@ skeleton = NodePath("../..")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Backboard/StaticBody3D"]
 shape = SubResource("BoxShape3D_81daw")
-
-[node name="UserReturnPosition" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.62)
