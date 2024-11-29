@@ -10,12 +10,12 @@ class_name FallState
 @export var jump_state: State
 @export var walk_state: State
 @export var run_state: State
-@export var terminal_state: State
-@export var operating_state: State
+@export var computer_state: State
+
 
 
 func enter():
-	#super()
+	super()
 
 	# Possible bad implementation of move_speed changing:
 	#move_speed = 5
@@ -27,7 +27,8 @@ func enter():
 	pass
 
 #func exit():
-#	pass
+	#super()
+	#pass
 
 func process_physics(delta: float) -> State:
 	parent.velocity.y -= gravity * delta
@@ -37,6 +38,8 @@ func process_physics(delta: float) -> State:
 	# dampening heigth of jump
 	if parent.velocity.y >= 0.001:
 		parent.velocity.y = lerp(parent.velocity.y, 0.0, lerp_val * gravity * delta)
+	
+	animation_tree.set("parameters/fall_jump/blend_position", abs(parent.velocity.y))
 
 	# Changing what move_speed is passed to component functions if run
 	var _passed_move_speed = move_speed

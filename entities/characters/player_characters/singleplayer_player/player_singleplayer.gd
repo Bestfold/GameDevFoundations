@@ -33,6 +33,8 @@ func _unhandled_input(event: InputEvent) -> void:
 
 
 func _physics_process(delta: float) -> void:
+	#var animation_state_machine = animation_tree["parameters/playback"]
+	#print(animation_state_machine.get_current_node())
 	# Passing function
 	state_machine.process_physics(delta)
 

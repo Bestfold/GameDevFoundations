@@ -5,9 +5,9 @@
 [ext_resource type="PackedScene" uid="uid://bhq0phkmsfg6f" path="res://common/components/interactable/Interactable.tscn" id="2_iy2cm"]
 [ext_resource type="Script" path="res://common/components/interactable/test_interactable.gd" id="3_kcecg"]
 [ext_resource type="Script" path="res://common/components/move_components/movement_enemy_test.gd" id="3_qo5e8"]
+[ext_resource type="PackedScene" uid="uid://cxnfgo2ddgk47" path="res://entities/net/computers/work_stations/Computer00sWorkStation/Computer00sWorkStation.tscn" id="4_hl5hq"]
 [ext_resource type="Script" path="res://common/components/look_components/look_enemy_test.gd" id="4_ky8kg"]
 [ext_resource type="PackedScene" uid="uid://c2l3rv6frpdkm" path="res://entities/net/computers/pc/pc_computer.tscn" id="7_lgpmj"]
-[ext_resource type="PackedScene" uid="uid://crkybx8yt7rju" path="res://entities/net/computers/pc_00s/computer_00s.tscn" id="8_odn2f"]
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_pjvrq"]
 size = Vector2(20, 20)
@@ -160,19 +160,34 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0.5, 0)
 [node name="CollisionShape3D" type="CollisionShape3D" parent="TestBoxes/CSGBox3D/StaticBody3D"]
 shape = SubResource("BoxShape3D_ps6dd")
 
+[node name="Computer00sWorkStation" parent="TestBoxes" instance=ExtResource("4_hl5hq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.26894, 0, 1.13055)
+
 [node name="NPC" parent="." instance=ExtResource("2_2i8er")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.19752, -2.98023e-07, 0.0954694)
 
 [node name="Skeleton3D" parent="NPC/Armature" index="0"]
-bones/0/position = Vector3(-1.46097e-10, 1.18252, 6.58606e-09)
-bones/2/rotation = Quaternion(-0.0149568, -0.00785699, 0.992468, -0.121333)
-bones/4/rotation = Quaternion(0.0434268, 0.0428677, 0.996987, -0.0478986)
-bones/5/rotation = Quaternion(-0.16492, -2.5014e-05, 0.00238866, 0.986304)
-bones/6/rotation = Quaternion(0.656409, 0.0182909, -0.0636815, 0.75149)
-bones/7/rotation = Quaternion(0.0182651, -0.00328078, 0.993746, 0.11011)
-bones/9/rotation = Quaternion(-0.0728363, 0.0441116, 0.995037, 0.0514737)
-bones/10/rotation = Quaternion(-0.16492, 2.50134e-05, -0.00238867, 0.986304)
-bones/11/rotation = Quaternion(0.654217, -0.0435413, 0.0791828, 0.750889)
+bones/0/position = Vector3(-9.60406e-11, 1.00085, 2.44167e-09)
+bones/0/rotation = Quaternion(-0.0222823, 1.1918e-07, -2.65625e-09, 0.999752)
+bones/1/rotation = Quaternion(0.120888, 8.25932e-15, 2.8822e-08, 0.992666)
+bones/2/rotation = Quaternion(-0.0149473, -0.00785448, 0.992501, -0.121067)
+bones/3/rotation = Quaternion(0.111725, 0.00241312, 0.0179131, 0.993575)
+bones/4/rotation = Quaternion(0.0515119, 0.050601, 0.996169, -0.0493239)
+bones/4/scale = Vector3(1.00004, 1, 1.00001)
+bones/5/rotation = Quaternion(-0.17984, -2.48059e-05, 0.00260777, 0.983692)
+bones/6/rotation = Quaternion(0.661513, 0.0259396, -0.0681397, 0.746381)
+bones/6/scale = Vector3(1.00001, 1.00001, 1)
+bones/7/rotation = Quaternion(0.0182582, -0.00327851, 0.993765, 0.109939)
+bones/9/rotation = Quaternion(-0.0859208, 0.0520299, 0.993489, 0.053752)
+bones/9/scale = Vector3(1.00004, 1, 1.00001)
+bones/10/rotation = Quaternion(-0.17984, 2.4808e-05, -0.00260775, 0.983692)
+bones/11/rotation = Quaternion(0.658683, -0.0556531, 0.086055, 0.745408)
+bones/11/scale = Vector3(1.00001, 1.00001, 1)
+bones/12/position = Vector3(0.172848, 0.560823, 0.382616)
+bones/14/position = Vector3(-0.203463, 0.560823, 0.382616)
+
+[node name="AnimationTree" parent="NPC" index="4"]
+parameters/crouch_idle_walk/BlendSpace1D/blend_position = 0
 
 [node name="MoveComponent" parent="NPC" index="6"]
 script = ExtResource("3_qo5e8")
@@ -191,8 +206,5 @@ shadow_enabled = true
 
 [node name="PcComputer1" parent="." instance=ExtResource("7_lgpmj")]
 transform = Transform3D(-0.707107, 0, -0.707107, 0, 1, 0, 0.707107, 0, -0.707107, 6.4278, 5.96046e-07, 7.3845)
-
-[node name="computer_00s" parent="." instance=ExtResource("8_odn2f")]
-transform = Transform3D(-0.00914896, 0, -0.999975, 0, 1.18394, 0, 1.31704, 0, -0.00694647, -3.93696, 1.00862, 0.12005)
 
 [editable path="NPC"]

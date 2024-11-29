@@ -1,9 +1,16 @@
 extends State
+class_name ComputerState
 
-class_name TerminalState
+@export_category("Modifiers")
 
-#func enter():
-	#super()
+
+@export_category("States")
+@export var idle_state: State
+
+
+
+func enter():
+	super()
 #	pass
 
 #func exit():

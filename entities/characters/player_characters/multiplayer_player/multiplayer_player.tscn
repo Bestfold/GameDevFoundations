@@ -1,10 +1,10 @@
-[gd_scene load_steps=54 format=4 uid="uid://d82venilpoaw"]
+[gd_scene load_steps=51 format=4 uid="uid://d82venilpoaw"]
 
 [ext_resource type="Script" path="res://entities/characters/player_characters/multiplayer_player/player_multiplayer.gd" id="1_h8f3l"]
 [ext_resource type="Script" path="res://utilities/multiplayer/input_sync_multiplayer.gd" id="2_si2pw"]
 [ext_resource type="AnimationNodeBlendTree" uid="uid://vfmo7k2k1r0u" path="res://assets/animations/player_run_blend.tres" id="3_5ksqu"]
 [ext_resource type="AnimationNodeBlendTree" uid="uid://tvtm2b1v1i0n" path="res://assets/animations/player_crouch_walk_blend.tres" id="3_ac86x"]
-[ext_resource type="Script" path="res://common/components/state_machine/states/state_machine.gd" id="3_gba1v"]
+[ext_resource type="Script" path="res://common/components/state_machine/state_machine.gd" id="3_gba1v"]
 [ext_resource type="Script" path="res://common/components/state_machine/states/idle.gd" id="4_r43pm"]
 [ext_resource type="Script" path="res://common/components/state_machine/states/walk.gd" id="5_gv8l8"]
 [ext_resource type="Script" path="res://common/components/state_machine/states/run.gd" id="6_my702"]
@@ -12,10 +12,7 @@
 [ext_resource type="Script" path="res://common/components/state_machine/states/fall.gd" id="8_hwvw3"]
 [ext_resource type="Script" path="res://common/components/state_machine/states/crouch_idle.gd" id="9_wbwdp"]
 [ext_resource type="Script" path="res://common/components/state_machine/states/crouch_walk.gd" id="10_ditk3"]
-[ext_resource type="Script" path="res://common/components/state_machine/states/crawl_idle.gd" id="11_3i263"]
-[ext_resource type="Script" path="res://common/components/state_machine/states/crawl_walk.gd" id="12_eclkw"]
-[ext_resource type="Script" path="res://common/components/state_machine/states/terminal.gd" id="13_6jiec"]
-[ext_resource type="Script" path="res://common/components/state_machine/states/operating.gd" id="14_ge6ct"]
+[ext_resource type="Script" path="res://common/components/state_machine/states/computer.gd" id="13_6jiec"]
 [ext_resource type="Script" path="res://common/components/state_machine/states/die_state.gd" id="15_qkean"]
 [ext_resource type="Script" path="res://common/components/move_components/movement_multiplayer_player.gd" id="16_jebct"]
 [ext_resource type="Script" path="res://common/components/look_components/look_player.gd" id="17_gaiv0"]
@@ -1550,74 +1547,76 @@ _data = {
 radius = 0.221641
 height = 1.83732
 
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_s17vl"]
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_g5v1a"]
+animation = &"computer_sitting"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_rnmti"]
 animation = &"idle"
 
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_w4br6"]
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_cgm2p"]
 animation = &"falling"
 
 [sub_resource type="AnimationNodeBlendSpace1D" id="AnimationNodeBlendSpace1D_4p5ik"]
-blend_point_0/node = SubResource("AnimationNodeAnimation_s17vl")
+blend_point_0/node = SubResource("AnimationNodeAnimation_rnmti")
 blend_point_0/pos = 0.0
-blend_point_1/node = SubResource("AnimationNodeAnimation_w4br6")
+blend_point_1/node = SubResource("AnimationNodeAnimation_cgm2p")
 blend_point_1/pos = 1.0
 min_space = 0.0
-
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_g5v1a"]
-animation = &"computer_sitting"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_qamel"]
 advance_mode = 2
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_fktcu"]
+switch_mode = 1
 advance_mode = 2
-advance_expression = "current_state == jump_state || current_state == fall_state"
+advance_condition = &"in_air"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_txw0e"]
 advance_mode = 2
-advance_expression = "current_state == crouch_walk_state || current_state == crouch_idle_state"
+advance_condition = &"crouching"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_scyu2"]
 advance_mode = 2
-advance_expression = "current_state == computer_state"
+advance_condition = &"computer"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_6pq64"]
 advance_mode = 2
-advance_expression = "current_state == computer_state"
+advance_condition = &"computer"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_e0w3j"]
 advance_mode = 2
-advance_expression = "current_state == computer_state"
+advance_condition = &"computer"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_xpoe0"]
 advance_mode = 2
-advance_expression = "current_state == jump_state || current_state == fall_state"
+advance_condition = &"in_air"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_145me"]
 advance_mode = 2
-advance_expression = "current_state == idle_state || current_state == run_state || current_state == walk_state"
+advance_condition = &"standing"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_l0mnq"]
+switch_mode = 1
 advance_mode = 2
-advance_expression = "current_state == idle_state || current_state == run_state || current_state == walk_state"
+advance_condition = &"standing"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_mq0vp"]
 advance_mode = 2
-advance_expression = "current_state == idle_state || current_state == run_state || current_state == walk_state"
+advance_condition = &"standing"
 
-[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_4yy5r"]
-states/CrouchIdleVsWalk/node = ExtResource("3_ac86x")
-states/CrouchIdleVsWalk/position = Vector2(209, 260)
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_p3557"]
 states/End/position = Vector2(870, 117)
-states/Fall/node = SubResource("AnimationNodeBlendSpace1D_4p5ik")
-states/Fall/position = Vector2(521, 260)
-states/IdleVsRun/node = ExtResource("3_5ksqu")
-states/IdleVsRun/position = Vector2(383, 38)
 states/Start/position = Vector2(196, 117)
-states/computer_sitting/node = SubResource("AnimationNodeAnimation_g5v1a")
-states/computer_sitting/position = Vector2(708, 106)
-transitions = ["Start", "IdleVsRun", SubResource("AnimationNodeStateMachineTransition_qamel"), "IdleVsRun", "Fall", SubResource("AnimationNodeStateMachineTransition_fktcu"), "IdleVsRun", "CrouchIdleVsWalk", SubResource("AnimationNodeStateMachineTransition_txw0e"), "IdleVsRun", "computer_sitting", SubResource("AnimationNodeStateMachineTransition_scyu2"), "CrouchIdleVsWalk", "computer_sitting", SubResource("AnimationNodeStateMachineTransition_6pq64"), "Fall", "computer_sitting", SubResource("AnimationNodeStateMachineTransition_e0w3j"), "CrouchIdleVsWalk", "Fall", SubResource("AnimationNodeStateMachineTransition_xpoe0"), "CrouchIdleVsWalk", "IdleVsRun", SubResource("AnimationNodeStateMachineTransition_145me"), "Fall", "IdleVsRun", SubResource("AnimationNodeStateMachineTransition_l0mnq"), "computer_sitting", "IdleVsRun", SubResource("AnimationNodeStateMachineTransition_mq0vp")]
-graph_offset = Vector2(-40, -3)
+states/computer/node = SubResource("AnimationNodeAnimation_g5v1a")
+states/computer/position = Vector2(708, 106)
+states/crouch_idle_walk/node = ExtResource("3_ac86x")
+states/crouch_idle_walk/position = Vector2(209, 260)
+states/fall_jump/node = SubResource("AnimationNodeBlendSpace1D_4p5ik")
+states/fall_jump/position = Vector2(521, 260)
+states/idle_walk_run/node = ExtResource("3_5ksqu")
+states/idle_walk_run/position = Vector2(383, 38)
+transitions = ["Start", "idle_walk_run", SubResource("AnimationNodeStateMachineTransition_qamel"), "idle_walk_run", "fall_jump", SubResource("AnimationNodeStateMachineTransition_fktcu"), "idle_walk_run", "crouch_idle_walk", SubResource("AnimationNodeStateMachineTransition_txw0e"), "idle_walk_run", "computer", SubResource("AnimationNodeStateMachineTransition_scyu2"), "crouch_idle_walk", "computer", SubResource("AnimationNodeStateMachineTransition_6pq64"), "fall_jump", "computer", SubResource("AnimationNodeStateMachineTransition_e0w3j"), "crouch_idle_walk", "fall_jump", SubResource("AnimationNodeStateMachineTransition_xpoe0"), "crouch_idle_walk", "idle_walk_run", SubResource("AnimationNodeStateMachineTransition_145me"), "fall_jump", "idle_walk_run", SubResource("AnimationNodeStateMachineTransition_l0mnq"), "computer", "idle_walk_run", SubResource("AnimationNodeStateMachineTransition_mq0vp")]
+graph_offset = Vector2(-4, 29)
 
 [node name="MultiplayerPlayer" type="CharacterBody3D"]
 collision_layer = 2
@@ -1645,7 +1644,7 @@ bones/0/name = "torso"
 bones/0/parent = -1
 bones/0/rest = Transform3D(1, -9.32587e-15, 2.38419e-07, -1.06224e-08, 0.999007, 0.0445535, -2.38182e-07, -0.0445535, 0.999007, 0, 1.01511, 0)
 bones/0/enabled = true
-bones/0/position = Vector3(1.29595e-10, 1.01432, 2.0065e-09)
+bones/0/position = Vector3(1.29759e-10, 1.01432, 2.00904e-09)
 bones/0/rotation = Quaternion(-0.0222823, 1.1918e-07, -2.65625e-09, 0.999752)
 bones/0/scale = Vector3(1, 1, 1)
 bones/1/name = "head"
@@ -1660,7 +1659,7 @@ bones/2/parent = 0
 bones/2/rest = Transform3D(-0.928782, 0.370483, -0.0101803, -0.37025, -0.928731, -0.0193173, -0.0166114, -0.0141724, 0.999762, 0.19763, 0.515398, -0.0102604)
 bones/2/enabled = true
 bones/2/position = Vector3(0.19763, 0.515398, -0.0102604)
-bones/2/rotation = Quaternion(-0.0146656, -0.0077805, 0.993411, -0.113395)
+bones/2/rotation = Quaternion(-0.0146656, -0.00778051, 0.993411, -0.113396)
 bones/2/scale = Vector3(0.999998, 1, 1)
 bones/3/name = "lowerarm.l"
 bones/3/parent = 2
@@ -1674,28 +1673,28 @@ bones/4/parent = 0
 bones/4/rest = Transform3D(-0.996395, 0.0850034, -0.00104224, -0.0849275, -0.99587, -0.0321057, -0.00376708, -0.0319009, 0.999486, 0.0823457, 0.0440742, -0.0250938)
 bones/4/enabled = true
 bones/4/position = Vector3(0.0823457, 0.0440742, -0.0250938)
-bones/4/rotation = Quaternion(0.0536823, -0.00890243, 0.997443, -0.0463188)
+bones/4/rotation = Quaternion(0.0536817, -0.00888893, 0.997444, -0.0463194)
 bones/4/scale = Vector3(1.00004, 1, 1.00001)
 bones/5/name = "lowerleg.l"
 bones/5/parent = 4
 bones/5/rest = Transform3D(0.999999, -0.0014021, -0.000118509, 0.00140698, 0.995297, 0.0968625, -1.78591e-05, -0.0968626, 0.995298, -6.23493e-09, 0.49904, 8.73115e-10)
 bones/5/enabled = true
 bones/5/position = Vector3(-6.23493e-09, 0.49904, 8.73115e-10)
-bones/5/rotation = Quaternion(-0.0599967, -2.51732e-05, 0.000869974, 0.998198)
+bones/5/rotation = Quaternion(-0.0600239, -2.51731e-05, 0.000870368, 0.998197)
 bones/5/scale = Vector3(1, 1, 1)
 bones/6/name = "foot.l"
 bones/6/parent = 5
 bones/6/rest = Transform3D(0.996258, 0.028486, -0.0815951, -0.0861143, 0.247266, -0.965113, -0.00731661, 0.968529, 0.248793, -1.16628e-08, 0.492678, 2.67755e-09)
 bones/6/enabled = true
 bones/6/position = Vector3(-1.16628e-08, 0.492678, 2.67755e-09)
-bones/6/rotation = Quaternion(0.614932, 0.0220732, -0.0679559, 0.785336)
+bones/6/rotation = Quaternion(0.614943, 0.022074, -0.0679558, 0.785328)
 bones/6/scale = Vector3(1.00001, 1.00001, 1)
 bones/7/name = "upperarm.r"
 bones/7/parent = 0
 bones/7/rest = Transform3D(-0.928782, -0.370483, 0.0101798, 0.37025, -0.928731, -0.0193173, 0.016611, -0.0141726, 0.999762, -0.19763, 0.515398, -0.0102605)
 bones/7/enabled = true
 bones/7/position = Vector3(-0.19763, 0.515398, -0.0102605)
-bones/7/rotation = Quaternion(0.0180949, -0.00322541, 0.994198, 0.105988)
+bones/7/rotation = Quaternion(0.0180949, -0.00322542, 0.994198, 0.105989)
 bones/7/scale = Vector3(0.999998, 1, 1)
 bones/8/name = "lowerarm.r"
 bones/8/parent = 7
@@ -1709,21 +1708,21 @@ bones/9/parent = 0
 bones/9/rest = Transform3D(-0.996395, -0.0850034, 0.00104181, 0.0849276, -0.99587, -0.0321057, 0.00376665, -0.0319009, 0.999486, -0.0823457, 0.0440742, -0.0250938)
 bones/9/enabled = true
 bones/9/position = Vector3(-0.0823457, 0.0440742, -0.0250938)
-bones/9/rotation = Quaternion(-0.0882966, -0.00736836, 0.994877, 0.048672)
+bones/9/rotation = Quaternion(-0.088296, -0.00735489, 0.994877, 0.048673)
 bones/9/scale = Vector3(1.00004, 1, 1.00001)
 bones/10/name = "lowerleg.r"
 bones/10/parent = 9
 bones/10/rest = Transform3D(0.999999, 0.00140208, 0.000118505, -0.00140697, 0.995297, 0.0968625, 1.78614e-05, -0.0968625, 0.995298, -9.87905e-09, 0.49904, -6.1118e-10)
 bones/10/enabled = true
 bones/10/position = Vector3(-9.87905e-09, 0.49904, -6.1118e-10)
-bones/10/rotation = Quaternion(-0.0599972, 2.51761e-05, -0.000869974, 0.998198)
+bones/10/rotation = Quaternion(-0.0600245, 2.51761e-05, -0.000870368, 0.998197)
 bones/10/scale = Vector3(1, 1, 1)
 bones/11/name = "foot.r"
 bones/11/parent = 10
 bones/11/rest = Transform3D(0.996258, -0.028486, 0.0815951, 0.0861143, 0.247266, -0.965113, 0.00731655, 0.968529, 0.248793, -4.74472e-09, 0.492678, 1.30385e-08)
 bones/11/enabled = true
 bones/11/position = Vector3(-4.74472e-09, 0.492678, 1.30385e-08)
-bones/11/rotation = Quaternion(0.612176, -0.0506481, 0.0876341, 0.784217)
+bones/11/rotation = Quaternion(0.612187, -0.0506492, 0.0876336, 0.784208)
 bones/11/scale = Vector3(1.00001, 1.00001, 1)
 bones/12/name = "iklegpole.l"
 bones/12/parent = -1
@@ -1774,7 +1773,6 @@ skin = SubResource("Skin_d2x4x")
 libraries = {
 "": SubResource("AnimationLibrary_bkmh2")
 }
-autoplay = "idle"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.924379, 0)
@@ -1803,18 +1801,22 @@ target_position = Vector3(0, -1.5, 0)
 [node name="AnimationTree" type="AnimationTree" parent="."]
 unique_name_in_owner = true
 root_node = NodePath("%AnimationTree/..")
-tree_root = SubResource("AnimationNodeStateMachine_4yy5r")
+tree_root = SubResource("AnimationNodeStateMachine_p3557")
 advance_expression_base_node = NodePath("../StateMachine")
 anim_player = NodePath("../AnimationPlayer")
-parameters/CrouchIdleVsWalk/BlendSpace1D/blend_position = 0
-parameters/Fall/blend_position = 0.0
-parameters/IdleVsRun/Run/blend_position = 0
+parameters/conditions/computer = false
+parameters/conditions/crouching = false
+parameters/conditions/in_air = false
+parameters/conditions/standing = false
+parameters/crouch_idle_walk/BlendSpace1D/blend_position = 0.0
+parameters/fall_jump/blend_position = 0.0
+parameters/idle_walk_run/Run/blend_position = 0
 
 [node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
 script = ExtResource("3_gba1v")
 initial_state = NodePath("Idle")
 
-[node name="Idle" type="Node" parent="StateMachine" node_paths=PackedStringArray("run_state", "fall_state", "jump_state", "walk_state", "die_state", "crouch_idle_state", "crouch_walk_state", "crawl_idle_state", "crawl_walk_state")]
+[node name="Idle" type="Node" parent="StateMachine" node_paths=PackedStringArray("run_state", "fall_state", "jump_state", "walk_state", "die_state", "crouch_idle_state", "crouch_walk_state", "computer_state")]
 script = ExtResource("4_r43pm")
 run_state = NodePath("../Run")
 fall_state = NodePath("../Fall")
@@ -1823,11 +1825,11 @@ walk_state = NodePath("../Walk")
 die_state = NodePath("../DieState")
 crouch_idle_state = NodePath("../CrouchIdle")
 crouch_walk_state = NodePath("../CrouchWalk")
-crawl_idle_state = NodePath("../CrawlIdle")
-crawl_walk_state = NodePath("../CrawlWalk")
+computer_state = NodePath("../Computer")
+animation_state_name = "idle_walk_run"
 move_speed = 0.0
 
-[node name="Walk" type="Node" parent="StateMachine" node_paths=PackedStringArray("idle_state", "run_state", "fall_state", "jump_state", "crouch_idle_state", "crouch_walk_state", "crawl_idle_state", "crawl_walk_state")]
+[node name="Walk" type="Node" parent="StateMachine" node_paths=PackedStringArray("idle_state", "run_state", "fall_state", "jump_state", "crouch_idle_state", "crouch_walk_state", "computer_state")]
 script = ExtResource("5_gv8l8")
 idle_state = NodePath("../Idle")
 run_state = NodePath("../Run")
@@ -1835,10 +1837,10 @@ fall_state = NodePath("../Fall")
 jump_state = NodePath("../Jump")
 crouch_idle_state = NodePath("../CrouchIdle")
 crouch_walk_state = NodePath("../CrouchWalk")
-crawl_idle_state = NodePath("../CrawlIdle")
-crawl_walk_state = NodePath("../CrawlWalk")
+computer_state = NodePath("../Computer")
+animation_state_name = "idle_walk_run"
 
-[node name="Run" type="Node" parent="StateMachine" node_paths=PackedStringArray("idle_state", "fall_state", "jump_state", "walk_state", "die_state", "crouch_idle_state", "crouch_walk_state", "crawl_idle_state", "crawl_walk_state")]
+[node name="Run" type="Node" parent="StateMachine" node_paths=PackedStringArray("idle_state", "fall_state", "jump_state", "walk_state", "die_state", "crouch_idle_state", "crouch_walk_state", "computer_state")]
 script = ExtResource("6_my702")
 idle_state = NodePath("../Idle")
 fall_state = NodePath("../Fall")
@@ -1847,41 +1849,40 @@ walk_state = NodePath("../Walk")
 die_state = NodePath("../DieState")
 crouch_idle_state = NodePath("../CrouchIdle")
 crouch_walk_state = NodePath("../CrouchWalk")
-crawl_idle_state = NodePath("../CrawlIdle")
-crawl_walk_state = NodePath("../CrawlWalk")
+computer_state = NodePath("../Computer")
+animation_state_name = "idle_walk_run"
 move_speed = 10.0
 
-[node name="Jump" type="Node" parent="StateMachine" node_paths=PackedStringArray("idle_state", "fall_state", "walk_state", "run_state")]
+[node name="Jump" type="Node" parent="StateMachine" node_paths=PackedStringArray("idle_state", "fall_state", "walk_state", "run_state", "computer_state")]
 script = ExtResource("7_ov722")
 idle_state = NodePath("../Idle")
 fall_state = NodePath("../Fall")
 walk_state = NodePath("../Walk")
 run_state = NodePath("../Run")
+computer_state = NodePath("../Computer")
+animation_state_name = "fall_jump"
 
-[node name="Fall" type="Node" parent="StateMachine" node_paths=PackedStringArray("idle_state", "jump_state", "walk_state", "run_state")]
+[node name="Fall" type="Node" parent="StateMachine" node_paths=PackedStringArray("idle_state", "jump_state", "walk_state", "run_state", "computer_state")]
 script = ExtResource("8_hwvw3")
 idle_state = NodePath("../Idle")
 jump_state = NodePath("../Jump")
 walk_state = NodePath("../Walk")
 run_state = NodePath("../Run")
+computer_state = NodePath("../Computer")
+animation_state_name = "fall_jump"
 
 [node name="CrouchIdle" type="Node" parent="StateMachine"]
 script = ExtResource("9_wbwdp")
+animation_state_name = "crouch_idle_walk"
 
 [node name="CrouchWalk" type="Node" parent="StateMachine"]
 script = ExtResource("10_ditk3")
+animation_state_name = "crouch_idle_walk"
 
-[node name="CrawlIdle" type="Node" parent="StateMachine"]
-script = ExtResource("11_3i263")
-
-[node name="CrawlWalk" type="Node" parent="StateMachine"]
-script = ExtResource("12_eclkw")
-
-[node name="Terminal" type="Node" parent="StateMachine"]
+[node name="Computer" type="Node" parent="StateMachine" node_paths=PackedStringArray("idle_state")]
 script = ExtResource("13_6jiec")
-
-[node name="Operating" type="Node" parent="StateMachine"]
-script = ExtResource("14_ge6ct")
+idle_state = NodePath("../Idle")
+animation_state_name = "computer"
 
 [node name="DieState" type="Node" parent="StateMachine"]
 script = ExtResource("15_qkean")

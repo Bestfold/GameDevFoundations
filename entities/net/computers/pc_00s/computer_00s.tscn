@@ -4,6 +4,7 @@
 [ext_resource type="Script" path="res://entities/net/computers/pc_00s/computer_00s.gd" id="2_jsss8"]
 
 [node name="computer_00s" instance=ExtResource("1_b6j33")]
+transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 0, 0, 0)
 script = ExtResource("2_jsss8")
 
 [node name="OperatingSystem" type="Node" parent="." index="0"]

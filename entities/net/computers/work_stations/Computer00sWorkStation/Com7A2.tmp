@@ -1,9 +1,8 @@
-[gd_scene load_steps=8 format=3 uid="uid://cxnfgo2ddgk47"]
+[gd_scene load_steps=7 format=3 uid="uid://cxnfgo2ddgk47"]
 
 [ext_resource type="Script" path="res://entities/net/computers/work_stations/Computer00sWorkStation/computer_00s_work_station.gd" id="1_8xggx"]
 [ext_resource type="PackedScene" uid="uid://crkybx8yt7rju" path="res://entities/net/computers/pc_00s/computer_00s.tscn" id="1_i1o82"]
 [ext_resource type="PackedScene" uid="uid://bhq0phkmsfg6f" path="res://common/components/interactable/Interactable.tscn" id="2_n2ctd"]
-[ext_resource type="Script" path="res://common/components/interactable/interactable_computer.gd" id="4_6t8ol"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_s2j0d"]
 size = Vector3(1.22702, 0.666077, 0.515906)
@@ -26,10 +25,10 @@ transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 0, 0.919981, 0)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0363006, 1.25406, -0.174018)
 shape = SubResource("BoxShape3D_s2j0d")
 
-[node name="InteractableBody" parent="StaticBody3D" instance=ExtResource("2_n2ctd")]
+[node name="InteractableBody" parent="StaticBody3D" node_paths=PackedStringArray("interact_area") instance=ExtResource("2_n2ctd")]
 unique_name_in_owner = true
-script = ExtResource("4_6t8ol")
 interact_prompt = "[E] to conputer"
+interact_area = NodePath("..")
 
 [node name="UserPosition" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.874477)
@@ -45,7 +44,7 @@ skeleton = NodePath("../..")
 shape = SubResource("BoxShape3D_81daw")
 
 [node name="Table" type="MeshInstance3D" parent="."]
-transform = Transform3D(1.40011, 0, 0, 0, 0.0564819, 0, 0, 0, 0.747415, 0.00487888, 0.891886, -0.155037)
+transform = Transform3D(1.40011, 0, 0, 0, 0.0564819, 0, 0, 0, 0.65, 0.00487888, 0.891886, -0.111783)
 mesh = SubResource("BoxMesh_xumdj")
 skeleton = NodePath("../..")
 

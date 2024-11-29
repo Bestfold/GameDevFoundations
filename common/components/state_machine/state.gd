@@ -4,7 +4,7 @@ class_name State
 
 # State base class
 
-@export var animation_condition_name: String
+@export var animation_state_name: String
 @export var move_speed: float = 5
 @export var lerp_val: float = 0.3
 
@@ -23,9 +23,13 @@ func enter():
 	#animation_tree.play(animation_name)
 	#var animation_condition_path := "parameters/conditions/" + str(animation_condition_name)
 	#animation_tree.set(animation_condition_path, true)
+	var animation_state_machine = animation_tree["parameters/playback"]
+	animation_state_machine.travel(animation_state_name)
 	pass
 
 func exit():
+	#var animation_condition_path := "parameters/conditions/" + str(animation_condition_name)
+	#animation_tree.set(animation_condition_path, false)
 	pass
 
 func process_physics(_delta: float) -> State:

@@ -1,5 +1,4 @@
 extends State
-
 class_name CrouchIdleState
 
 #func enter():
