@@ -10,8 +10,6 @@ class_name GameManager
 @export var world_scene: PackedScene
 @export var singleplayer_player_scene: PackedScene
 
-var currently_ingame = false
-
 # Debug logger
 #signal game_log(value)
 
@@ -65,35 +63,40 @@ func multiplayer_disconnect():
 	pass
 
 
-func _add_world():
-	currently_ingame = true
-	
+func _add_world():	
 	preload("res://stages/levels/world/world.tscn")
 	var world = world_scene.instantiate()
 	world.name = "World"
 	add_child(world)
 	move_child(world, 1)
 
+	MenuManager.in_game = true
+
 
 func continue_game():
-	toggle_menu_control_at_player(false)
+	MenuManager.toggle_menu_control_at_player(false)
 
 
 func leave_game():
 	
 	if not MultiplayerManager.multiplayer_mode_enabled:
 		_remove_single_player()
+	
+	for player in multiplayer_players.get_children():
+		multiplayer_players.remove_child(player)
+	
 	_remove_world()
 
 
 func _remove_world():
-	currently_ingame = false
 	var world = get_node("World")
 
 	multiplayer_disconnect()
 
 	remove_child(world)
 	world.queue_free()
+
+	MenuManager.in_game = false
 
 	
 func become_host():
@@ -238,55 +241,6 @@ func remove_left_behind_body(player_id: int):
 			return
 			
 	push_error("Tried to remove 'LeftBehindBody', but found none of name: " + body_name)
-
-
-
-
-
-
-
-func _input(_event):
-		# Debug window for values
-	if Input.is_action_just_pressed("debug"):
-		if ui.debug_ui.visible:
-			ui.debug_ui.hide()
-		else:
-			ui.debug_ui.show()
-
-	
-	if not currently_ingame:
-		return
-
-	# Escape-menu for game-instance
-	if Input.is_action_just_pressed("escape"):
-		if not ui.ingame_menu.visible:
-			ui.toggle_ingame_menu(true)
-			toggle_menu_control_at_player(true)
-		else:
-			ui.toggle_ingame_menu(false)
-			toggle_menu_control_at_player(false)
-	
-
-
-# Changes menu_visible atribute at either single- or multiplayer-player, which again determines wether
-#  look_component.capture_mouse captures or free's mouse
-#		Could be changed to a signal, which players connect to, but in order to
-#		 keep player without refrence to game, this is done:
-
-func toggle_menu_control_at_player(value: bool):
-	if MultiplayerManager.multiplayer_mode_enabled:
-		var id = multiplayer.get_unique_id()
-		if multiplayer_players.has_node(str(id)):
-			var multiplayer_player = multiplayer_players.get_node(str(id))
-			multiplayer_player.set_menu_visible(value)
-			multiplayer_player.look_component.capture_mouse()
-	else:
-		var singleplayer_player = get_node("PlayerSingleplayer")
-		if singleplayer_player != null:
-			singleplayer_player.set_menu_visible(value)
-			singleplayer_player.look_component.capture_mouse()
-		
-
 
 
 # Helper-function

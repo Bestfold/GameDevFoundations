@@ -167,15 +167,15 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.26894, 0, 1.13055)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.19752, -2.98023e-07, 0.0954694)
 
 [node name="Skeleton3D" parent="NPC/Armature" index="0"]
-bones/0/position = Vector3(-1.49916e-10, 1.001, 2.94581e-09)
-bones/2/rotation = Quaternion(-0.0149621, -0.00785836, 0.992451, -0.121471)
-bones/4/rotation = Quaternion(0.0515961, 0.0480472, 0.996298, -0.0491806)
-bones/5/rotation = Quaternion(-0.174419, -2.48321e-05, 0.00252916, 0.984668)
-bones/6/rotation = Quaternion(0.659555, 0.0257657, -0.0681172, 0.74812)
-bones/7/rotation = Quaternion(0.0182699, -0.00328233, 0.993734, 0.110223)
-bones/9/rotation = Quaternion(-0.0860165, 0.0494804, 0.993624, 0.0535196)
-bones/10/rotation = Quaternion(-0.174419, 2.48235e-05, -0.00252914, 0.984668)
-bones/11/rotation = Quaternion(0.65673, -0.0554323, 0.0861096, 0.74714)
+bones/0/position = Vector3(-1.3427e-10, 1.00059, 1.95118e-09)
+bones/2/rotation = Quaternion(-0.0149547, -0.00785643, 0.992476, -0.12127)
+bones/4/rotation = Quaternion(0.0515289, 0.0500837, 0.996196, -0.0492949)
+bones/5/rotation = Quaternion(-0.178848, -2.48096e-05, 0.00259339, 0.983873)
+bones/6/rotation = Quaternion(0.661117, 0.0259044, -0.0681351, 0.746733)
+bones/7/rotation = Quaternion(0.0182636, -0.00328027, 0.993751, 0.11007)
+bones/9/rotation = Quaternion(-0.0859402, 0.0515135, 0.993517, 0.0537049)
+bones/10/rotation = Quaternion(-0.178848, 2.48108e-05, -0.00259337, 0.983873)
+bones/11/rotation = Quaternion(0.658288, -0.0556083, 0.086066, 0.74576)
 
 [node name="AnimationTree" parent="NPC" index="4"]
 parameters/crouch_idle_walk/BlendSpace1D/blend_position = 0

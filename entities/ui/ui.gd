@@ -1,5 +1,7 @@
 extends CanvasLayer
 
+# Manages buttons being pressed in menus
+
 @onready var main_menu: Control = %MainMenu
 @onready var debug_ui: DebugUI = %DebugUI
 @onready var lobby_menu: VBoxContainer = %LobbyMenu

@@ -9,7 +9,7 @@ var head_bobbing_index = 0.0
 
 # For players this will change mouse mode to captured
 func capture_mouse() -> void:
-	if parent.capture_mouse:
+	if Input.mouse_mode == Input.MOUSE_MODE_VISIBLE:
 		Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	else:
 		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)

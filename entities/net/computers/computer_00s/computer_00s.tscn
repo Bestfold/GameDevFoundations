@@ -1,7 +1,15 @@
-[gd_scene load_steps=3 format=3 uid="uid://crkybx8yt7rju"]
+[gd_scene load_steps=6 format=3 uid="uid://crkybx8yt7rju"]
 
 [ext_resource type="PackedScene" uid="uid://1shm260jhuux" path="res://entities/net/computers/computer_00s/computer_00s.glb" id="1_b6j33"]
 [ext_resource type="Script" path="res://entities/net/computers/computer_00s/computer_00s.gd" id="2_jsss8"]
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_0x3oj"]
+viewport_path = NodePath("SubViewport")
+
+[sub_resource type="Gradient" id="Gradient_00v6y"]
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_fd87d"]
+gradient = SubResource("Gradient_00v6y")
 
 [node name="computer_00s" instance=ExtResource("1_b6j33")]
 transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 0, 0, 0)
@@ -9,3 +17,28 @@ script = ExtResource("2_jsss8")
 
 [node name="OperatingSystem" type="Node" parent="." index="0"]
 unique_name_in_owner = true
+
+[node name="Sprite3D" type="Sprite3D" parent="." index="4"]
+transform = Transform3D(0.0882026, 0, 0, 0, 0.0582437, 0, 0, 0, 1, 0, 0.287501, 0)
+texture = SubResource("ViewportTexture_0x3oj")
+
+[node name="SubViewport" type="SubViewport" parent="." index="5"]
+
+[node name="Node2D" type="Node2D" parent="SubViewport" index="0"]
+
+[node name="Control" type="Control" parent="SubViewport" index="1"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextureRect" type="TextureRect" parent="SubViewport/Control" index="0"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("GradientTexture1D_fd87d")

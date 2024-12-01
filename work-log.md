@@ -142,4 +142,9 @@
   fikse en generell meny-kontroll også.
  Neste blir å sette seg inn i 2D skjerm, og prøve å fikse en meny manager
 
+# 01.12.24
+ God jul B>
+ Refactor meny-styring til en egen MenuManager.
+ Smått begynt å se på 2D representasjon på datamaskin  med SubViewport
+
 # END LOG
