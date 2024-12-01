@@ -145,6 +145,9 @@
 # 01.12.24
  God jul B>
  Refactor meny-styring til en egen MenuManager.
- Smått begynt å se på 2D representasjon på datamaskin  med SubViewport
+ Smått begynt å se på 2D representasjon på datamaskin med SubViewport.
+ Ønsker å få styring ved bord til å bli grei først. Jobber nå med å sette skjermen i fokus når man interacter med den.
+  Siste jeg gjorde var å lage en metode som setter dette fokuset (men den funker ikke) når man interacter med skjerm, og
+  resetter når man trykker Escape. Men implementajsonen må aktiveres også når karakter entrer rom!
 
 # END LOG

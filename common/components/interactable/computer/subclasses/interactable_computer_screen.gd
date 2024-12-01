@@ -1,0 +1,2 @@
+extends InteractableComputer
+class_name InteractableComputerScreen

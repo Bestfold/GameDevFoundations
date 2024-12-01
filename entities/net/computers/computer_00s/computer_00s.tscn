@@ -18,11 +18,15 @@ script = ExtResource("2_jsss8")
 [node name="OperatingSystem" type="Node" parent="." index="0"]
 unique_name_in_owner = true
 
+[node name="Cube" parent="." index="1"]
+transform = Transform3D(0.974975, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+
 [node name="Sprite3D" type="Sprite3D" parent="." index="4"]
-transform = Transform3D(0.0882026, 0, 0, 0, 0.0582437, 0, 0, 0, 1, 0, 0.287501, 0)
+transform = Transform3D(-0.0408409, 0, -8.71219e-08, 0, 0.0414533, 0, 3.57042e-09, 0, -0.996558, 0, 0.287501, 0)
 texture = SubResource("ViewportTexture_0x3oj")
 
 [node name="SubViewport" type="SubViewport" parent="." index="5"]
+size = Vector2i(960, 720)
 
 [node name="Node2D" type="Node2D" parent="SubViewport" index="0"]
 
@@ -42,3 +46,51 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 texture = SubResource("GradientTexture1D_fd87d")
+
+[node name="VSplitContainer" type="HSplitContainer" parent="SubViewport/Control/TextureRect" index="0"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="SubViewport/Control/TextureRect/VSplitContainer" index="0"]
+layout_mode = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="VBoxContainer" type="VBoxContainer" parent="SubViewport/Control/TextureRect/VSplitContainer/MarginContainer" index="0"]
+custom_minimum_size = Vector2(400, 200)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="SubViewport/Control/TextureRect/VSplitContainer/MarginContainer/VBoxContainer" index="0"]
+layout_mode = 2
+text = "Rooms"
+
+[node name="AvailableRooms" type="MenuBar" parent="SubViewport/Control/TextureRect/VSplitContainer/MarginContainer/VBoxContainer" index="1"]
+layout_mode = 2
+
+[node name="EnterRoom" type="Button" parent="SubViewport/Control/TextureRect/VSplitContainer/MarginContainer/VBoxContainer" index="2"]
+layout_mode = 2
+text = "Enter room"
+alignment = 0
+
+[node name="MarginContainer2" type="MarginContainer" parent="SubViewport/Control/TextureRect/VSplitContainer" index="1"]
+layout_mode = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="SubViewport/Control/TextureRect/VSplitContainer/MarginContainer2" index="0"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="SubViewport/Control/TextureRect/VSplitContainer/MarginContainer2/VBoxContainer2" index="0"]
+layout_mode = 2
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="SubViewport/Control/TextureRect/VSplitContainer/MarginContainer2/VBoxContainer2" index="1"]
+layout_mode = 2

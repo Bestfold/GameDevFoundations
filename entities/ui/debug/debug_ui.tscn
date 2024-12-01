@@ -28,6 +28,10 @@ theme_override_constants/margin_bottom = 16
 layout_mode = 2
 size_flags_vertical = 0
 
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Debug"
+
 [node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
 

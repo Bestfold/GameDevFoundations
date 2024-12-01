@@ -4,8 +4,6 @@ class_name PlayerCharacter
 # Menu is visible and should capture mouse and remove control over character
 @export var menu_visible := false
 
-var sitting := false
-
 # Child refrences
 @onready var spring_arm: SpringArm3D = %SpringArm3D
 @onready var armature: Node3D = $Armature
@@ -20,6 +18,23 @@ var sitting := false
 @onready var can_interact_component: CanInteractInterface = $CanInteract
 @onready var head_bobbing: Node3D = %Head_bobbing
 @onready var camera: Camera3D = %Camera3D
+@onready var interact_ray: RayCast3D = %InteractRay
+
+
+var sitting := false:
+	set(value):
+		sitting = value
+		if value == true:
+			spring_arm.position.y += -0.5
+			# Setting collison mask to only get "TableInteractables"
+			interact_ray.set_collision_mask_value(1, false)
+			interact_ray.set_collision_mask_value(3, true)
+		else:
+			spring_arm.position.y += 0.5
+			interact_ray.set_collision_mask_value(1, true)
+			interact_ray.set_collision_mask_value(3, false)
+
+var at_desktop := false
 
 
 func set_menu_visible(value: bool):

@@ -7,16 +7,16 @@ class_name CanInteractInterface
 @export var interact_ray: RayCast3D
 @export var text_label: Label
 
+
+var message: String
 var last_interactable: InteractableInterface
 
 func handle_physics(_delta: float) -> InteractableInterface:
-	var message:= ""
 	var interactable_to_return: InteractableInterface = null
-
+	message = ""
 
 	if interact_ray.is_colliding():
 		var colliding_body = interact_ray.get_collider()
-
 		var colliding_body_children = colliding_body.get_children()
 
 		for child in colliding_body_children:
@@ -31,8 +31,7 @@ func handle_physics(_delta: float) -> InteractableInterface:
 					child.execute_interaction(parent)
 					last_interactable = child
 					interactable_to_return = child
-					break
-
+					break	
 			
 	if text_label:
 		# Debug

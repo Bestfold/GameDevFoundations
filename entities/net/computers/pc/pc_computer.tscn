@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://entities/net/computers/pc/pc_os.gd" id="1_80blw"]
 [ext_resource type="PackedScene" uid="uid://bhq0phkmsfg6f" path="res://common/components/interactable/Interactable.tscn" id="2_0r75e"]
-[ext_resource type="Script" path="res://common/components/interactable/interactable_computer_test.gd" id="3_dusmw"]
+[ext_resource type="Script" path="res://common/components/interactable/computer/subclasses/interactable_computer_test.gd" id="3_dusmw"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_y33vq"]
 
