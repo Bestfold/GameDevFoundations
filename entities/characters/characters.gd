@@ -10,11 +10,11 @@ func set_controlable(value: bool):
 	if current_controller:
 		is_controlable = value
 	
-	print("is_controlable: " + str(is_controlable))
+	#print("is_controlable: " + str(is_controlable))
 
 
 func set_current_controller(value: bool):
 	if value == false:
 		set_controlable(false)
 	current_controller = value
-	print("current controller: " + str(current_controller))
+	#print("current controller: " + str(current_controller))

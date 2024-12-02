@@ -49,3 +49,27 @@ func handle_input(event: InputEvent, _move_speed: float, _lerp_val: float) -> vo
 	#	parent.head_bobbing.position.x = lerp(parent.head_bobbing.position.x, 
 	#			head_bobbing_vector.x * move_speed * 0.5, delta * lerp_val)
 	#parent.spring_arm_pivot.transform = parent.head_mesh.transform
+
+
+func set_camera_position(position: Vector3):
+	parent.spring_arm.position = position
+
+
+func set_camera_rotation(rotation: Vector3):
+	parent.rotation = Vector3.ZERO
+
+	parent.spring_arm.rotation.x = rotation.x
+	parent.spring_arm_pivot.rotation.y = rotation.y
+	parent.spring_arm.rotation.z = rotation.z
+
+
+func add_camera_position_offset(position_offset: Vector3):
+	parent.spring_arm.position.x += position_offset.x
+	parent.spring_arm.position.y += position_offset.y
+	parent.spring_arm.position.z += position_offset.z
+
+
+func add_camera_rotation_offset(rotation_offset: Vector3):
+	parent.spring_arm.rotation.x += rotation_offset.x
+	parent.spring_arm_pivot.position.y += rotation_offset.y
+	parent.spring_arm.position.z += rotation_offset.z

@@ -150,4 +150,18 @@
   Siste jeg gjorde var å lage en metode som setter dette fokuset (men den funker ikke) når man interacter med skjerm, og
   resetter når man trykker Escape. Men implementajsonen må aktiveres også når karakter entrer rom!
 
+# 02.12.24
+ Fiksa sitting og fokus på skjerm. Neste blir å få kontroll og mus til skjerm.
+ Det er en del replication som få ses på og rettes opp.
+    - Computer-animasjon replikeres ikke (Interaction eller state ikke replikert?)
+    - Animasjons-syklus for Idle blir forkortet andre karakterer hopper på en game-instance.
+
+ Har satt opp en "occupied" replikering for WorkStations. Den bruker rpc når occuper: set(value):, noe som kanskje er litt
+  rart, men det funker nå.
+
+ Neste:
+  - Interaction replikering. Et system som tar hensyn til å kunne gjøre mange forskjellige typer interactions
+  - Feilsøke animasjons-syklus 
+
+
 # END LOG

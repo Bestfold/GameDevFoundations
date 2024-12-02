@@ -24,10 +24,12 @@ func handle_physics(_delta: float) -> InteractableInterface:
 			
 				message = child.interact_prompt
 
+				
+
 				# Get implementation from inhereted scripts
 				if get_request_for_interaction():
-					print("Interactable: " + str(child))
-					print("Interactable's owner: " + str(child.owner))
+					#print("Interactable: " + str(child))
+					#print("Interactable's owner: " + str(child.owner))
 					child.execute_interaction(parent)
 					last_interactable = child
 					interactable_to_return = child
@@ -38,6 +40,10 @@ func handle_physics(_delta: float) -> InteractableInterface:
 		text_label.text = message
 
 	return interactable_to_return
+
+
+func empty_interaction_label():
+	text_label.text = ""
 
 
 #func handle_input(_event: InputEvent) -> void:

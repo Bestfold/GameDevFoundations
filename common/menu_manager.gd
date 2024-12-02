@@ -16,7 +16,6 @@ var instances_player_on_computer = false
 
 func _ready():
 	game = get_tree().get_current_scene().get_node(".")
-	print(game)
 	digital_rooms_manager = game.get_node("DigitalRoomsManager")
 	ui = game.get_node("UI")
 
@@ -35,8 +34,6 @@ func _input(_event):
 
 	# Escape-menu for game-instance
 	if Input.is_action_just_pressed("escape"):
-		#print(digital_rooms_manager)
-		#print(ui)
 		if not ui.ingame_menu.visible:
 			ui.toggle_ingame_menu(true)
 			toggle_menu_control_at_player(true)

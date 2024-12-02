@@ -47,7 +47,7 @@ func process_physics(delta: float) -> State:
 
 	var interactable = can_interact_component.handle_physics(delta)
 	if interactable:
-		if interactable.owner is WorkStationInterface:
+		if interactable.owner is WorkStationInterface && not interactable.owner.occupied:
 			return computer_state
 
 	parent.move_and_slide()

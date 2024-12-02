@@ -2,7 +2,7 @@ extends InteractableInterface
 class_name InteractableComputer
 
 func execute_interaction(interacter):
-	print("Test interactable interacted B>")
+	#print("Test interactable interacted B>")
 
 	if interacter is PlayerMultiplayer:
 		multiplayer_execute_interaction.rpc()

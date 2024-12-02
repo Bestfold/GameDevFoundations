@@ -9,3 +9,19 @@ class_name WorkStationInterface
 @onready var interactable_body:= %InteractableBody
 
 var user_position_to_computer_angle: float
+
+var screen_pos_to_user_pos: Vector3 
+
+var occupied: bool = false:
+	set(value):
+		if occupied == value:
+			return
+		occupied = value
+		if MultiplayerManager.multiplayer_mode_enabled:
+			replicate_occupied.rpc(value)
+
+
+@rpc("any_peer", "call_remote")
+func replicate_occupied(value: bool):
+	print("replicating occupation of WorkStation: " + str(value))
+	occupied = value

@@ -3,6 +3,7 @@ class_name PlayerCharacter
 
 # Menu is visible and should capture mouse and remove control over character
 @export var menu_visible := false
+@export var sitting_camera_offset := -0.5
 
 # Child refrences
 @onready var spring_arm: SpringArm3D = %SpringArm3D
@@ -24,13 +25,14 @@ class_name PlayerCharacter
 var sitting := false:
 	set(value):
 		sitting = value
+		
 		if value == true:
-			spring_arm.position.y += -0.5
+			look_component.add_camera_position_offset(Vector3(0, sitting_camera_offset, 0))
 			# Setting collison mask to only get "TableInteractables"
 			interact_ray.set_collision_mask_value(1, false)
 			interact_ray.set_collision_mask_value(3, true)
 		else:
-			spring_arm.position.y += 0.5
+			look_component.add_camera_position_offset(Vector3(0, -sitting_camera_offset, 0))
 			interact_ray.set_collision_mask_value(1, true)
 			interact_ray.set_collision_mask_value(3, false)
 
