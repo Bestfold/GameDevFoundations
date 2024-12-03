@@ -9,10 +9,17 @@ var username = ""
 func _ready():
 	# Does nothing if not the right client
 	if get_multiplayer_authority() != multiplayer.get_unique_id():
-		set_physics_process(false)
-		set_process_unhandled_input(false)
+		#set_physics_process(false)
+		#set_process_unhandled_input(false)
+		set_process_input(false)
 
 	username = SteamManager.steam_username
+
+var do_interact
+
+func _unhandled_input(_event):
+	do_interact = Input.is_action_just_pressed("interact")
+
 
 #var input_dir := Vector2(0,0)
 #var do_jump := false

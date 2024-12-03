@@ -23,5 +23,5 @@ var occupied: bool = false:
 
 @rpc("any_peer", "call_remote")
 func replicate_occupied(value: bool):
-	print("replicating occupation of WorkStation: " + str(value))
+	#print("replicating occupation of WorkStation: " + str(value))
 	occupied = value

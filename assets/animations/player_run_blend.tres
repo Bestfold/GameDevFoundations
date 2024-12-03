@@ -14,7 +14,7 @@ blend_point_1/pos = 1.0
 min_space = 0.0
 
 [resource]
-graph_offset = Vector2(-216, 58)
+graph_offset = Vector2(-350.391, 83.7364)
 nodes/Run/node = SubResource("AnimationNodeBlendSpace1D_3t4j7")
 nodes/Run/position = Vector2(-20, 140)
 node_connections = [&"output", 0, &"Run"]

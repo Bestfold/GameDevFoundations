@@ -59,3 +59,15 @@ func _physics_process(delta: float) -> void:
 func _process(delta: float) -> void:
 	#if multiplayer.is_server():
 	state_machine.process_frame(delta)
+
+
+# Position and rotation are replicated from client, if server scripts wants to change them they have to be changed here
+@rpc("any_peer", "call_local")
+func set_player_global_position(new_position: Vector3):
+	if multiplayer.get_unique_id() == player_id:
+		position = new_position
+
+@rpc("any_peer", "call_local")
+func set_player_rotation(new_rotation: Vector3):
+	if multiplayer.get_unique_id() == player_id:
+		look_component.set_camera_rotation(new_rotation)

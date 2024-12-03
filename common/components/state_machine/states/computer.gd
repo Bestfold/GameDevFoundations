@@ -13,22 +13,32 @@ var computer_workstation: WorkStationInterface
 
 func enter():
 	super()
+	print("COMPUDERSTTATE ENTETER")
+	if multiplayer.is_server():
+		var last_interacted = parent.can_interact_component.last_interactable
 
-	var last_interacted = parent.can_interact_component.last_interactable
+		if last_interacted.owner is not WorkStationInterface:
+			push_error("ComputerState: Last interactable interacted with was not of type InteractableComputer")
+			invalid_state = true
+			return
+	
+		computer_workstation = last_interacted.owner
+		computer_workstation.occupied = true
 
-	if last_interacted.owner is not WorkStationInterface:
-		push_error("ComputerState: Last interactable interacted with was not of type InteractableComputer")
-		invalid_state = true
-		return
+		if MultiplayerManager.multiplayer_mode_enabled && multiplayer.is_server():
+
+			var position_to_set = computer_workstation.user_position.global_position
+			parent.set_player_global_position.rpc(position_to_set)
+
+			var rotation_to_set := Vector3(0, computer_workstation.user_position_to_computer_angle + PI, 0)
+			parent.set_player_rotation.rpc(rotation_to_set)
+
+		else:
+			parent.global_position = computer_workstation.user_position.global_position
+			parent.rotation.y = computer_workstation.user_position_to_computer_angle
 	
-	computer_workstation = last_interacted.owner
-	computer_workstation.occupied = true
-	
-	parent.global_position = computer_workstation.user_position.global_position
-	parent.rotation.y = computer_workstation.user_position_to_computer_angle
-	
-	parent.sitting = true
-	MenuManager.instances_player_on_computer = true
+		parent.sitting = true
+		MenuManager.instances_player_on_computer = true
 
 
 #	pass
@@ -46,13 +56,15 @@ func exit():
 
 
 func process_physics(delta: float) -> State:
+	#if !parent.is_on_floor():
+	#	return idle_state
 	if invalid_state:
 		push_error("ComputerState:process_physics:INVALID STATE")
 		return idle_state
 
-	if not multiplayer.is_server():
-		if parent.name == "1":
-			print("Host Character on client replies B)")
+	#if not multiplayer.is_server():
+	#	if parent.name == "1":
+	#		print("Host Character on client replies B)")
 
 
 	if not parent.at_desktop:
@@ -60,7 +72,7 @@ func process_physics(delta: float) -> State:
 
 		if last_interacted is InteractableComputerScreen:
 			set_screen_focus(true)
-			can_interact_component.empty_interaction_label()
+			#can_interact_component.empty_interaction_label()
 
 	return null
 

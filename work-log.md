@@ -163,5 +163,16 @@
   - Interaction replikering. Et system som tar hensyn til å kunne gjøre mange forskjellige typer interactions
   - Feilsøke animasjons-syklus 
 
+# 03.12.24
+ Interaction replikering.
+ Se tegning.
+  Klient flytter og roterer seg så RayCast på deres kolliderer med interactable.
+  Posisjon og rotasjon replikerer til server. Karakters RayCast kolliderer også med samme interactable (ved normal funksjon)
+  Klien ønsker å interact-e, og replikerer dette.
+  Server utfører interaction og benytter RPC for å gjøre endringene på alle klienter
+
+  Per nå har jeg RayCast riktig på klient og server, og input for interaction. Men endringene mangler fra server til klienter
+   . Både posisjonering, og spesielt State-skifte. Det er neste
+
 
 # END LOG

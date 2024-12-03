@@ -11,8 +11,8 @@ class_name CanInteractInterface
 var message: String
 var last_interactable: InteractableInterface
 
+# Returns class name of interactable
 func handle_physics(_delta: float) -> InteractableInterface:
-	var interactable_to_return: InteractableInterface = null
 	message = ""
 
 	if interact_ray.is_colliding():
@@ -24,22 +24,21 @@ func handle_physics(_delta: float) -> InteractableInterface:
 			
 				message = child.interact_prompt
 
-				
-
 				# Get implementation from inhereted scripts
+					
 				if get_request_for_interaction():
-					#print("Interactable: " + str(child))
-					#print("Interactable's owner: " + str(child.owner))
+					print("Interactable: " + str(child))
+					print("Interactable's owner: " + str(child.owner))
 					child.execute_interaction(parent)
-					last_interactable = child
-					interactable_to_return = child
-					break	
+					last_interactable = last_interactable
+					text_label.text = ""
+					return last_interactable
 			
 	if text_label:
 		# Debug
 		text_label.text = message
 
-	return interactable_to_return
+	return null
 
 
 func empty_interaction_label():
