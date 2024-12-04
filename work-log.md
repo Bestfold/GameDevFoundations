@@ -174,5 +174,12 @@
   Per nå har jeg RayCast riktig på klient og server, og input for interaction. Men endringene mangler fra server til klienter
    . Både posisjonering, og spesielt State-skifte. Det er neste
 
+# 04.12.24
+ Interaction og ComputerState replikering.
+ For å få en god implementasjon som fungerte for multiplayer måtte store endringer til. Jeg er nærmere fungerende kode nå, men
+  ennå noe arbeid igjen.
+ Stort fokus på hva som skulle gjøres på server, og hvor mye av game-state skulle bestemmes på server kontra klient. Endte opp
+  med å ta vurderingen at hele game state, utenom posisjon og rotasjon, skal være bestemt av server sin game-state.
+
 
 # END LOG

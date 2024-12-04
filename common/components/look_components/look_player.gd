@@ -57,7 +57,7 @@ func set_camera_position(position: Vector3):
 
 func set_camera_rotation(rotation: Vector3):
 	parent.rotation = Vector3.ZERO
-
+	parent.armature.rotation = Vector3.ZERO
 	parent.spring_arm.rotation.x = rotation.x
 	parent.spring_arm_pivot.rotation.y = rotation.y
 	parent.spring_arm.rotation.z = rotation.z

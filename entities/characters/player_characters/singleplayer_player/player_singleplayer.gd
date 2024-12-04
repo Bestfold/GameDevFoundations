@@ -47,3 +47,17 @@ func _physics_process(delta: float) -> void:
 # Passing function
 func _process(delta: float) -> void:
 	state_machine.process_frame(delta)
+
+
+
+func set_player_global_position(new_position: Vector3):
+	position = new_position
+
+func set_player_rotation(new_rotation: Vector3):
+	look_component.set_camera_rotation(new_rotation)
+
+func set_sitting(value: bool):
+	sitting = value
+
+func set_at_desktop(value: bool):
+	at_desktop = value

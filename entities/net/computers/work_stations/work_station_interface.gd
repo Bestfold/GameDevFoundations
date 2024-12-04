@@ -18,10 +18,10 @@ var occupied: bool = false:
 			return
 		occupied = value
 		if MultiplayerManager.multiplayer_mode_enabled:
-			replicate_occupied.rpc(value)
+			replicate_remote_occupied.rpc(value)
 
 
 @rpc("any_peer", "call_remote")
-func replicate_occupied(value: bool):
+func replicate_remote_occupied(value: bool):
 	#print("replicating occupation of WorkStation: " + str(value))
 	occupied = value

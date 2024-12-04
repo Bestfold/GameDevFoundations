@@ -1,6 +1,10 @@
 extends Node
 class_name InteractableInterface
 
+enum Type {NONE, COMPUTER, VEHICLE, CHAIR, SCREEN, BUTTON}
+
+@export var interaction_type :Type
+
 @export var interact_prompt: String = ""
 #@export var parent: Node3D
 @export var interact_area: CollisionObject3D

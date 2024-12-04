@@ -61,13 +61,61 @@ func _process(delta: float) -> void:
 	state_machine.process_frame(delta)
 
 
+
+
+func set_sitting(value: bool):
+	replicate_set_sitting.rpc(value)
+
+func set_at_desktop(value: bool):
+	replicate_set_at_desktop.rpc(value)
+	
+
+func set_player_global_position(new_position: Vector3):
+	replicate_set_player_global_position.rpc(new_position)
+
+func set_camera_position(new_position: Vector3):
+	replicate_set_camera_position.rpc(new_position)
+
+func add_camera_position_offset(position_offset):
+	replicate_add_camera_position_offset.rpc(position_offset)
+
+func set_camera_rotation(new_rotation: Vector3):
+	replicate_set_camera_rotation.rpc(new_rotation)
+
+func add_camera_rotation_offset(position_offset):
+	replicate_add_camera_rotation_offset.rpc(position_offset)
+
+
+@rpc("any_peer", "call_local")
+func replicate_set_sitting(value: bool):
+	sitting = value
+
+@rpc("any_peer", "call_local")
+func replicate_set_at_desktop(value: bool):
+	at_desktop = value
+
 # Position and rotation are replicated from client, if server scripts wants to change them they have to be changed here
 @rpc("any_peer", "call_local")
-func set_player_global_position(new_position: Vector3):
+func replicate_set_player_global_position(new_position: Vector3):
 	if multiplayer.get_unique_id() == player_id:
 		position = new_position
 
 @rpc("any_peer", "call_local")
-func set_player_rotation(new_rotation: Vector3):
+func replicate_set_camera_position(new_position: Vector3):
+	if multiplayer.get_unique_id() == player_id:
+		look_component.set_camera_position(new_position)
+
+@rpc("any_peer", "call_local")
+func replicate_add_camera_position_offset(new_position: Vector3):
+	if multiplayer.get_unique_id() == player_id:
+		look_component.add_camera_position_offset(new_position)
+
+@rpc("any_peer", "call_local")
+func replicate_set_camera_rotation(new_rotation: Vector3):
 	if multiplayer.get_unique_id() == player_id:
 		look_component.set_camera_rotation(new_rotation)
+
+@rpc("any_peer", "call_local")
+func replicate_add_camera_rotation_offset(new_rotation: Vector3):
+	if multiplayer.get_unique_id() == player_id:
+		look_component.add_camera_rotation_offset(new_rotation)

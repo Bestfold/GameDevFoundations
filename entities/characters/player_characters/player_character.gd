@@ -25,8 +25,7 @@ class_name PlayerCharacter
 var sitting := false:
 	set(value):
 		sitting = value
-		
-		if value == true:
+		if value:
 			look_component.add_camera_position_offset(Vector3(0, sitting_camera_offset, 0))
 			# Setting collison mask to only get "TableInteractables"
 			interact_ray.set_collision_mask_value(1, false)
@@ -48,3 +47,34 @@ func toggle_menu_control(value: bool):
 	if not sitting:
 		set_menu_visible(value)
 		look_component.capture_mouse()
+
+func set_player_global_position(_new_position: Vector3):
+	pass
+
+func set_player_rotation(new_rotation: Vector3):
+	set_camera_rotation(new_rotation)
+
+func set_camera_position(_new_position: Vector3):
+	pass
+
+func add_camera_position_offset(_position_offset):
+	pass
+
+func set_camera_rotation(_new_rotation: Vector3):
+	pass
+
+func add_camera_rotation_offset(_position_offset):
+	pass
+
+
+func set_sitting(_value: bool):
+	pass
+
+
+func set_at_desktop(_value: bool):
+	pass
+
+
+#@rpc("any_peer", "call_remote")
+#func replicate_remote_set_sitting(value: bool):
+#	sitting = value
