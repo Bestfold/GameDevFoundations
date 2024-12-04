@@ -181,5 +181,7 @@
  Stort fokus på hva som skulle gjøres på server, og hvor mye av game-state skulle bestemmes på server kontra klient. Endte opp
   med å ta vurderingen at hele game state, utenom posisjon og rotasjon, skal være bestemt av server sin game-state.
 
+ Rimelig mye rot og tullball. Men nærmer meg nå. Fokus på det å forlate computer-state igjen.
+
 
 # END LOG

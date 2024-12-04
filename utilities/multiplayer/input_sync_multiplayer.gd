@@ -1,7 +1,7 @@
 extends MultiplayerSynchronizer
 
 @onready var input_synchronizer: MultiplayerSynchronizer = %InputSynchronizer
-@onready var player: CharacterBody3D = $".."
+#@onready var player: CharacterBody3D = $".."
 
 
 var username = ""

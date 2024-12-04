@@ -40,7 +40,7 @@ func _input(_event):
 		else:
 			ui.toggle_ingame_menu(false)
 			toggle_menu_control_at_player(false)
-	
+
 
 
 # Changes menu_visible atribute at either single- or multiplayer-player, which again determines wether

@@ -15,8 +15,7 @@ func enter():
 	super()
 	print("COMPUDERSTTATE ENTETER")
 
-	# Server or singleplayer
-	if multiplayer.is_server() || not MultiplayerManager.multiplayer_mode_enabled:
+	if is_server_or_singleplayer():
 	
 		var last_interacted = parent.can_interact_component.last_interactable
 
@@ -33,8 +32,8 @@ func enter():
 		var position_to_set = computer_workstation.user_position.global_position
 		parent.set_player_global_position(position_to_set)
 
-		var rotation_to_set := Vector3(0, computer_workstation.user_position_to_computer_angle + PI, 0)
-		parent.set_player_rotation(rotation_to_set)
+		var rotation_to_set := Vector3(0, computer_workstation.user_position_to_computer_angle, 0)
+		parent.set_camera_rotation(rotation_to_set)
 
 		parent.set_sitting(true)
 
@@ -52,8 +51,7 @@ func exit():
 	#var last_interacted = parent.can_interact_component.last_interactable
 	#if last_interacted:
 	
-	# Server or singleplayer
-	if multiplayer.is_server() || not MultiplayerManager.multiplayer_mode_enabled:
+	if is_server_or_singleplayer():
 		computer_workstation.occupied = false
 		parent.set_sitting(false)
 	
@@ -70,36 +68,37 @@ func exit():
 
 
 func process_physics(delta: float) -> State:
-	#if !parent.is_on_floor():
-	#	return idle_state
 	if invalid_state:
 		push_error("ComputerState:process_physics:INVALID STATE")
 		return idle_state
 
-	# Server or singleplayer
-	if multiplayer.is_server() || not MultiplayerManager.multiplayer_mode_enabled:
-# REWORK
-		# Interactions from table:
-		if not parent.at_desktop:
-			var interactable_type = can_interact_component.handle_physics(delta)
+	var interactable_type = InteractableInterface.Type.NONE
 
-			match interactable_type:
-				InteractableInterface.Type.SCREEN:
+	# Interactions from table:
+	if not parent.at_desktop:
+		interactable_type = can_interact_component.handle_physics(delta)
+
+		match interactable_type:
+			InteractableInterface.Type.SCREEN:
+				if is_server_or_singleplayer():
 					set_screen_focus(true)
-				_: # Default (Type.NONE)
-					pass
+			_: # Default (Type.NONE)
+				pass
 
+# REWORK
+	
+	if can_interact_component.leave_interact_state():
+		print("LEAVING COMPUTER STATE?")
+		if parent.at_desktop:
+			if is_server_or_singleplayer():
+					set_screen_focus(false)
+		elif parent.sitting:
+			
+			if is_server_or_singleplayer():
+				var position_to_set = computer_workstation.user_return_position.global_position
+				parent.set_player_global_position(position_to_set)
 
-		if can_interact_component.leave_interact_state():
-			if parent.at_desktop:
-				set_screen_focus(false)
-			elif parent.sitting:
-				if MultiplayerManager.multiplayer_mode_enabled && multiplayer.is_server():
-
-					var position_to_set = computer_workstation.user_return_position.global_position
-					parent.set_player_global_position(position_to_set)
-
-				return idle_state
+			return idle_state
 # END REWORK
 
 	return null
@@ -139,6 +138,10 @@ func set_screen_focus(value: bool):
 			)
 		
 		parent.add_camera_position_offset(camera_position_offset)
+
+
+func is_server_or_singleplayer() -> bool:
+	return multiplayer.is_server() || not MultiplayerManager.multiplayer_mode_enabled
 
 
 @rpc("any_peer", "call_remote")
