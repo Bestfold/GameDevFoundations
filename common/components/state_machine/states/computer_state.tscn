@@ -1,0 +1,39 @@
+[gd_scene load_steps=7 format=3 uid="uid://ct423lfom84lw"]
+
+[ext_resource type="Script" path="res://common/components/state_machine/states/computer.gd" id="1_x3fwp"]
+[ext_resource type="PackedScene" uid="uid://bkdv2owi8757p" path="res://common/components/state_machine/state_machine.tscn" id="2_555fn"]
+[ext_resource type="Script" path="res://common/components/state_machine/states/computer_states/computer_idle.gd" id="3_6e0ma"]
+[ext_resource type="Script" path="res://common/components/state_machine/states/computer_states/computer_enter.gd" id="3_f52ef"]
+[ext_resource type="Script" path="res://common/components/state_machine/states/computer_states/computer_focus.gd" id="4_u56y2"]
+[ext_resource type="Script" path="res://common/components/state_machine/states/computer_states/computer_leave.gd" id="5_afxsf"]
+
+[node name="Computer" type="Node"]
+script = ExtResource("1_x3fwp")
+animation_state_name = "computer"
+
+[node name="StateMachine" parent="." node_paths=PackedStringArray("initial_state") instance=ExtResource("2_555fn")]
+unique_name_in_owner = true
+initial_state = NodePath("ComputerEnter")
+
+[node name="ComputerEnter" type="Node" parent="StateMachine" node_paths=PackedStringArray("computer_idle", "computer_leave")]
+script = ExtResource("3_f52ef")
+computer_idle = NodePath("../ComputerIdle")
+computer_leave = NodePath("../ComputerLeave")
+
+[node name="ComputerIdle" type="Node" parent="StateMachine" node_paths=PackedStringArray("computer_focus", "computer_leave")]
+script = ExtResource("3_6e0ma")
+computer_focus = NodePath("../ComputerFocus")
+computer_leave = NodePath("../ComputerLeave")
+animation_state_name = "computer"
+
+[node name="ComputerFocus" type="Node" parent="StateMachine" node_paths=PackedStringArray("computer_idle", "computer_leave")]
+script = ExtResource("4_u56y2")
+computer_idle = NodePath("../ComputerIdle")
+computer_leave = NodePath("../ComputerLeave")
+animation_state_name = "computer"
+
+[node name="ComputerLeave" type="Node" parent="StateMachine" node_paths=PackedStringArray("computer_idle", "computer_focus")]
+script = ExtResource("5_afxsf")
+computer_idle = NodePath("../ComputerIdle")
+computer_focus = NodePath("../ComputerFocus")
+animation_state_name = "computer"

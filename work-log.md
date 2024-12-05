@@ -183,5 +183,12 @@
 
  Rimelig mye rot og tullball. Men nærmer meg nå. Fokus på det å forlate computer-state igjen.
 
+# 05.12.24
+ Innser at det blir for mye rot og lite kontroll med implementasjonen som er satt opp nå.
+ Reworker ComputerState til å ha en egen sub-StateMachine som holder rede på forskjellige arvere av ComputerStateInterface
+
+ ENDELIG
+ Sub- State Machine for ComputerState ferdig, og alt funker som det skal.
+
 
 # END LOG

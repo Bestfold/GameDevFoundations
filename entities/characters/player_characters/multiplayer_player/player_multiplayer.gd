@@ -52,6 +52,11 @@ func _unhandled_input(event: InputEvent) -> void:
 
 
 func _physics_process(delta: float) -> void:
+	if multiplayer.get_unique_id() == player_id:
+		DebugGlobal.var1 = sitting
+		DebugGlobal.var2 = at_desktop
+		DebugGlobal.var3 = state_machine.current_state.name
+		
 	# Passing function
 	state_machine.process_physics(delta)
 
@@ -59,7 +64,6 @@ func _physics_process(delta: float) -> void:
 func _process(delta: float) -> void:
 	#if multiplayer.is_server():
 	state_machine.process_frame(delta)
-
 
 
 
@@ -97,25 +101,20 @@ func replicate_set_at_desktop(value: bool):
 # Position and rotation are replicated from client, if server scripts wants to change them they have to be changed here
 @rpc("any_peer", "call_local")
 func replicate_set_player_global_position(new_position: Vector3):
-	if multiplayer.get_unique_id() == player_id:
-		position = new_position
+	position = new_position
 
 @rpc("any_peer", "call_local")
 func replicate_set_camera_position(new_position: Vector3):
-	if multiplayer.get_unique_id() == player_id:
-		look_component.set_camera_position(new_position)
+	look_component.set_camera_position(new_position)
 
 @rpc("any_peer", "call_local")
-func replicate_add_camera_position_offset(new_position: Vector3):
-	if multiplayer.get_unique_id() == player_id:
-		look_component.add_camera_position_offset(new_position)
+func replicate_add_camera_position_offset(position_offset: Vector3):
+	look_component.add_camera_position_offset(position_offset)
 
 @rpc("any_peer", "call_local")
 func replicate_set_camera_rotation(new_rotation: Vector3):
-	if multiplayer.get_unique_id() == player_id:
-		look_component.set_camera_rotation(new_rotation)
+	look_component.set_camera_rotation(new_rotation)
 
 @rpc("any_peer", "call_local")
-func replicate_add_camera_rotation_offset(new_rotation: Vector3):
-	if multiplayer.get_unique_id() == player_id:
-		look_component.add_camera_rotation_offset(new_rotation)
+func replicate_add_camera_rotation_offset(rotation_offset: Vector3):
+	look_component.add_camera_rotation_offset(rotation_offset)

@@ -6,7 +6,7 @@ class_name CanInteractInterface
 @export var parent: Character
 @export var interact_ray: RayCast3D
 @export var text_label: Label
-@export var interact_cooldown: float = 0.5 
+@export var interact_cooldown: float = 0.1 
 
 var interact_cooldown_active := false
 
@@ -31,12 +31,8 @@ func handle_physics(_delta: float) -> InteractableInterface.Type:
 	last_interactable_type = get_request_for_interaction(interactable)
 
 	if last_interactable_type != _NONE:
-		# FJÆRN #
-		if not multiplayer.is_server():
-			print("Client got here: interaction type not NONE")
-			empty_interaction_label()
-			_start_interact_cooldown()
-
+		empty_interaction_label()
+		_start_interact_cooldown()
 
 	return last_interactable_type
 
@@ -45,9 +41,12 @@ func leave_interact_state() -> bool:
 	if interact_cooldown_active:
 		return false
 
-	if get_request_for_leave_interact_state():
+	var will_leave_state = get_request_for_leave_interact_state()
+
+	if will_leave_state:
+		_start_interact_cooldown()
 		return true
-		
+
 	return false
 
 
@@ -75,17 +74,8 @@ func listen_for_interactable() -> InteractableInterface:
 	return null
 
 
-func message_prompt(interactable: InteractableInterface):
-	if not text_label:
-		push_warning("CanInteractInterface:message_prompt: TEXT_LABEL == NULL")
-		return
-
-	message = ""
-
-	if interactable:
-		message = interactable.interact_prompt
-
-	text_label.text = message
+func message_prompt(_interactable: InteractableInterface):
+	return
 
 
 func get_request_for_interaction(_interactable: InteractableInterface) -> InteractableInterface.Type:

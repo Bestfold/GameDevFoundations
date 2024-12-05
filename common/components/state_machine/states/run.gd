@@ -36,10 +36,12 @@ func process_physics(delta: float) -> State:
 
 	look_component.handle_physics(delta, move_speed, lerp_val)
 
-	var interactable = can_interact_component.handle_physics(delta)
-	if interactable:
-		if interactable.owner is WorkStationInterface:
+	var interactable_type = can_interact_component.handle_physics(delta)
+	match interactable_type:
+		InteractableInterface.Type.COMPUTER:
 			return computer_state
+		_: # Default (Type.NONE)
+			pass
 
 	if !parent.is_on_floor():
 		return fall_state

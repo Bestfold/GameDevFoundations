@@ -22,6 +22,7 @@ SteamManager="*res://utilities/multiplayer/steam/steam_manager.gd"
 InternetManager="*res://entities/net/internet_manager.gd"
 SharedNet="*res://entities/net/shared_net/shared_net.gd"
 MenuManager="*res://common/menu_manager.gd"
+DebugGlobal="*res://utilities/global_bus/debug_global.gd"
 
 [display]
 

@@ -62,6 +62,8 @@ func set_camera_rotation(rotation: Vector3):
 	parent.spring_arm_pivot.rotation.y = rotation.y
 	parent.spring_arm.rotation.z = rotation.z
 
+	parent.armature.rotation.y = parent.spring_arm_pivot.position.y
+
 
 func add_camera_position_offset(position_offset: Vector3):
 	parent.spring_arm.position.x += position_offset.x
@@ -73,3 +75,5 @@ func add_camera_rotation_offset(rotation_offset: Vector3):
 	parent.spring_arm.rotation.x += rotation_offset.x
 	parent.spring_arm_pivot.position.y += rotation_offset.y
 	parent.spring_arm.position.z += rotation_offset.z
+
+	parent.armature.rotation.y = parent.spring_arm_pivot.position.y

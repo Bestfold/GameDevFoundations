@@ -20,7 +20,6 @@ size = Vector3(0.641357, 0.590393, 0.127899)
 script = ExtResource("1_8xggx")
 user_return_position = NodePath("UserReturnPosition")
 user_position = NodePath("UserPosition")
-user_sitting = true
 screen_camera_position = NodePath("ScreenCameraPosition")
 
 [node name="Computer_00s" parent="." instance=ExtResource("1_i1o82")]
@@ -36,7 +35,7 @@ shape = SubResource("BoxShape3D_s2j0d")
 [node name="InteractableBody" parent="SitAtTable" node_paths=PackedStringArray("interact_area") instance=ExtResource("2_n2ctd")]
 unique_name_in_owner = true
 script = ExtResource("4_6t8ol")
-interaction_type = 1
+interaction_type = 2
 interact_prompt = "[E] to conputer"
 interact_area = NodePath("..")
 
@@ -51,7 +50,7 @@ shape = SubResource("BoxShape3D_s5ke0")
 [node name="InteractableScreen" parent="Screen" node_paths=PackedStringArray("interact_area") instance=ExtResource("2_n2ctd")]
 unique_name_in_owner = true
 script = ExtResource("5_0oiac")
-interaction_type = 4
+interaction_type = 5
 interact_prompt = "[E] to screen"
 interact_area = NodePath("..")
 

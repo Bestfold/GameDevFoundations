@@ -12,7 +12,7 @@
 [ext_resource type="Script" path="res://common/components/state_machine/states/fall.gd" id="8_hwvw3"]
 [ext_resource type="Script" path="res://common/components/state_machine/states/crouch_idle.gd" id="9_wbwdp"]
 [ext_resource type="Script" path="res://common/components/state_machine/states/crouch_walk.gd" id="10_ditk3"]
-[ext_resource type="Script" path="res://common/components/state_machine/states/computer.gd" id="13_6jiec"]
+[ext_resource type="PackedScene" uid="uid://ct423lfom84lw" path="res://common/components/state_machine/states/computer_state.tscn" id="13_rp5o8"]
 [ext_resource type="Script" path="res://common/components/state_machine/states/die_state.gd" id="15_qkean"]
 [ext_resource type="Script" path="res://common/components/move_components/movement_multiplayer_player.gd" id="16_jebct"]
 [ext_resource type="Script" path="res://common/components/look_components/look_player.gd" id="17_gaiv0"]
@@ -1848,10 +1848,8 @@ animation_state_name = "crouch_idle_walk"
 script = ExtResource("10_ditk3")
 animation_state_name = "crouch_idle_walk"
 
-[node name="Computer" type="Node" parent="StateMachine" node_paths=PackedStringArray("idle_state")]
-script = ExtResource("13_6jiec")
+[node name="Computer" parent="StateMachine" node_paths=PackedStringArray("idle_state") instance=ExtResource("13_rp5o8")]
 idle_state = NodePath("../Idle")
-animation_state_name = "computer"
 
 [node name="DieState" type="Node" parent="StateMachine"]
 script = ExtResource("15_qkean")

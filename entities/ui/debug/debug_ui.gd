@@ -8,27 +8,27 @@ class_name DebugUI
 @onready var var_4_label: Label = %Var4
 @onready var var_5_label: Label = %Var5
 
-var var1 = 0.0:
+var var1:
 	set(new_value):
 		var1 = new_value
 		_update_variable_label(var_1_label, var1)
 
-var var2 = 0.0:
+var var2:
 	set(new_value):
 		var2 = new_value
 		_update_variable_label(var_2_label, var2)
 
-var var3 = 0.0:
+var var3:
 	set(new_value):
 		var3 = new_value
 		_update_variable_label(var_3_label, var3)
 
-var var4 = 0.0:
+var var4:
 	set(new_value):
 		var4 = new_value
 		_update_variable_label(var_4_label, var4)
 
-var var5 = 0.0:
+var var5:
 	set(new_value):
 		var5 = new_value
 		_update_variable_label(var_5_label, var5)
@@ -37,6 +37,7 @@ var var5 = 0.0:
 
 func _update_variable_label(label_to_update: Label, variable_to_updatate):
 	label_to_update.text = str(variable_to_updatate)
+	#print("label: " + str(label_to_update) + " with value: " + str(variable_to_updatate))
 
 
 func _monitored_value_1(value_to_monitor):
