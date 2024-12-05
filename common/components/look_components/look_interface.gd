@@ -18,3 +18,19 @@ func handle_input(_event: InputEvent, _move_speed: float, _lerp_val: float) -> v
 # Returns rotation-float for y-axis
 func handle_physics(_delta: float, _move_speed: float, _lerp_val: float) -> void:
 	pass
+
+
+func set_camera_position(_position: Vector3):
+	pass
+
+
+func set_camera_rotation(_rotation: Vector3):
+	pass
+
+
+func add_camera_position_offset(_position_offset: Vector3):
+	pass
+
+
+func add_camera_rotation_offset(_rotation_offset: Vector3):
+	pass

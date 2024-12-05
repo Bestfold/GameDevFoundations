@@ -7,22 +7,6 @@ class_name PlayerMultiplayer
 ## Passes refrences down to state machine
 ## Sets authority for replication. Position, rotation and states replicate from owner-client
 
-
-# Child refrences
-@onready var spring_arm: SpringArm3D = %SpringArm3D
-@onready var armature: Node3D = $Armature
-@onready var animation_tree: AnimationTree = $AnimationTree
-@onready var spring_arm_pivot: Node3D = %SpringArmPivot
-@onready var state_machine: StateMachine = $StateMachine
-@onready var animation_player: AnimationPlayer = $AnimationPlayer
-@onready var head_mesh: MeshInstance3D = %Head
-@onready var move_component: MovementInterface = $MoveComponent
-@onready var look_component: LookInterface = $LookComponent
-@onready var can_interact_component: CanInteractInterface = $CanInteract
-@onready var head_bobbing: Node3D = %Head_bobbing
-@onready var camera: Camera3D = %Camera3D
-
-
 var username = ""
 
 # When given an id, authority over certain replication is taken
@@ -40,10 +24,9 @@ var player_id:
 
 func _ready() -> void:
 	# Initialize state machine, passing a refrence of player to the states
-	state_machine.init(self, animation_player, move_component, look_component,
-			can_interact_component)
-		
-	
+	state_machine.init(self, animation_tree, skeleton, move_component, 
+			look_component,	can_interact_component)
+			
 	# Run on client who owns player
 	if multiplayer.get_unique_id() == player_id:
 		camera.make_current()
@@ -69,6 +52,11 @@ func _unhandled_input(event: InputEvent) -> void:
 
 
 func _physics_process(delta: float) -> void:
+	if multiplayer.get_unique_id() == player_id:
+		DebugGlobal.var1 = sitting
+		DebugGlobal.var2 = at_desktop
+		DebugGlobal.var3 = state_machine.current_state.name
+		
 	# Passing function
 	state_machine.process_physics(delta)
 
@@ -76,3 +64,57 @@ func _physics_process(delta: float) -> void:
 func _process(delta: float) -> void:
 	#if multiplayer.is_server():
 	state_machine.process_frame(delta)
+
+
+
+func set_sitting(value: bool):
+	replicate_set_sitting.rpc(value)
+
+func set_at_desktop(value: bool):
+	replicate_set_at_desktop.rpc(value)
+	
+
+func set_player_global_position(new_position: Vector3):
+	replicate_set_player_global_position.rpc(new_position)
+
+func set_camera_position(new_position: Vector3):
+	replicate_set_camera_position.rpc(new_position)
+
+func add_camera_position_offset(position_offset):
+	replicate_add_camera_position_offset.rpc(position_offset)
+
+func set_camera_rotation(new_rotation: Vector3):
+	replicate_set_camera_rotation.rpc(new_rotation)
+
+func add_camera_rotation_offset(position_offset):
+	replicate_add_camera_rotation_offset.rpc(position_offset)
+
+
+@rpc("any_peer", "call_local")
+func replicate_set_sitting(value: bool):
+	sitting = value
+
+@rpc("any_peer", "call_local")
+func replicate_set_at_desktop(value: bool):
+	at_desktop = value
+
+# Position and rotation are replicated from client, if server scripts wants to change them they have to be changed here
+@rpc("any_peer", "call_local")
+func replicate_set_player_global_position(new_position: Vector3):
+	position = new_position
+
+@rpc("any_peer", "call_local")
+func replicate_set_camera_position(new_position: Vector3):
+	look_component.set_camera_position(new_position)
+
+@rpc("any_peer", "call_local")
+func replicate_add_camera_position_offset(position_offset: Vector3):
+	look_component.add_camera_position_offset(position_offset)
+
+@rpc("any_peer", "call_local")
+func replicate_set_camera_rotation(new_rotation: Vector3):
+	look_component.set_camera_rotation(new_rotation)
+
+@rpc("any_peer", "call_local")
+func replicate_add_camera_rotation_offset(rotation_offset: Vector3):
+	look_component.add_camera_rotation_offset(rotation_offset)

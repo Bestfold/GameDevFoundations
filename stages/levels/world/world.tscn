@@ -1,10 +1,11 @@
-[gd_scene load_steps=18 format=3 uid="uid://c26siogmy1l2f"]
+[gd_scene load_steps=19 format=3 uid="uid://c26siogmy1l2f"]
 
 [ext_resource type="MeshLibrary" uid="uid://deetsral7i5dx" path="res://stages/brickwall/brickwallTileset.tres" id="1_o4gn4"]
 [ext_resource type="PackedScene" uid="uid://w482w0w2x31k" path="res://entities/characters/player_characters/singleplayer_player/singleplayer_player.tscn" id="2_2i8er"]
 [ext_resource type="PackedScene" uid="uid://bhq0phkmsfg6f" path="res://common/components/interactable/Interactable.tscn" id="2_iy2cm"]
 [ext_resource type="Script" path="res://common/components/interactable/test_interactable.gd" id="3_kcecg"]
 [ext_resource type="Script" path="res://common/components/move_components/movement_enemy_test.gd" id="3_qo5e8"]
+[ext_resource type="PackedScene" uid="uid://cxnfgo2ddgk47" path="res://entities/net/computers/work_stations/Computer00sWorkStation/Computer00sWorkStation.tscn" id="4_hl5hq"]
 [ext_resource type="Script" path="res://common/components/look_components/look_enemy_test.gd" id="4_ky8kg"]
 [ext_resource type="PackedScene" uid="uid://c2l3rv6frpdkm" path="res://entities/net/computers/pc/pc_computer.tscn" id="7_lgpmj"]
 
@@ -46,7 +47,6 @@ fog_density = 0.1
 
 [node name="Ground" type="MeshInstance3D" parent="."]
 transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 0, 0, 0)
-visible = false
 mesh = SubResource("PlaneMesh_pjvrq")
 surface_material_override/0 = SubResource("StandardMaterial3D_vymgn")
 
@@ -164,21 +164,18 @@ shape = SubResource("BoxShape3D_ps6dd")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.19752, -2.98023e-07, 0.0954694)
 
 [node name="Skeleton3D" parent="NPC/Armature" index="0"]
-bones/0/position = Vector3(-8.99354e-11, 1.18865, 5.6679e-09)
-bones/0/rotation = Quaternion(-0.0222822, 1.1918e-07, -2.65625e-09, 0.999752)
-bones/1/rotation = Quaternion(0.120888, -1.87045e-14, 2.8822e-08, 0.992666)
-bones/2/rotation = Quaternion(-0.0148352, -0.00782508, 0.99287, -0.118017)
-bones/3/rotation = Quaternion(0.111725, 0.00241308, 0.0179131, 0.993575)
-bones/4/rotation = Quaternion(0.0440356, 0.0248861, 0.997609, -0.047098)
-bones/5/rotation = Quaternion(-0.128732, -2.51499e-05, 0.00186453, 0.991678)
-bones/6/rotation = Quaternion(0.64247, 0.0171812, -0.0634495, 0.763487)
-bones/7/rotation = Quaternion(0.0182011, -0.00325995, 0.993918, 0.108561)
-bones/8/rotation = Quaternion(0.111725, -0.00241307, -0.0179131, 0.993575)
-bones/9/rotation = Quaternion(-0.0735049, 0.0261504, 0.99569, 0.0501375)
-bones/10/rotation = Quaternion(-0.128732, 2.51541e-05, -0.00186454, 0.991678)
-bones/11/rotation = Quaternion(0.640293, -0.0421431, 0.079409, 0.762852)
-bones/12/rotation = Quaternion(-0.0305826, 0.706445, -0.706445, 0.0305826)
-bones/13/rotation = Quaternion(0.0305826, 0.706445, -0.706445, -0.0305826)
+bones/0/position = Vector3(3.21721e-11, 1.0029, 1.63288e-09)
+bones/2/rotation = Quaternion(-0.014917, -0.00784654, 0.992602, -0.120242)
+bones/4/rotation = Quaternion(0.051789, 0.0422865, 0.996565, -0.0488626)
+bones/5/rotation = Quaternion(-0.162897, -2.48804e-05, 0.00236208, 0.98664)
+bones/6/rotation = Quaternion(0.655125, 0.0253762, -0.0680715, 0.752019)
+bones/7/rotation = Quaternion(0.0182361, -0.00327134, 0.993825, 0.109404)
+bones/9/rotation = Quaternion(-0.0862343, 0.0437292, 0.993903, 0.0530004)
+bones/10/rotation = Quaternion(-0.162897, 2.48792e-05, -0.00236206, 0.98664)
+bones/11/rotation = Quaternion(0.652307, -0.0549368, 0.0862376, 0.751026)
+
+[node name="AnimationTree" parent="NPC" index="4"]
+parameters/crouch_idle_walk/BlendSpace1D/blend_position = 0
 
 [node name="MoveComponent" parent="NPC" index="6"]
 script = ExtResource("3_qo5e8")
@@ -197,5 +194,11 @@ shadow_enabled = true
 
 [node name="PcComputer1" parent="." instance=ExtResource("7_lgpmj")]
 transform = Transform3D(-0.707107, 0, -0.707107, 0, 1, 0, 0.707107, 0, -0.707107, 6.4278, 5.96046e-07, 7.3845)
+
+[node name="Computer00sWorkStation" parent="." instance=ExtResource("4_hl5hq")]
+transform = Transform3D(0.707107, 0, -0.707107, 0, 1, 0, 0.707107, 0, 0.707107, -7.683, 0, 3.959)
+
+[node name="Computer00sWorkStation2" parent="." instance=ExtResource("4_hl5hq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.19309, 5.96046e-07, 5.08145)
 
 [editable path="NPC"]

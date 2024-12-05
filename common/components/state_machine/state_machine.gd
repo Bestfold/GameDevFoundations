@@ -3,7 +3,8 @@ extends Node
 class_name StateMachine
 
 # State machine for managing states
-# NOTE General state machine
+# NOTE General state machine     
+# ALTERNATE sub- state machine
 
 # Works by passing functions to states (process_physics etc.) and changing
 #  states based on returned states from said passed functions.
@@ -13,21 +14,45 @@ class_name StateMachine
 var states : Dictionary = {}
 var current_state : State
 
-
+# GENERAL
 # Gets parent refrence (as param) to all state-children
-func init(parent: CharacterBody3D, animation_player: AnimationPlayer, 
-		move_component: MovementInterface, look_component: LookInterface,
+func init(parent: CharacterBody3D, animation_tree: AnimationTree, 
+		skeleton: Skeleton3D, move_component: MovementInterface, 
+		look_component: LookInterface, 
 		can_interact_component: CanInteractInterface) -> void:
 
 	for child in get_children():
 		child.parent = parent
-		child.animation_player = animation_player
+		child.animation_tree = animation_tree
+		child.skeleton = skeleton
 		child.move_component = move_component
 		child.look_component = look_component
 		child.can_interact_component = can_interact_component
-	
+
 	# Initialize to the default state
 	change_state(initial_state)
+
+
+# ALTERNATE
+# Gets parent refrence (as param) to all state-children
+func init_sub_state_machine(parent: CharacterBody3D, animation_tree: AnimationTree, 
+		skeleton: Skeleton3D, move_component: MovementInterface, 
+		look_component: LookInterface, 
+		can_interact_component: CanInteractInterface,
+		parent_state: State) -> void:
+
+	for child in get_children():
+		child.parent = parent
+		child.animation_tree = animation_tree
+		child.skeleton = skeleton
+		child.move_component = move_component
+		child.look_component = look_component
+		child.can_interact_component = can_interact_component
+		child.parent_state = parent_state
+
+	# Initialize to the default state
+	change_state(initial_state)
+
 
 # Changing from current to new state
 func change_state(new_state : State):

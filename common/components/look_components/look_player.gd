@@ -9,7 +9,7 @@ var head_bobbing_index = 0.0
 
 # For players this will change mouse mode to captured
 func capture_mouse() -> void:
-	if parent.capture_mouse:
+	if Input.mouse_mode == Input.MOUSE_MODE_VISIBLE:
 		Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	else:
 		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
@@ -26,6 +26,14 @@ func handle_input(event: InputEvent, _move_speed: float, _lerp_val: float) -> vo
 		#	atan2(parent.velocity.x, parent.velocity.z), lerp_val)
 		parent.armature.rotation.y = parent.spring_arm_pivot.rotation.y
 
+		#var target_vector = Vector3(parent.spring_arm.rotation.x, 0, 0)
+
+		var bone_index = parent.skeleton.find_bone("torso")
+		parent.skeleton.set_bone_pose_rotation(bone_index, Quaternion(Vector3(1,0,0).normalized(), parent.spring_arm.rotation.x).normalized())
+		
+		#var head_bone_pose: Transform3D = parent.skeleton.get_bone_global_pose(bone_index)
+		#head_bone_pose = head_bone_pose.looking_at(target_vector)
+		#parent.skeleton.set_bone_pose(bone_index, head_bone_pose)
 
 #func handle_physics(delta: float, move_speed: float, lerp_val: float) -> void:
 	# Head-bobbing if moving:
@@ -41,3 +49,31 @@ func handle_input(event: InputEvent, _move_speed: float, _lerp_val: float) -> vo
 	#	parent.head_bobbing.position.x = lerp(parent.head_bobbing.position.x, 
 	#			head_bobbing_vector.x * move_speed * 0.5, delta * lerp_val)
 	#parent.spring_arm_pivot.transform = parent.head_mesh.transform
+
+
+func set_camera_position(position: Vector3):
+	parent.spring_arm.position = position
+
+
+func set_camera_rotation(rotation: Vector3):
+	parent.rotation = Vector3.ZERO
+	parent.armature.rotation = Vector3.ZERO
+	parent.spring_arm.rotation.x = rotation.x
+	parent.spring_arm_pivot.rotation.y = rotation.y
+	parent.spring_arm.rotation.z = rotation.z
+
+	parent.armature.rotation.y = parent.spring_arm_pivot.position.y
+
+
+func add_camera_position_offset(position_offset: Vector3):
+	parent.spring_arm.position.x += position_offset.x
+	parent.spring_arm.position.y += position_offset.y
+	parent.spring_arm.position.z += position_offset.z
+
+
+func add_camera_rotation_offset(rotation_offset: Vector3):
+	parent.spring_arm.rotation.x += rotation_offset.x
+	parent.spring_arm_pivot.position.y += rotation_offset.y
+	parent.spring_arm.position.z += rotation_offset.z
+
+	parent.armature.rotation.y = parent.spring_arm_pivot.position.y

@@ -1,0 +1,94 @@
+[gd_scene load_steps=10 format=3 uid="uid://cxnfgo2ddgk47"]
+
+[ext_resource type="Script" path="res://entities/net/computers/work_stations/Computer00sWorkStation/computer_00s_work_station.gd" id="1_8xggx"]
+[ext_resource type="PackedScene" uid="uid://crkybx8yt7rju" path="res://entities/net/computers/computer_00s/computer_00s.tscn" id="1_i1o82"]
+[ext_resource type="PackedScene" uid="uid://bhq0phkmsfg6f" path="res://common/components/interactable/Interactable.tscn" id="2_n2ctd"]
+[ext_resource type="Script" path="res://common/components/interactable/computer/interactable_computer.gd" id="4_6t8ol"]
+[ext_resource type="Script" path="res://common/components/interactable/computer/subclasses/interactable_computer_screen.gd" id="5_0oiac"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_s2j0d"]
+size = Vector3(1.22702, 0.666077, 0.515906)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_s5ke0"]
+size = Vector3(0.641357, 0.590393, 0.127899)
+
+[sub_resource type="BoxMesh" id="BoxMesh_xumdj"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_81daw"]
+
+[node name="Computer00sWorkStation" type="Node3D" node_paths=PackedStringArray("user_return_position", "user_position", "screen_camera_position")]
+script = ExtResource("1_8xggx")
+user_return_position = NodePath("UserReturnPosition")
+user_position = NodePath("UserPosition")
+screen_camera_position = NodePath("ScreenCameraPosition")
+
+[node name="Computer_00s" parent="." instance=ExtResource("1_i1o82")]
+unique_name_in_owner = true
+transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 0, 0.799253, 0)
+
+[node name="SitAtTable" type="StaticBody3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="SitAtTable"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0363006, 1.14348, -0.174018)
+shape = SubResource("BoxShape3D_s2j0d")
+
+[node name="InteractableBody" parent="SitAtTable" node_paths=PackedStringArray("interact_area") instance=ExtResource("2_n2ctd")]
+unique_name_in_owner = true
+script = ExtResource("4_6t8ol")
+interaction_type = 2
+interact_prompt = "[E] to conputer"
+interact_area = NodePath("..")
+
+[node name="Screen" type="StaticBody3D" parent="."]
+collision_layer = 4
+collision_mask = 4
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Screen"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0048371, 1.19411, 0.0354089)
+shape = SubResource("BoxShape3D_s5ke0")
+
+[node name="InteractableScreen" parent="Screen" node_paths=PackedStringArray("interact_area") instance=ExtResource("2_n2ctd")]
+unique_name_in_owner = true
+script = ExtResource("5_0oiac")
+interaction_type = 5
+interact_prompt = "[E] to screen"
+interact_area = NodePath("..")
+
+[node name="UserPosition" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.874477)
+
+[node name="Chair" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.39554, 0, 0, 0, 0.65, 0, 0, 0, 0.427523, 0, 0.323225, -0.850656)
+mesh = SubResource("BoxMesh_xumdj")
+skeleton = NodePath("../..")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Chair"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Chair/StaticBody3D"]
+shape = SubResource("BoxShape3D_81daw")
+
+[node name="Table" type="MeshInstance3D" parent="."]
+transform = Transform3D(1.40011, 0, 0, 0, 0.0564819, 0, 0, 0, 0.747415, 0.00487888, 0.771158, -0.155037)
+mesh = SubResource("BoxMesh_xumdj")
+skeleton = NodePath("../..")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Table"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Table/StaticBody3D"]
+shape = SubResource("BoxShape3D_81daw")
+
+[node name="Backboard" type="MeshInstance3D" parent="."]
+transform = Transform3D(1.40011, 0, 0, 0, -2.4689e-09, 1.17, 0, -0.0564819, -5.11423e-08, 0.00487888, 0.584694, 0.241794)
+mesh = SubResource("BoxMesh_xumdj")
+skeleton = NodePath("../..")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Backboard"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Backboard/StaticBody3D"]
+shape = SubResource("BoxShape3D_81daw")
+
+[node name="UserReturnPosition" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.62)
+
+[node name="ScreenCameraPosition" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.22, -0.5)

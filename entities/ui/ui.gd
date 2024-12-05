@@ -1,5 +1,7 @@
 extends CanvasLayer
 
+# Manages buttons being pressed in menus
+
 @onready var main_menu: Control = %MainMenu
 @onready var debug_ui: DebugUI = %DebugUI
 @onready var lobby_menu: VBoxContainer = %LobbyMenu
@@ -21,7 +23,8 @@ signal leave_current_game()
 
 func _ready():
 	_open_main_menu()
-	debug_ui.hide()
+	if not OS.is_debug_build():
+		debug_ui.hide()
 
 	main_menu.singleplayer_pressed.connect(chose_singleplayer)
 	main_menu.multiplayer_pressed.connect(chose_multiplayer)

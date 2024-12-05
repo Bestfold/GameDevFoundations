@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://p1fmmucvhx2e"]
+
+[ext_resource type="Script" path="res://entities/net/computers/work_stations/work_station_interface.gd" id="1_qhpxi"]
+
+[node name="ComputerWorkStation" type="Node3D"]
+script = ExtResource("1_qhpxi")

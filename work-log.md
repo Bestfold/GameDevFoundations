@@ -111,4 +111,84 @@
 
  Har gjennomført alt B>    
 
+ Begynte så vidt på å begynne med skeletal transform for å rotere hodet når man ser opp og ned, men også for muligheten
+  til å rotere hodet når man ser rundt på en skjerm.
+ Dette krever Quaternions (som jeg tror jeg skjønner helt greit. Man setter opp en vektor, og så roterer man med en 
+  vinkel rundt denne vektoren). Neste blir å forstå seg på bone_pose_rotation for å flytte hodet.
+
+# 27.11.24
+ Plan: Lage og sette opp det som ligger foran en visuelt funksjonabel "terminal"
+  Delmål:
+  - Lage en "terminal"/datamaskin i blender
+  - Lage karakter-animasjon for å sitte på datamaskin (samt å falle, og crouch i samme slengen)
+  - Logikken og eventuell state for å interagere med pc.
+  - Sette opp skjerm
+  - Sette opp at man styrer det på skjermen med mus og tastatur
+
+  Fikk laget datamaskin og satt opp scene og script filer. Neste blir å lage animasjoner, sette opp work-station for
+   datamaskin, og så begynne på datamaskinens funksjonalitet.
+
+ Alle animasjoner fullført B>
+ Nå må jeg sette meg inn i AnimationTree for å få til overgang mellom disse.
+
+# 28.11.24
+ Er på ferten av å få til AnimationTree. Men det trenger arbeid. Sist endra jeg AnimationTree på single_player, fortsett
+  her.
+
+# 29.11.24
+ AnimationTree er løst ved å bruke AnimationNodeStateMachinePlayback sin .travel() metode, og sette animasjons-state-navn 
+  i export under hver state-machine state.
+ Har satt opp begynnelsen av "ComputerState". Den setter posisjon og rotasjon(men gir ikke riktig på rotasjon). Trenger å 
+  fikse en generell meny-kontroll også.
+ Neste blir å sette seg inn i 2D skjerm, og prøve å fikse en meny manager
+
+# 01.12.24
+ God jul B>
+ Refactor meny-styring til en egen MenuManager.
+ Smått begynt å se på 2D representasjon på datamaskin med SubViewport.
+ Ønsker å få styring ved bord til å bli grei først. Jobber nå med å sette skjermen i fokus når man interacter med den.
+  Siste jeg gjorde var å lage en metode som setter dette fokuset (men den funker ikke) når man interacter med skjerm, og
+  resetter når man trykker Escape. Men implementajsonen må aktiveres også når karakter entrer rom!
+
+# 02.12.24
+ Fiksa sitting og fokus på skjerm. Neste blir å få kontroll og mus til skjerm.
+ Det er en del replication som få ses på og rettes opp.
+    - Computer-animasjon replikeres ikke (Interaction eller state ikke replikert?)
+    - Animasjons-syklus for Idle blir forkortet andre karakterer hopper på en game-instance.
+
+ Har satt opp en "occupied" replikering for WorkStations. Den bruker rpc når occuper: set(value):, noe som kanskje er litt
+  rart, men det funker nå.
+
+ Neste:
+  - Interaction replikering. Et system som tar hensyn til å kunne gjøre mange forskjellige typer interactions
+  - Feilsøke animasjons-syklus 
+
+# 03.12.24
+ Interaction replikering.
+ Se tegning.
+  Klient flytter og roterer seg så RayCast på deres kolliderer med interactable.
+  Posisjon og rotasjon replikerer til server. Karakters RayCast kolliderer også med samme interactable (ved normal funksjon)
+  Klien ønsker å interact-e, og replikerer dette.
+  Server utfører interaction og benytter RPC for å gjøre endringene på alle klienter
+
+  Per nå har jeg RayCast riktig på klient og server, og input for interaction. Men endringene mangler fra server til klienter
+   . Både posisjonering, og spesielt State-skifte. Det er neste
+
+# 04.12.24
+ Interaction og ComputerState replikering.
+ For å få en god implementasjon som fungerte for multiplayer måtte store endringer til. Jeg er nærmere fungerende kode nå, men
+  ennå noe arbeid igjen.
+ Stort fokus på hva som skulle gjøres på server, og hvor mye av game-state skulle bestemmes på server kontra klient. Endte opp
+  med å ta vurderingen at hele game state, utenom posisjon og rotasjon, skal være bestemt av server sin game-state.
+
+ Rimelig mye rot og tullball. Men nærmer meg nå. Fokus på det å forlate computer-state igjen.
+
+# 05.12.24
+ Innser at det blir for mye rot og lite kontroll med implementasjonen som er satt opp nå.
+ Reworker ComputerState til å ha en egen sub-StateMachine som holder rede på forskjellige arvere av ComputerStateInterface
+
+ ENDELIG
+ Sub- State Machine for ComputerState ferdig, og alt funker som det skal.
+
+
 # END LOG

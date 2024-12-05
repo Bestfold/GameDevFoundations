@@ -9,17 +9,15 @@ class_name WalkState
 @export var jump_state: State
 @export var crouch_idle_state: State
 @export var crouch_walk_state: State
-@export var crawl_idle_state: State
-@export var crawl_walk_state: State
-@export var terminal_state: State
-@export var operating_state: State
+@export var computer_state: State
 
 func enter():
-	#super()
+	super()
 	pass
 
-func exit():
-	pass
+#func exit():
+	#super()
+	#pass
 
 func process_physics(delta: float) -> State:
 	parent.velocity.y -= gravity * delta
@@ -30,9 +28,16 @@ func process_physics(delta: float) -> State:
 	var _velocity_vector_x_and_z = Vector2(parent.velocity.x, parent.velocity.z)
 	
 	# Animation blending between idle and run
-	parent.animation_tree.set("parameters/BlendSpace1D/blend_position", _velocity_vector_x_and_z.length() / 10)# / move_speed)
+	parent.animation_tree.set("parameters/idle_walk_run/Run/blend_position", _velocity_vector_x_and_z.length() / 10)# / move_speed)
 
 	look_component.handle_physics(delta, move_speed, lerp_val)
+
+	var interactable_type = can_interact_component.handle_physics(delta)
+	match interactable_type:
+		InteractableInterface.Type.COMPUTER:
+			return computer_state
+		_: # Default (Type.NONE)
+			pass
 
 	parent.move_and_slide()
 	return null
@@ -43,15 +48,19 @@ func process_input(event: InputEvent) -> State:
 	look_component.handle_input(event, move_speed, lerp_val)
 
 	var input_dir := move_component.get_movement_input()
-
+	
+	# Idle
 	if input_dir == Vector2.ZERO:
 		return idle_state
-	if input_dir != Vector2.ZERO && move_component.wants_run():
+	# Run
+	elif input_dir != Vector2.ZERO && move_component.wants_run():
 		return run_state
-	if move_component.wants_jump() and parent.is_on_floor():
+	# Jump
+	elif move_component.wants_jump() and parent.is_on_floor():
 		return jump_state
 	
-	return null
+	else:
+		return null
 
 func process_frame(_delta: float) -> State:
 	return null
