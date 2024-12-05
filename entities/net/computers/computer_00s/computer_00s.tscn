@@ -1,7 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://crkybx8yt7rju"]
+[gd_scene load_steps=7 format=3 uid="uid://crkybx8yt7rju"]
 
 [ext_resource type="PackedScene" uid="uid://1shm260jhuux" path="res://entities/net/computers/computer_00s/computer_00s.glb" id="1_b6j33"]
 [ext_resource type="Script" path="res://entities/net/computers/computer_00s/computer_00s.gd" id="2_jsss8"]
+[ext_resource type="Texture2D" uid="uid://djukaeedf41ah" path="res://icon.svg" id="3_30l2x"]
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_0x3oj"]
 viewport_path = NodePath("SubViewport")
@@ -26,6 +27,7 @@ transform = Transform3D(-0.0408409, 0, -8.71219e-08, 0, 0.0414533, 0, 3.57042e-0
 texture = SubResource("ViewportTexture_0x3oj")
 
 [node name="SubViewport" type="SubViewport" parent="." index="5"]
+unique_name_in_owner = true
 size = Vector2i(960, 720)
 
 [node name="Node2D" type="Node2D" parent="SubViewport" index="0"]
@@ -70,8 +72,11 @@ layout_mode = 2
 layout_mode = 2
 text = "Rooms"
 
-[node name="AvailableRooms" type="MenuBar" parent="SubViewport/Control/TextureRect/VSplitContainer/MarginContainer/VBoxContainer" index="1"]
+[node name="AvailableRooms" type="OptionButton" parent="SubViewport/Control/TextureRect/VSplitContainer/MarginContainer/VBoxContainer" index="1"]
 layout_mode = 2
+item_count = 1
+popup/item_0/text = "Room1"
+popup/item_0/icon = ExtResource("3_30l2x")
 
 [node name="EnterRoom" type="Button" parent="SubViewport/Control/TextureRect/VSplitContainer/MarginContainer/VBoxContainer" index="2"]
 layout_mode = 2

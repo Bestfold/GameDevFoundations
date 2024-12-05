@@ -190,5 +190,7 @@
  ENDELIG
  Sub- State Machine for ComputerState ferdig, og alt funker som det skal.
 
+ Siste jeg gjorde: Research og tukling med inputs til SubViewport. Nå går inputs inn dit i focus, men musa er ikke synlig i
+  SubViewport
 
 # END LOG

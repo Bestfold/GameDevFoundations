@@ -7,6 +7,7 @@ class_name ComputerFocus
 func enter():
 	super()
 	print("ComputerFocus entered")
+	Input.set_mouse_mode(Input.MOUSE_MODE_CONFINED_HIDDEN)
 
 	if is_server_or_singleplayer():
 		parent.set_at_desktop(true)
@@ -42,7 +43,13 @@ func process_physics(_delta: float) -> State:
 
 	return null
 
-func process_input(_event: InputEvent) -> State:
+func process_input(event: InputEvent) -> State:
+	if is_server_or_singleplayer():
+		var sub_viewport: SubViewport = parent_state.computer_workstation.computer.sub_viewport
+		#sub_viewport.set_input_as_handled()
+		sub_viewport.push_input(event)
+		
+		#sub_viewport._input(event).mouse_set_mode(Input.MOUSE_MODE_CONFINED)
 	return null
 
 func process_frame(_delta: float) -> State:
