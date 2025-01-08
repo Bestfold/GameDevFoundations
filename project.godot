@@ -34,6 +34,10 @@ window/size/window_height_override=600
 version_control/plugin_name="GitPlugin"
 version_control/autoload_on_startup=true
 
+[filesystem]
+
+import/blender/enabled=false
+
 [global_group]
 
 logs="Logger components to be called by debugger"

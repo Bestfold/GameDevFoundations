@@ -1,8 +1,9 @@
-[gd_scene load_steps=7 format=3 uid="uid://crkybx8yt7rju"]
+[gd_scene load_steps=8 format=3 uid="uid://crkybx8yt7rju"]
 
 [ext_resource type="PackedScene" uid="uid://1shm260jhuux" path="res://entities/net/computers/computer_00s/computer_00s.glb" id="1_b6j33"]
 [ext_resource type="Script" path="res://entities/net/computers/computer_00s/computer_00s.gd" id="2_jsss8"]
 [ext_resource type="Texture2D" uid="uid://djukaeedf41ah" path="res://icon.svg" id="3_30l2x"]
+[ext_resource type="Script" path="res://entities/net/computers/computer_00s/computer_screen_viewport.gd" id="3_vyna3"]
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_0x3oj"]
 viewport_path = NodePath("SubViewport")
@@ -22,13 +23,15 @@ unique_name_in_owner = true
 [node name="Cube" parent="." index="1"]
 transform = Transform3D(0.974975, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 
-[node name="Sprite3D" type="Sprite3D" parent="." index="4"]
-transform = Transform3D(-0.0408409, 0, -8.71219e-08, 0, 0.0414533, 0, 3.57042e-09, 0, -0.996558, 0, 0.287501, 0)
+[node name="Screen" type="Sprite3D" parent="." index="4"]
+unique_name_in_owner = true
+transform = Transform3D(-0.0408409, 0, -1.50476e-07, 0, 0.0414533, 0, 6.1668e-09, 0, -0.996558, 0, 0.287501, 0)
 texture = SubResource("ViewportTexture_0x3oj")
 
 [node name="SubViewport" type="SubViewport" parent="." index="5"]
 unique_name_in_owner = true
 size = Vector2i(960, 720)
+script = ExtResource("3_vyna3")
 
 [node name="Node2D" type="Node2D" parent="SubViewport" index="0"]
 
@@ -39,6 +42,8 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
 
 [node name="TextureRect" type="TextureRect" parent="SubViewport/Control" index="0"]
 layout_mode = 1
@@ -99,3 +104,7 @@ layout_mode = 2
 
 [node name="HBoxContainer2" type="HBoxContainer" parent="SubViewport/Control/TextureRect/VSplitContainer/MarginContainer2/VBoxContainer2" index="1"]
 layout_mode = 2
+
+[node name="MousePointer" type="Sprite2D" parent="SubViewport" index="2"]
+unique_name_in_owner = true
+texture = ExtResource("3_30l2x")

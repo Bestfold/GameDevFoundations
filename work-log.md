@@ -193,4 +193,20 @@
  Siste jeg gjorde: Research og tukling med inputs til SubViewport. Nå går inputs inn dit i focus, men musa er ikke synlig i
   SubViewport
 
+# 06.12.24
+ Hjemme i Horten med laptop.
+ Jobba med å feilsøke SubViewport - mus.
+ Har kommet fram til å bruke en Transform2D som endrer mus-input til riktig transform til pc-skjerm. 
+  Benytter en Sprite2D til mus i skjermen. Men sprite-musa følger ikke der den faktiske musa trykker.
+
+# 07.12.24
+ Etter mer feilsøking har jeg kommet fram til at den beste løsningen sannsynkligvis blir å endre 
+  implementasjonen. Det jeg ønsker er at SubViewport-en skal åpnes i en SubViewportContainer, altså
+  en del av skjermen. Da vil pc-skjermen vises direkte oppå den faktiske skjermen. 
+  Utfordringer:
+	- Musa må "confine"-es til SubViewport-en som vises.
+	- Overgang fra ComputerIdle sin skjerm (Texture) til SubViewport.
+
+ Dette ønsker jeg å løse med pc-en i Oslo.
+
 # END LOG
