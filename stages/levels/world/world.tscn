@@ -164,15 +164,15 @@ shape = SubResource("BoxShape3D_ps6dd")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.19752, -2.98023e-07, 0.0954694)
 
 [node name="Skeleton3D" parent="NPC/Armature" index="0"]
-bones/0/position = Vector3(3.21721e-11, 1.0029, 1.63288e-09)
-bones/2/rotation = Quaternion(-0.014917, -0.00784654, 0.992602, -0.120242)
-bones/4/rotation = Quaternion(0.051789, 0.0422865, 0.996565, -0.0488626)
-bones/5/rotation = Quaternion(-0.162897, -2.48804e-05, 0.00236208, 0.98664)
-bones/6/rotation = Quaternion(0.655125, 0.0253762, -0.0680715, 0.752019)
-bones/7/rotation = Quaternion(0.0182361, -0.00327134, 0.993825, 0.109404)
-bones/9/rotation = Quaternion(-0.0862343, 0.0437292, 0.993903, 0.0530004)
-bones/10/rotation = Quaternion(-0.162897, 2.48792e-05, -0.00236206, 0.98664)
-bones/11/rotation = Quaternion(0.652307, -0.0549368, 0.0862376, 0.751026)
+bones/0/position = Vector3(-6.15831e-12, 1.01452, 2.50443e-09)
+bones/2/rotation = Quaternion(-0.0146634, -0.00777993, 0.993418, -0.113336)
+bones/4/rotation = Quaternion(0.053833, -0.012621, 0.997403, -0.0461517)
+bones/5/rotation = Quaternion(-0.0524977, -2.51891e-05, 0.000761237, 0.998621)
+bones/6/rotation = Quaternion(0.611955, 0.0218421, -0.0679674, 0.787664)
+bones/7/rotation = Quaternion(0.0180963, -0.00322588, 0.994194, 0.106023)
+bones/9/rotation = Quaternion(-0.088456, -0.0110798, 0.994843, 0.0483755)
+bones/10/rotation = Quaternion(-0.0524983, 2.51938e-05, -0.00076124, 0.998621)
+bones/11/rotation = Quaternion(0.609202, -0.0503425, 0.0877534, 0.786535)
 
 [node name="AnimationTree" parent="NPC" index="4"]
 parameters/crouch_idle_walk/BlendSpace1D/blend_position = 0

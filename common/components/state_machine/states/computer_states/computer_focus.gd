@@ -7,6 +7,7 @@ class_name ComputerFocus
 func enter():
 	super()
 	print("ComputerFocus entered")
+	Input.set_mouse_mode(Input.MOUSE_MODE_CONFINED)
 
 	if is_server_or_singleplayer():
 		parent.set_at_desktop(true)
@@ -24,7 +25,7 @@ func enter():
 
 
 func exit():
-
+	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	if is_server_or_singleplayer():
 		parent.set_at_desktop(false)
 
@@ -42,7 +43,13 @@ func process_physics(_delta: float) -> State:
 
 	return null
 
-func process_input(_event: InputEvent) -> State:
+func process_input(event: InputEvent) -> State:
+	if is_server_or_singleplayer():
+		var sub_viewport: SubViewport = parent_state.computer_workstation.computer.sub_viewport
+		sub_viewport.push_input(event)
+		sub_viewport.set_input_as_handled() # Unsure if this makes it so things outside of 
+		# viewport can be interacted with, which is the idea.
+		
 	return null
 
 func process_frame(_delta: float) -> State:
