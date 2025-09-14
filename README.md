@@ -38,7 +38,7 @@ For this learning project, player input and position is being handled locally an
 
 ## Character Controller
 
-The Character Controller is controlled with a Finite State Machine, with Sub-State-Machines for special States. The State Machine and Sub-State Machine I have implemented are created by TheShaggyDev [link]. The State Machine passes tick-calls and input-calls down through refrences to each state. It manages which State-refrence it passes the calls to based on what State is the current_state, and what conditions must happen for a change to another state.
+The Character Controller is controlled with a Finite State Machine, with Sub-State-Machines for special States. The State Machine and Sub-State Machine I have implemented are created by TheShaggyDev https://www.youtube.com/watch?v=bNdFXooM1MQ&t=6s. The State Machine passes tick-calls and input-calls down through refrences to each state. It manages which State-refrence it passes the calls to based on what State is the current_state, and what conditions must happen for a change to another state.
 
 In order to create reusable behaviour for my characters, I have implemented components as Interfaces (although Godot does not have Interfaces in this version, I use inheritance of Classes to act like an Interface). There is a component for looking, moving, interacting and being interactable, which can be inherited to create components specialized to the specific characters.
 
